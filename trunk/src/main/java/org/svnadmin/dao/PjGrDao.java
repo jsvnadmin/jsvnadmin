@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.svnadmin.Constants;
 import org.svnadmin.entity.PjGr;
 
 /**
@@ -92,7 +93,7 @@ public class PjGrDao extends Dao {
 	 * @return 有相同的svn root的项目组
 	 */
 	public List<PjGr> getListByRootPath(String rootPath) {
-		String sql = "select pj,gr,des from pj_gr where pj in (select distinct pj from pj where path like ?) order by pj,gr";
+		String sql = "select pj,gr,des from pj_gr where pj in (select distinct pj from pj where type=? and path like ?) order by pj,gr";
 		List<PjGr> list = new ArrayList<PjGr>();
 
 		Connection conn = null;
@@ -102,6 +103,7 @@ public class PjGrDao extends Dao {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
+			pstmt.setString(index++, Constants.HTTP_MUTIL);
 			pstmt.setString(index++, rootPath + "%");
 
 			rs = pstmt.executeQuery();

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.svnadmin.Constants;
 import org.svnadmin.entity.Usr;
 
 /**
@@ -134,8 +135,8 @@ public class UsrDao extends Dao {
 		String sql = "select p.usr,p.role,CASE WHEN pu.psw IS NOT NULL THEN pu.psw ELSE p.psw END psw from ("
 				+ "select a.usr,a.role,a.psw from usr a "
 				+ "where "
-				+ "exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj in (select distinct pj from pj where path like ?)) "
-				+ "or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj in (select distinct pj from pj where path like ?)) "
+				+ "exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj in (select distinct pj from pj where type=? and path like ?)) "
+				+ "or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj in (select distinct pj from pj where type=? and path like ?)) "
 				+ ") p "
 				+ "left join pj_usr pu on (p.usr=pu.usr) where p.usr <> '*'"
 				+ "order by p.usr; ";
@@ -148,7 +149,9 @@ public class UsrDao extends Dao {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
+			pstmt.setString(index++, Constants.HTTP_MUTIL);
 			pstmt.setString(index++, rootPath + "%");
+			pstmt.setString(index++, Constants.HTTP_MUTIL);
 			pstmt.setString(index++, rootPath + "%");
 
 			rs = pstmt.executeQuery();
