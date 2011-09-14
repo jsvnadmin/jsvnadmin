@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
-import org.svnadmin.Constants;
 import org.svnadmin.entity.PjGr;
 
 /**
@@ -73,38 +72,6 @@ public class PjGrDao extends Dao {
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
 			pstmt.setString(index++, pj);
-
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				list.add(readPjGr(rs));
-			}
-			return list;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			this.close(rs, pstmt, conn);
-		}
-	}
-
-	/**
-	 * @param rootPath
-	 *            svn root
-	 * @return 有相同的svn root的项目组
-	 */
-	public List<PjGr> getListByRootPath(String rootPath) {
-		String sql = "select pj,gr,des from pj_gr where pj in (select distinct pj from pj where type=? and path like ?) order by pj,gr";
-		List<PjGr> list = new ArrayList<PjGr>();
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = this.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			int index = 1;
-			pstmt.setString(index++, Constants.HTTP_MUTIL);
-			pstmt.setString(index++, rootPath + "%");
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
