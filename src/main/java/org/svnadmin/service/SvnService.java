@@ -433,6 +433,7 @@ public class SvnService {
 				}
 				contents.append(pjGr.getPjGrUsrs().get(i).getUsr());
 			}
+			contents.append(SEP);
 		}
 		
 		contents.append(SEP);
