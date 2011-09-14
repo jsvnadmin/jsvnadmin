@@ -1,7 +1,5 @@
 package org.svnadmin.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 组
@@ -22,26 +20,6 @@ public class PjGr {
 	 * 描述
 	 */
 	private String des;
-
-	/**
-	 * 组的用户列表
-	 */
-	private List<PjGrUsr> pjGrUsrs = new ArrayList<PjGrUsr>();
-
-	/**
-	 * @return 组的用户列表
-	 */
-	public List<PjGrUsr> getPjGrUsrs() {
-		return pjGrUsrs;
-	}
-
-	/**
-	 * @param pjGrUsrs
-	 *            组的用户列表
-	 */
-	public void setPjGrUsrs(List<PjGrUsr> pjGrUsrs) {
-		this.pjGrUsrs = pjGrUsrs;
-	}
 
 	/**
 	 * @return 项目

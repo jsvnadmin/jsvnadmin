@@ -24,7 +24,6 @@ import org.svnadmin.dao.PjGrUsrDao;
 import org.svnadmin.dao.UsrDao;
 import org.svnadmin.entity.Pj;
 import org.svnadmin.entity.PjAuth;
-import org.svnadmin.entity.PjGr;
 import org.svnadmin.entity.PjGrUsr;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.util.EncryptUtil;
@@ -127,13 +126,13 @@ public class SvnService {
 		// 项目的用户
 		List<Usr> usrList = this.usrDao.getList(pj.getPj());
 		// 项目的用户组
-		List<PjGr> pjGrList = this.getPjGrList(pj.getPj());
+		Map<String, List<PjGrUsr>> pjGrUsrMap = this.getPjGrUsrs(pj.getPj());
 		// 项目的权限
-		Map<String, List<PjAuth>> pjAuthMap = this.getPjAuthList(pj.getPj());
+		Map<String, List<PjAuth>> pjAuthMap = this.getPjAuths(pj.getPj());
 
 		this.exportSvnConf(pj);
 		this.exportPasswdSVN(pj, usrList);
-		this.exportAuthz(pj, pjGrList, pjAuthMap);
+		this.exportAuthz(pj, pjGrUsrMap, pjAuthMap);
 	}
 
 	/**
@@ -146,13 +145,13 @@ public class SvnService {
 		// 项目的用户
 		List<Usr> usrList = this.usrDao.getList(pj.getPj());
 		// 项目的用户组
-		List<PjGr> pjGrList = this.getPjGrList(pj.getPj());
+		Map<String, List<PjGrUsr>> pjGrUsrMap = this.getPjGrUsrs(pj.getPj());
 		// 项目的权限
-		Map<String, List<PjAuth>> pjAuthMap = this.getPjAuthList(pj.getPj());
+		Map<String, List<PjAuth>> pjAuthMap = this.getPjAuths(pj.getPj());
 
 		this.exportSVNPathConf(pj);
 		this.exportPasswdHTTP(pj, usrList);
-		this.exportAuthz(pj, pjGrList, pjAuthMap);
+		this.exportAuthz(pj, pjGrUsrMap, pjAuthMap);
 	}
 
 	/**
@@ -170,16 +169,17 @@ public class SvnService {
 		// 和这个项目在同一个父目录的所有项目的用户
 		List<Usr> usrList = this.usrDao.getListByRootPath(svnRoot);
 		// 和这个项目在同一个父目录的所有项目的用户组
-		List<PjGr> pjGrList = this.getPjGrListByRootPath(svnRoot);
+		Map<String, List<PjGrUsr>> pjGrUsrMap = this
+				.getPjGrUsrsByRootPath(svnRoot);
 		// 和这个项目在同一个父目录的所有项目的权限
 		Map<String, List<PjAuth>> pjAuthMap = this
-				.getPjAuthListByRootPath(svnRoot);
+				.getPjAuthsByRootPath(svnRoot);
 
 		this.exportSVNParentPathConf(root);
 
 		this.exportPasswdHTTPMutil(root, usrList);
 
-		this.exportAuthzHTTPMutil(root, pjGrList, pjAuthMap);
+		this.exportAuthzHTTPMutil(root, pjGrUsrMap, pjAuthMap);
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class SvnService {
 	 *            svn root
 	 * @return 有相同svn root的项目的权限列表
 	 */
-	private Map<String, List<PjAuth>> getPjAuthListByRootPath(String rootPath) {
+	private Map<String, List<PjAuth>> getPjAuthsByRootPath(String rootPath) {
 		Map<String, List<PjAuth>> results = new LinkedHashMap<String, List<PjAuth>>();// <res,List<PjAuth>>
 		List<PjAuth> pjAuthList = this.pjAuthDao.getListByRootPath(rootPath);
 		// 格式化返回数据
@@ -212,7 +212,7 @@ public class SvnService {
 	 *            项目
 	 * @return 项目的权限列表
 	 */
-	private Map<String, List<PjAuth>> getPjAuthList(String pj) {
+	private Map<String, List<PjAuth>> getPjAuths(String pj) {
 		Map<String, List<PjAuth>> results = new LinkedHashMap<String, List<PjAuth>>();// <res,List<PjAuth>>
 		List<PjAuth> pjAuthList = this.pjAuthDao.getList(pj);
 		// 格式化返回数据
@@ -235,18 +235,19 @@ public class SvnService {
 	 *            项目
 	 * @return 项目的组列表
 	 */
-	private List<PjGr> getPjGrList(String pj) {
+	private Map<String, List<PjGrUsr>> getPjGrUsrs(String pj) {
+		Map<String, List<PjGrUsr>> results = new LinkedHashMap<String, List<PjGrUsr>>();// <gr,List<PjGrUsr>>
 
-		List<PjGr> results = this.pjGrDao.getList(pj);
-		if (results != null) {
-			// 组的用户
-			for (PjGr pjGr : results) {
-				List<PjGrUsr> pjGrUsrs = this.pjGrUsrDao.getList(pjGr.getPj(),
-						pjGr.getGr());
-				if (pjGrUsrs != null) {
-					pjGr.setPjGrUsrs(pjGrUsrs);
-				}
+		List<PjGrUsr> pjGrUsrs = this.pjGrUsrDao.getList(pj);
+
+		// 格式化返回数据
+		for (PjGrUsr pjGrUsr : pjGrUsrs) {
+			List<PjGrUsr> grUsrList = results.get(pjGrUsr.getGr());
+			if (grUsrList == null) {
+				grUsrList = new ArrayList<PjGrUsr>();
+				results.put(pjGrUsr.getGr(), grUsrList);
 			}
+			grUsrList.add(pjGrUsr);
 		}
 
 		return results;
@@ -259,21 +260,24 @@ public class SvnService {
 	 *            svn root
 	 * @return 有相同svn root的项目的权限列表
 	 */
-	private List<PjGr> getPjGrListByRootPath(String rootPath) {
+	private Map<String, List<PjGrUsr>> getPjGrUsrsByRootPath(String rootPath) {
 
-		List<PjGr> results = this.pjGrDao.getListByRootPath(rootPath);
-		if (results != null) {
-			// 组的用户
-			for (PjGr pjGr : results) {
-				List<PjGrUsr> pjGrUsrs = this.pjGrUsrDao.getList(pjGr.getPj(),
-						pjGr.getGr());
-				if (pjGrUsrs != null) {
-					pjGr.setPjGrUsrs(pjGrUsrs);
-				}
+		Map<String, List<PjGrUsr>> results = new LinkedHashMap<String, List<PjGrUsr>>();// <gr,List<PjGrUsr>>
+
+		List<PjGrUsr> pjGrUsrs = this.pjGrUsrDao.getListByRootPath(rootPath);
+
+		// 格式化返回数据
+		for (PjGrUsr pjGrUsr : pjGrUsrs) {
+			List<PjGrUsr> grUsrList = results.get(pjGrUsr.getGr());
+			if (grUsrList == null) {
+				grUsrList = new ArrayList<PjGrUsr>();
+				results.put(pjGrUsr.getGr(), grUsrList);
 			}
+			grUsrList.add(pjGrUsr);
 		}
 
 		return results;
+
 	}
 
 	/**
@@ -349,12 +353,13 @@ public class SvnService {
 	 * 
 	 * @param root
 	 *            svn root
-	 * @param pjGrList
+	 * @param pjGrUsrMap
 	 *            所有的项目列表
 	 * @param resMap
 	 *            所有的权限列表
 	 */
-	private void exportAuthzHTTPMutil(File root, List<PjGr> pjGrList,
+	private void exportAuthzHTTPMutil(File root,
+			Map<String, List<PjGrUsr>> pjGrUsrMap,
 			Map<String, List<PjAuth>> resMap) {
 		if (root == null) {
 			return;
@@ -368,13 +373,17 @@ public class SvnService {
 		contents.append("[aliases]").append(SEP);
 		contents.append("[groups]").append(SEP);
 
-		for (PjGr pjGr : pjGrList) {
-			contents.append(pjGr.getGr()).append("=");
-			for (int i = 0; i < pjGr.getPjGrUsrs().size(); i++) {
+		for (Iterator<String> grIterator = pjGrUsrMap.keySet().iterator(); grIterator
+				.hasNext();) {
+			String gr = grIterator.next();
+			contents.append(gr).append("=");
+			List<PjGrUsr> pjGrUsrList = pjGrUsrMap.get(gr);
+			for (int i = 0; i < pjGrUsrList.size(); i++) {
+				PjGrUsr pjGrUsr = pjGrUsrList.get(i);
 				if (i != 0) {
 					contents.append(",");
 				}
-				contents.append(pjGr.getPjGrUsrs().get(i).getUsr());
+				contents.append(pjGrUsr.getUsr());
 			}
 			contents.append(SEP);
 		}
@@ -405,12 +414,12 @@ public class SvnService {
 	 * 
 	 * @param pj
 	 *            项目
-	 * @param pjGrList
+	 * @param pjGrUsrMap
 	 *            项目的组列表
 	 * @param resMap
 	 *            项目的权限列表
 	 */
-	private void exportAuthz(Pj pj, List<PjGr> pjGrList,
+	private void exportAuthz(Pj pj, Map<String, List<PjGrUsr>> pjGrUsrMap,
 			Map<String, List<PjAuth>> resMap) {
 		if (pj == null || StringUtils.isBlank(pj.getPj())) {
 			return;
@@ -424,17 +433,21 @@ public class SvnService {
 		contents.append("[aliases]").append(SEP);
 		contents.append("[groups]").append(SEP);
 
-		for (PjGr pjGr : pjGrList) {
-			contents.append(pjGr.getGr()).append("=");
-			for (int i = 0; i < pjGr.getPjGrUsrs().size(); i++) {
+		for (Iterator<String> grIterator = pjGrUsrMap.keySet().iterator(); grIterator
+				.hasNext();) {
+			String gr = grIterator.next();
+			contents.append(gr).append("=");
+			List<PjGrUsr> pjGrUsrList = pjGrUsrMap.get(gr);
+			for (int i = 0; i < pjGrUsrList.size(); i++) {
+				PjGrUsr pjGrUsr = pjGrUsrList.get(i);
 				if (i != 0) {
 					contents.append(",");
 				}
-				contents.append(pjGr.getPjGrUsrs().get(i).getUsr());
+				contents.append(pjGrUsr.getUsr());
 			}
 			contents.append(SEP);
 		}
-		
+
 		contents.append(SEP);
 
 		for (Iterator<String> resIterator = resMap.keySet().iterator(); resIterator

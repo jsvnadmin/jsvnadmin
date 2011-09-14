@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.svnadmin.Constants;
 import org.svnadmin.entity.PjGrUsr;
 
 /**
@@ -65,7 +66,7 @@ public class PjGrUsrDao extends Dao {
 	 * @return 组用户列表
 	 */
 	public List<PjGrUsr> getList(String pj, String gr) {
-		String sql = "select pj,usr,gr from pj_gr_usr where pj=? and gr=? order by pj";
+		String sql = "select pj,usr,gr from pj_gr_usr where pj=? and gr=? order by usr";
 		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -76,6 +77,68 @@ public class PjGrUsrDao extends Dao {
 			int index = 1;
 			pstmt.setString(index++, pj);
 			pstmt.setString(index++, gr);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(readPjGrUsr(rs));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+	}
+
+	/**
+	 * @param pj
+	 *            项目
+	 * @return 组用户列表
+	 */
+	public List<PjGrUsr> getList(String pj) {
+		String sql = "select pj,usr,gr from pj_gr_usr where pj=? order by gr,usr";
+		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, pj);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(readPjGrUsr(rs));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+	}
+
+	/**
+	 * @param rootPath
+	 *            svn root
+	 * @return 有相同的svn root的项目组用户
+	 */
+	public List<PjGrUsr> getListByRootPath(String rootPath) {
+		String sql = "select pj,usr,gr from pj_gr_usr where pj in (select distinct pj from pj where type=? and path like ?) order by pj,gr,usr";
+		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, Constants.HTTP_MUTIL);
+			pstmt.setString(index++, rootPath + "%");
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
