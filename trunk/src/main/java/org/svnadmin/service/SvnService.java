@@ -450,6 +450,7 @@ public class SvnService {
 							.append(pjAuth.getRw()).append(SEP);
 				}
 			}
+			contents.append(SEP);
 		}
 
 		this.write(outFile, contents.toString());
