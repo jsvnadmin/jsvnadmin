@@ -1,0 +1,246 @@
+package org.svnadmin.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
+import org.svnadmin.entity.PjGrUsr;
+
+/**
+ * 项目的组的用户
+ * 
+ * @author Harvey
+ * 
+ */
+@Repository(PjGrUsrDao.BEAN_NAME)
+public class PjGrUsrDao extends Dao {
+	private final Logger LOG = Logger.getLogger(this.getClass());
+	public static final String BEAN_NAME = "pjGrUsrDao";
+
+	/**
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @param usr
+	 *            用户
+	 * @return 组用户
+	 */
+	public PjGrUsr get(String pj, String gr, String usr) {
+		String sql = "select pj,usr,gr from pj_gr_usr where pj = ? and gr=? and usr=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, pj);
+			pstmt.setString(index++, gr);
+			pstmt.setString(index++, usr);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return readPjGrUsr(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+		return null;
+	}
+
+	/**
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @return 组用户列表
+	 */
+	public List<PjGrUsr> getList(String pj, String gr) {
+		String sql = "select pj,usr,gr from pj_gr_usr where pj=? and gr=? order by pj";
+		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, pj);
+			pstmt.setString(index++, gr);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(readPjGrUsr(rs));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+	}
+
+	/**
+	 * @param rs
+	 *            ResultSet
+	 * @return 组用户
+	 * @throws SQLException
+	 *             jdbc异常
+	 */
+	PjGrUsr readPjGrUsr(ResultSet rs) throws SQLException {
+		PjGrUsr result = new PjGrUsr();
+		result.setPj(rs.getString("pj"));
+		result.setUsr(rs.getString("usr"));
+		result.setGr(rs.getString("gr"));
+		return result;
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @param usr
+	 *            用户
+	 */
+	public void delete(String pj, String gr, String usr) {
+		String sql = "delete from pj_gr_usr where pj = ? and gr=? and usr=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, pj);
+			pstmt.setString(index++, gr);
+			pstmt.setString(index++, usr);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(null, pstmt, conn);
+		}
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param usr
+	 *            用户
+	 */
+	public void deleteUsr(String usr) {
+		String sql = "delete from pj_gr_usr where usr = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, usr);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(null, pstmt, conn);
+		}
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 */
+	public void deletePjGr(String pj, String gr) {
+		String sql = "delete from pj_gr_usr where pj = ? and gr = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, pj);
+			pstmt.setString(index++, gr);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(null, pstmt, conn);
+		}
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param pj
+	 *            项目
+	 */
+	public void deletePj(String pj) {
+		String sql = "delete from pj_gr_usr where pj = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, pj);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(null, pstmt, conn);
+		}
+	}
+
+	/**
+	 * 保存
+	 * 
+	 * @param pjGrUsr
+	 *            项目用户
+	 */
+	public void save(PjGrUsr pjGrUsr) {
+		if (this.get(pjGrUsr.getPj(), pjGrUsr.getGr(), pjGrUsr.getUsr()) == null) {
+			String sql = "insert into pj_gr_usr (pj,usr,gr) values (?,?,?)";
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			try {
+				conn = this.getConnection();
+				pstmt = conn.prepareStatement(sql);
+				int index = 1;
+				pstmt.setString(index++, pjGrUsr.getPj());
+				pstmt.setString(index++, pjGrUsr.getUsr());
+				pstmt.setString(index++, pjGrUsr.getGr());
+
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} finally {
+				this.close(null, pstmt, conn);
+			}
+		}
+	}
+
+}
