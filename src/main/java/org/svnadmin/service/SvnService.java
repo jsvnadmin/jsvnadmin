@@ -295,7 +295,7 @@ public class SvnService {
 					+ EncryptUtil
 							.encriptSHA1(EncryptUtil.decrypt(usr.getPsw()));
 			contents.append(usr.getUsr()).append(":").append(shaPsw)
-					.append(SEP).append(SEP);
+					.append(SEP);
 		}
 		this.write(outFile, contents.toString());
 	}
@@ -319,7 +319,7 @@ public class SvnService {
 					+ EncryptUtil
 							.encriptSHA1(EncryptUtil.decrypt(usr.getPsw()));
 			contents.append(usr.getUsr()).append(":").append(shaPsw)
-					.append(SEP).append(SEP);
+					.append(SEP);
 		}
 		this.write(outFile, contents.toString());
 	}
@@ -339,8 +339,7 @@ public class SvnService {
 
 		for (Usr usr : usrList) {
 			contents.append(usr.getUsr()).append("=")
-					.append(EncryptUtil.decrypt(usr.getPsw())).append(SEP)
-					.append(SEP);// 解密
+					.append(EncryptUtil.decrypt(usr.getPsw())).append(SEP);// 解密
 		}
 		this.write(outFile, contents.toString());
 	}
