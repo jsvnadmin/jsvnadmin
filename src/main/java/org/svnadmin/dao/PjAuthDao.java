@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.svnadmin.Constants;
 import org.svnadmin.entity.PjAuth;
 
 @Repository(PjAuthDao.BEAN_NAME)
@@ -102,9 +103,9 @@ public class PjAuthDao extends Dao {
 	}
 
 	public List<PjAuth> getListByRootPath(String rootPath) {
-		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj in (select distinct pj from pj where path like ?) "
+		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
 				+ "UNION "
-				+ "select pj,res,rw,' ' gr,usr from pj_usr_auth where pj in (select distinct pj from pj where path like ?) "
+				+ "select pj,res,rw,' ' gr,usr from pj_usr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
 				+ "order by res,gr,usr";
 		List<PjAuth> list = new ArrayList<PjAuth>();
 
@@ -115,7 +116,9 @@ public class PjAuthDao extends Dao {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
+			pstmt.setString(index++, Constants.HTTP_MUTIL);
 			pstmt.setString(index++, rootPath + "%");
+			pstmt.setString(index++, Constants.HTTP_MUTIL);
 			pstmt.setString(index++, rootPath + "%");
 
 			rs = pstmt.executeQuery();
