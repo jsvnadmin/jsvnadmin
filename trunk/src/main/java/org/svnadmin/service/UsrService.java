@@ -1,6 +1,10 @@
 package org.svnadmin.service;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -54,7 +58,7 @@ public class UsrService {
 	@Transactional
 	public void delete(String usr){
 		
-		List<Pj> list = this.pjDao.getList(usr);
+		List<Pj> list = this.getPjList(usr);
 		
 		this.pjAuthDao.deleteUsr(usr);
 		this.pjGrUsrDao.deleteUsr(usr);
@@ -77,12 +81,37 @@ public class UsrService {
 			this.usrDao.update(usr);
 		}
 		//更新用户所在的项目
-		List<Pj> list = this.pjDao.getList(usr.getUsr());
+		List<Pj> list = this.getPjList(usr.getUsr());
 		if(list!=null){
 			for (Pj pj : list) {
 				this.svnService.exportConfig(pj);
 			}
 		}
+	}
+	
+	private List<Pj> getPjList(String usr){
+		List<Pj> list = this.pjDao.getList(usr);//用户可以看到的所有项目
+		//如果项目使用http(多库)，只返回一个项目就可以，SvnService导出时，会导出所有相同svn root的项目
+		List<Pj> results = new ArrayList<Pj>();
+		
+		Map<String,Pj> temp = new HashMap<String,Pj>();
+		for (Pj pj : list) {
+			if(Constants.HTTP_MUTIL.equals(pj.getType())){
+				File root = new File(pj.getPath()).getParentFile();//svn root
+				String key = root.getAbsolutePath();
+				if(temp.containsKey(key)){
+					continue;
+				}else{
+					temp.put(key, pj);
+					results.add(pj);//第一个
+				}
+			}else{
+				results.add(pj);
+			}
+		}
+		
+		
+		return results;
 	}
 	
 	public int getCount(){
