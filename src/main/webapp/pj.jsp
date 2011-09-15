@@ -1,17 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@page import="org.svnadmin.util.SpringUtils"%>
-<%@page import="org.svnadmin.service.PjGrUsrService"%>
 <%@page import="org.svnadmin.util.EncryptUtil"%>
 <%@page import="org.svnadmin.entity.*"%>
 <%@page import="org.svnadmin.Constants"%>
-<%@page import="java.util.Calendar"%>
 <%@include file="inc.jsp"%>
 <span style="color:green;font-weight:bold;">项目管理</span><br><br>
 
 <%
 boolean hasAdminRight = (Boolean)request.getAttribute("hasAdminRight");
 boolean hasManagerRight = (Boolean)request.getAttribute("hasManagerRight");
-PjGrUsrService pjGrUsrService = SpringUtils.getBean(PjGrUsrService.BEAN_NAME);
 %>
 
 <%
@@ -105,15 +101,14 @@ function checkForm(f){
 	if(list!=null){
 	  for(int i = 0;i<list.size();i++){
 		  Pj pj = list.get(i);
-		  boolean isManager = hasAdminRight?true:pjGrUsrService.get(pj.getPj(), Constants.getManagerGroup(pj.getPj()), _usr.getUsr()) != null;
 		%>
 		<tr>
 		<td><%=(i+1) %></td>
 		<td>
-			<%if(hasAdminRight || isManager){%><a href="<%=ctx%>/pj?act=get&pj=<%=pj.getPj()%>"><%=pj.getPj() %></a><%}else{%><%=pj.getPj() %><%}%>
+			<%if(hasAdminRight || pj.isManager()){%><a href="<%=ctx%>/pj?act=get&pj=<%=pj.getPj()%>"><%=pj.getPj() %></a><%}else{%><%=pj.getPj() %><%}%>
 		</td>
 		<td title="<%=pj.getPj() %>">
-			<%if(hasAdminRight || isManager){%><%=pj.getPath() %><%}else{%>&nbsp;<%}%>
+			<%if(hasAdminRight || pj.isManager()){%><%=pj.getPath() %><%}else{%>&nbsp;<%}%>
 		</td>
 		<td title="<%=pj.getPj() %>"><%=pj.getUrl() %></td>
 		<td title="<%=pj.getPj() %>"><%=pj.getType()%></td>
@@ -122,7 +117,7 @@ function checkForm(f){
 		<%if(Constants.SVN.equals(pj.getType()) || Constants.HTTP.equals(pj.getType())){%><a href="<%=ctx%>/pjusr?pj=<%=pj.getPj()%>">设置用户</a><%}else{%>&nbsp;<%}%>
 		</td>
 		
-		<%if(hasAdminRight || isManager){%>
+		<%if(hasAdminRight || pj.isManager()){%>
 		<td title="<%=pj.getPj() %>">
 			<a href="<%=ctx%>/pjgr?pj=<%=pj.getPj()%>">设置用户组</a>
 		</td>

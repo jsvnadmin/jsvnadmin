@@ -1,12 +1,8 @@
-<%@page import="org.svnadmin.util.EncryptUtil"%>
-<%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@page import="org.svnadmin.Constants"%>
+<%@page import="org.svnadmin.util.EncryptUtil"%>
 <%@include file="inc.jsp"%>
 <span style="color:green;font-weight:bold;"><a href="pj">项目管理(<%=request.getParameter("pj")%>)</a> --> 用户组管理</span><br><br>
-<%
-String PJ_MANAGER = org.svnadmin.Constants.getManagerGroup(request.getParameter("pj"));
-
-%>
 
 <%
 org.svnadmin.entity.PjGr entity = (org.svnadmin.entity.PjGr)request.getAttribute("entity");
@@ -21,11 +17,6 @@ function checkForm(f){
 	}
 	if(f.elements["gr"].value==""){
 		alert("组号不可以为空");
-		f.elements["gr"].focus();
-		return false;
-	}
-	if("<%=PJ_MANAGER%>" == f.elements["gr"].value){
-		alert("管理员组是默认组，不可以修改");
 		f.elements["gr"].focus();
 		return false;
 	}
@@ -73,14 +64,14 @@ function checkForm(f){
 		</td>
 		
 		<td>
-			<%if(PJ_MANAGER.equals(pjGr.getGr())){%><%=pjGr.getGr() %><%}else{%>
+			<%if((pjGr.getPj()+"_"+Constants.GROUP_MANAGER).equals(pjGr.getGr()) || Constants.GROUP_MANAGER.equals(pjGr.getGr())){%><%=pjGr.getGr() %><%}else{%>
 			<a href="<%=ctx%>/pjgr?act=get&pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>"><%=pjGr.getGr() %></a>
 			<%}%>
 		</td>
 		<td><%=pjGr.getDes() %></td>
 		<td><a href="<%=ctx%>/pjgrusr?pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>">设置用户</a></td>
 		<td>
-			<%if(PJ_MANAGER.equals(pjGr.getGr())){%>&nbsp;<%}else{%>
+			<%if((pjGr.getPj()+"_"+Constants.GROUP_MANAGER).equals(pjGr.getGr()) || Constants.GROUP_MANAGER.equals(pjGr.getGr())){%>&nbsp;<%}else{%>
 			<a href="javascript:if(confirm('确认删除?')){del('<%=ctx%>/pjgr?&pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>')}">删除</a>
 			<%}%>
 		</td>

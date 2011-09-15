@@ -262,16 +262,17 @@ public class SvnService {
 	 */
 	private Map<String, List<PjGrUsr>> getPjGrUsrsByRootPath(String rootPath) {
 
-		Map<String, List<PjGrUsr>> results = new LinkedHashMap<String, List<PjGrUsr>>();// <gr,List<PjGrUsr>>
+		Map<String, List<PjGrUsr>> results = new LinkedHashMap<String, List<PjGrUsr>>();// <pj_gr,List<PjGrUsr>>
 
 		List<PjGrUsr> pjGrUsrs = this.pjGrUsrDao.getListByRootPath(rootPath);
 
 		// 格式化返回数据
 		for (PjGrUsr pjGrUsr : pjGrUsrs) {
-			List<PjGrUsr> grUsrList = results.get(pjGrUsr.getGr());
+			String key = pjGrUsr.getPj() + "_" + pjGrUsr.getGr();
+			List<PjGrUsr> grUsrList = results.get(key);// 项目ID_组ID see: Issue 4
 			if (grUsrList == null) {
 				grUsrList = new ArrayList<PjGrUsr>();
-				results.put(pjGrUsr.getGr(), grUsrList);
+				results.put(key, grUsrList);
 			}
 			grUsrList.add(pjGrUsr);
 		}
@@ -354,7 +355,7 @@ public class SvnService {
 	 * @param root
 	 *            svn root
 	 * @param pjGrUsrMap
-	 *            所有的项目列表
+	 *            所有的项目组用户列表
 	 * @param resMap
 	 *            所有的权限列表
 	 */
@@ -364,10 +365,6 @@ public class SvnService {
 		if (root == null) {
 			return;
 		}
-		/*
-		 * if(pjGrList == null || pjGrList.size() == 0){ return; } if(pjAuthMap
-		 * == null || pjAuthMap.size() == 0){ return; }
-		 */
 		File outFile = new File(root, "authz");
 		StringBuffer contents = new StringBuffer();
 		contents.append("[aliases]").append(SEP);
@@ -375,11 +372,14 @@ public class SvnService {
 
 		for (Iterator<String> grIterator = pjGrUsrMap.keySet().iterator(); grIterator
 				.hasNext();) {
-			String gr = grIterator.next();
+			String gr = grIterator.next();// 项目ID_组ID see: Issue 4
 			contents.append(gr).append("=");
 			List<PjGrUsr> pjGrUsrList = pjGrUsrMap.get(gr);
 			for (int i = 0; i < pjGrUsrList.size(); i++) {
 				PjGrUsr pjGrUsr = pjGrUsrList.get(i);
+				if(pjGrUsr.getUsr() == null){
+					continue;
+				}
 				if (i != 0) {
 					contents.append(",");
 				}
@@ -396,8 +396,10 @@ public class SvnService {
 			contents.append(res).append(SEP);
 			for (PjAuth pjAuth : resMap.get(res)) {
 				if (StringUtils.isNotBlank(pjAuth.getGr())) {
-					contents.append("@").append(pjAuth.getGr()).append("=")
-							.append(pjAuth.getRw()).append(SEP);
+					// 项目ID_组ID see: Issue 4
+					contents.append("@")
+							.append(pjAuth.getPj() + "_" + pjAuth.getGr())
+							.append("=").append(pjAuth.getRw()).append(SEP);
 				} else if (StringUtils.isNotBlank(pjAuth.getUsr())) {
 					contents.append(pjAuth.getUsr()).append("=")
 							.append(pjAuth.getRw()).append(SEP);
@@ -440,6 +442,9 @@ public class SvnService {
 			List<PjGrUsr> pjGrUsrList = pjGrUsrMap.get(gr);
 			for (int i = 0; i < pjGrUsrList.size(); i++) {
 				PjGrUsr pjGrUsr = pjGrUsrList.get(i);
+				if(pjGrUsr.getUsr() == null){
+					continue;
+				}
 				if (i != 0) {
 					contents.append(",");
 				}

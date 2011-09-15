@@ -92,12 +92,16 @@ public class PjGrUsrDao extends Dao {
 	}
 
 	/**
+	 * 项目的组用户列表(用户可能为空),导出authz文件时使用
+	 * 
 	 * @param pj
 	 *            项目
-	 * @return 组用户列表
+	 * @return 项目的组用户列表
 	 */
 	public List<PjGrUsr> getList(String pj) {
-		String sql = "select pj,usr,gr from pj_gr_usr where pj=? order by gr,usr";
+		// String sql =
+		// "select pj,usr,gr from pj_gr_usr where pj=? order by gr,usr";
+		String sql = "select a.pj,a.gr,b.usr from pj_gr a left join pj_gr_usr b on (a.pj=b.pj and a.gr=b.gr) where a.pj=? order by a.gr,b.usr";
 		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -122,12 +126,17 @@ public class PjGrUsrDao extends Dao {
 	}
 
 	/**
+	 * 有相同的svn root的项目的组用户列表(用户可能为空),导出authz文件时使用
+	 * 
 	 * @param rootPath
 	 *            svn root
 	 * @return 有相同的svn root的项目组用户
 	 */
 	public List<PjGrUsr> getListByRootPath(String rootPath) {
-		String sql = "select pj,usr,gr from pj_gr_usr where pj in (select distinct pj from pj where type=? and path like ?) order by pj,gr,usr";
+		// String sql =
+		// "select pj,usr,gr from pj_gr_usr where pj in (select distinct pj from pj where type=? and path like ?) order by pj,gr,usr";
+		String sql = "select a.pj,a.gr,b.usr from pj_gr a left join pj_gr_usr b on (a.pj=b.pj and a.gr=b.gr) "
+				+ "where a.pj in (select distinct pj from pj where type=? and path like ?) order by a.pj,a.gr,b.usr";
 		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
 
 		Connection conn = null;
