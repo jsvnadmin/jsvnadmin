@@ -54,6 +54,7 @@ tr.over{background: #ECF2AF;}
 	<tr style="border-width:0px 0 0 0px;">
 		<td align="center" style="font-size:20;font-weight:bold;border-width:0px 0 0 0px;">
 			SVN ADMIN
+			<sub style="font-size: 10px;font-weight:normal;">V ${project.version}</sub>
 		</td>
 	</tr>
 	<tr style="border-width:0px 0 0 0px;">

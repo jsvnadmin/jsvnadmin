@@ -213,6 +213,15 @@
 					<version>2.1.1</version>
 					<configuration>
 						<archiveClasses>${war.archiveClasses}</archiveClasses>
+						<webResources>
+							<resource>
+								<directory>${project.basedir}/src/main/webapp</directory>
+								<filtering>true</filtering>
+								<includes>
+									<include>inc.jsp</include>
+								</includes>
+							</resource>
+						</webResources>
 					</configuration>
 				</plugin>
 
