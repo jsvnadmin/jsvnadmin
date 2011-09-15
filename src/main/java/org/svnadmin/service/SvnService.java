@@ -109,7 +109,8 @@ public class SvnService {
 			this.exportHTTP(pj);
 		} else if (Constants.HTTP_MUTIL.equalsIgnoreCase(pj.getType())) {// HTTP(多库)
 																			// SVNParentPath
-			this.exportHTTPMutil(pj);
+			File root = new File(pj.getPath()).getParentFile();
+			this.exportHTTPMutil(root);
 		} else if (Constants.SVN.equalsIgnoreCase(pj.getType())) {// SVN
 			this.exportSVN(pj);
 		}
@@ -157,11 +158,10 @@ public class SvnService {
 	/**
 	 * 导出http(多库)的配置信息
 	 * 
-	 * @param pj
-	 *            项目
+	 * @param root
+	 *            svn root
 	 */
-	private void exportHTTPMutil(Pj pj) {
-		File root = new File(pj.getPath()).getParentFile();
+	private void exportHTTPMutil(File root) {
 		String svnRoot = StringUtils.replace(root.getAbsolutePath(), "\\", "/");
 		if (!svnRoot.endsWith("/")) {
 			svnRoot += "/";
@@ -377,7 +377,7 @@ public class SvnService {
 			List<PjGrUsr> pjGrUsrList = pjGrUsrMap.get(gr);
 			for (int i = 0; i < pjGrUsrList.size(); i++) {
 				PjGrUsr pjGrUsr = pjGrUsrList.get(i);
-				if(pjGrUsr.getUsr() == null){
+				if (pjGrUsr.getUsr() == null) {
 					continue;
 				}
 				if (i != 0) {
@@ -442,7 +442,7 @@ public class SvnService {
 			List<PjGrUsr> pjGrUsrList = pjGrUsrMap.get(gr);
 			for (int i = 0; i < pjGrUsrList.size(); i++) {
 				PjGrUsr pjGrUsr = pjGrUsrList.get(i);
-				if(pjGrUsr.getUsr() == null){
+				if (pjGrUsr.getUsr() == null) {
 					continue;
 				}
 				if (i != 0) {
@@ -518,7 +518,10 @@ public class SvnService {
 				&& pj.getUrl().indexOf("//") != -1) {
 			location = StringUtils.substringAfter(pj.getUrl(), "//");// 192.168.1.100/svn/projar/trunk
 			location = StringUtils.substringAfter(location, "/");// svn/projar/trunk
-			location = StringUtils.substringBeforeLast(location, "/trunk");// svn/projar see: Issue 5
+			location = StringUtils.substringBeforeLast(location, "/trunk");// svn/projar
+																			// see:
+																			// Issue
+																			// 5
 		}
 
 		contents.append("<Location /").append(location).append(">").append(SEP);
