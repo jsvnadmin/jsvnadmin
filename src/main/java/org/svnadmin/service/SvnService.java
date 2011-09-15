@@ -513,11 +513,12 @@ public class SvnService {
 				.append("/conf/httpd.conf").append(SEP);
 
 		String location = pj.getPj();
-		// 例如 http://192.168.1.100/svn/projar
+		// 例如 http://192.168.1.100/svn/projar/trunk
 		if (StringUtils.isNotBlank(pj.getUrl())
 				&& pj.getUrl().indexOf("//") != -1) {
-			location = StringUtils.substringAfter(pj.getUrl(), "//");// 192.168.1.100/svn/projar
-			location = StringUtils.substringAfter(location, "/");// svn/projar
+			location = StringUtils.substringAfter(pj.getUrl(), "//");// 192.168.1.100/svn/projar/trunk
+			location = StringUtils.substringAfter(location, "/");// svn/projar/trunk
+			location = StringUtils.substringBeforeLast(location, "/trunk");// svn/projar see: Issue 5
 		}
 
 		contents.append("<Location /").append(location).append(">").append(SEP);
