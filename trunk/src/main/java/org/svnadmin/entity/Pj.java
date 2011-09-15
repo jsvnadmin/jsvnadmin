@@ -27,6 +27,11 @@ public class Pj {
 	 * 类型
 	 */
 	private String type;
+	
+	/**
+	 * 用户是否是这个项目的管理员
+	 */
+	private boolean manager;
 
 	/**
 	 * @return 项目ID
@@ -101,6 +106,20 @@ public class Pj {
 	 */
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	/**
+	 * @return 用户是否是这个项目的管理员
+	 */
+	public boolean isManager() {
+		return manager;
+	}
+
+	/**
+	 * @param manager 用户是否是这个项目的管理员
+	 */
+	public void setManager(boolean manager) {
+		this.manager = manager;
 	}
 
 }

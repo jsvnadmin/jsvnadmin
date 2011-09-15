@@ -1,12 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@page import="org.svnadmin.Constants"%>
 <%@page import="org.svnadmin.util.EncryptUtil"%>
-<%@page import="java.util.Calendar"%>
-<%@ page contentType="text/html;charset=UTF-8"%>
 <%@include file="inc.jsp"%>
 <span style="color:green;font-weight:bold;"><a href="pj">项目管理(<%=request.getParameter("pj")%>)</a> --> 权限管理</span><br><br>
-<%
-String PJ_MANAGER = org.svnadmin.Constants.getManagerGroup(request.getParameter("pj"));
-%>
 
 <%
 org.svnadmin.entity.PjAuth entity = (org.svnadmin.entity.PjAuth)request.getAttribute("entity");

@@ -103,7 +103,7 @@ public class PjService {
 			for (String gr : Constants.GROUPS) {
 				PjGr pjGr = new PjGr();
 				pjGr.setPj(pj.getPj());
-				pjGr.setGr(pj.getPj() + "_" + gr);
+				pjGr.setGr(gr);
 				pjGr.setDes(gr);
 				pjGrDao.save(pjGr);
 			}

@@ -45,11 +45,4 @@ public class Constants {
 	 */
 	public static final String USR_ROLE_ADMIN="admin";
 	
-	/**
-	 * @param pj 项目
-	 * @return 项目管理员代码
-	 */
-	public static final String getManagerGroup(String pj){
-		return pj+"_"+GROUP_MANAGER;
-	}
 }

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.svnadmin.Constants;
@@ -82,13 +83,19 @@ public class PjDao extends Dao {
 	/**
 	 * @param usr
 	 *            用户
-	 * @return 用户有权限的项目列表
+	 * @return 用户有权限的项目列表(用户是否是这个项目的管理员)
 	 */
 	public List<Pj> getList(String usr) {
-		String sql = "select distinct a.pj,a.path,a.url,a.des,a.type from pj a where "
-				+ "exists (select b.usr from pj_gr_usr b where a.pj=b.pj and b.usr=?) "
+		String sql = "select p.pj,p.path,p.url,p.des,p.type,pm.pj manager from ( "
+				+ "select distinct a.pj,a.path,a.url,a.des,a.type from pj a where  "
+				+ "exists (select b.usr from pj_gr_usr b where a.pj=b.pj and b.usr=?)  "
 				+ "or exists(select c.usr from pj_usr_auth c where a.pj=c.pj and c.usr=?) "
-				+ "order by a.pj";
+				+ ") p "
+				+ "left join ( "
+				+ "select distinct a.pj from pj a where  "
+				// TODO like ? 应该是 = ? ,用like主要是兼容3.0版本 see: Issue 4
+				+ "exists (select b.usr from pj_gr_usr b where a.pj=b.pj and b.usr=? and b.gr like ?)"
+				+ ") pm on p.pj=pm.pj";
 		List<Pj> list = new ArrayList<Pj>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -99,10 +106,14 @@ public class PjDao extends Dao {
 			int index = 1;
 			pstmt.setString(index++, usr);
 			pstmt.setString(index++, usr);
+			pstmt.setString(index++, usr);
+			pstmt.setString(index++, "%"+Constants.GROUP_MANAGER);//TODO 主要是兼容3.0版本
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Pj pj = readPj(rs);
+				String manager = rs.getString("manager");//是否是管理员组的用户
+				pj.setManager(StringUtils.isNotBlank(manager));
 				list.add(pj);
 			}
 			return list;
