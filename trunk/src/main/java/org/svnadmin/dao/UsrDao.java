@@ -88,6 +88,41 @@ public class UsrDao extends Dao {
 	}
 
 	/**
+	 * 获取这个项目组未选的用户(不包括*)
+	 * 
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @return 项目组未选的用户(不包括*)
+	 */
+	public List<Usr> listUnSelected(String pj, String gr) {
+		String sql = "select usr,psw,role from usr a where a.usr <> '*' "
+				+ "and not exists (select usr from pj_gr_usr b where a.usr = b.usr and b.pj=? and b.gr=?) order by a.usr";
+		List<Usr> list = new ArrayList<Usr>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, pj);
+			pstmt.setString(index++, gr);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(readUsr(rs));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+	}
+
+	/**
 	 * @param pj
 	 *            项目
 	 * @return 所有项目用户列表(不包括*)

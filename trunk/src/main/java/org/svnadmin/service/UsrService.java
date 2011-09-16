@@ -54,6 +54,15 @@ public class UsrService {
 	public List<Usr> list(String pj){
 		return this.usrDao.getList(pj);
 	}
+	/**
+	 * 获取这个项目组未选的用户
+	 * @param pj 项目
+	 * @param gr 组
+	 * @return 项目组未选的用户
+	 */
+	public List<Usr> listUnSelected(String pj, String gr) {
+		return this.usrDao.listUnSelected(pj,gr);
+	}
 	
 	@Transactional
 	public void delete(String usr){
@@ -145,4 +154,5 @@ public class UsrService {
 		}
 		return entity;
 	}
+
 }

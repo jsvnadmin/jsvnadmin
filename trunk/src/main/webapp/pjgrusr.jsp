@@ -24,9 +24,6 @@ function checkForm(f){
 		if(usrlist!=null){	
 		for(int i = 0;i<usrlist.size();i++){
 			org.svnadmin.entity.Usr usr = usrlist.get(i);
-			if("*".equals(usr.getUsr())){
-				continue;
-			}
 		%>
 		<option value="<%=usr.getUsr()%>"><%=usr.getUsr()%></option>
 		<%}}%>

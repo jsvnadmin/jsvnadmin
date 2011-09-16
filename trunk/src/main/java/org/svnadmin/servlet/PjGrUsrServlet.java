@@ -51,7 +51,7 @@ public class PjGrUsrServlet extends PjBaseServlet {
 	@Override
 	protected void forword(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		request.setAttribute("usrList",usrService.list());
+		request.setAttribute("usrList",usrService.listUnSelected(request.getParameter("pj"), request.getParameter("gr")));
 		request.getRequestDispatcher("pjgrusr.jsp").forward(request, response);
 	}
 
