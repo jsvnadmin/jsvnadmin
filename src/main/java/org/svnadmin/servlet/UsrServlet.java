@@ -16,12 +16,21 @@ import org.svnadmin.util.EncryptUtil;
 import org.svnadmin.util.SpringUtils;
 
 /**
- * Servlet implementation class UsrServlet
+ * 用户
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 3.0
  */
 public class UsrServlet extends BaseServlet {
-	private static final long serialVersionUID = 1L;
 
-	UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
+	/**
+	 * 序列化ID
+	 */
+	private static final long serialVersionUID = 5448367307094487885L;
+	/**
+	 * 用户服务层
+	 */
+	protected UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
 
 	@Override
 	protected void get(HttpServletRequest request, HttpServletResponse response) {
@@ -33,8 +42,9 @@ public class UsrServlet extends BaseServlet {
 	protected void delete(HttpServletRequest request,
 			HttpServletResponse response) {
 		usrService.delete(request.getParameter("usr"));
-		
-		if(request.getParameter("usr").equals(getUsrFromSession(request).getUsr())){//当前用户
+
+		if (request.getParameter("usr").equals(
+				getUsrFromSession(request).getUsr())) {// 当前用户
 			request.getSession().removeAttribute(Constants.SESSION_KEY);
 			request.getSession().invalidate();
 			throw new TimeoutException("没有登录");
@@ -54,9 +64,9 @@ public class UsrServlet extends BaseServlet {
 		entity.setRole(request.getParameter("role"));
 
 		usrService.save(entity);
-		
-		if(entity.getUsr().equals(getUsrFromSession(request).getUsr())){//当前用户
-			request.getSession().setAttribute(Constants.SESSION_KEY,entity);
+
+		if (entity.getUsr().equals(getUsrFromSession(request).getUsr())) {// 当前用户
+			request.getSession().setAttribute(Constants.SESSION_KEY, entity);
 		}
 		request.setAttribute("entity", entity);
 	}
@@ -64,7 +74,7 @@ public class UsrServlet extends BaseServlet {
 	@Override
 	protected void list(HttpServletRequest request, HttpServletResponse response) {
 		boolean hasAdminRight = this.hasAdminRight(request, response);
-		if(hasAdminRight){
+		if (hasAdminRight) {
 			List<Usr> list = usrService.list();
 			request.setAttribute("list", list);
 		}
@@ -73,12 +83,12 @@ public class UsrServlet extends BaseServlet {
 	@Override
 	protected void forword(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		
+
 		boolean hasAdminRight = this.hasAdminRight(request, response);
 		request.setAttribute("hasAdminRight", hasAdminRight);
-		
-		if(!hasAdminRight){
-			request.setAttribute("entity",getUsrFromSession(request));
+
+		if (!hasAdminRight) {
+			request.setAttribute("entity", getUsrFromSession(request));
 		}
 
 		request.getRequestDispatcher("usr.jsp").forward(request, response);

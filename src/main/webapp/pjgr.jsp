@@ -51,7 +51,7 @@ function checkForm(f){
 		<td>删除</td>
 	</thead>
 	<%
-	java.util.List<org.svnadmin.entity.PjGr> list = (java.util.List)request.getAttribute("list");
+	java.util.List<org.svnadmin.entity.PjGr> list = (java.util.List<org.svnadmin.entity.PjGr>)request.getAttribute("list");
 
 	if(list!=null){
 	  for(int i = 0;i<list.size();i++){

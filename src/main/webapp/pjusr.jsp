@@ -88,7 +88,7 @@ function checkForm(f){
 		<td>密码</td>
 		<td>删除</td>
 	<%
-	java.util.List<org.svnadmin.entity.PjUsr> list = (java.util.List)request.getAttribute("list");
+	java.util.List<org.svnadmin.entity.PjUsr> list = (java.util.List<org.svnadmin.entity.PjUsr>)request.getAttribute("list");
 
 	if(list!=null){
 	  for(int i = 0;i<list.size();i++){

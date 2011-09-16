@@ -29,9 +29,10 @@ import org.svnadmin.entity.Usr;
 import org.svnadmin.util.EncryptUtil;
 
 /**
- * 导出svn配置信息
+ * 导出svn配置信息服务层
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
  * 
  */
 @Service(SvnService.BEAN_NAME)
@@ -54,31 +55,31 @@ public class SvnService {
 	 * 项目DAO
 	 */
 	@Resource(name = PjDao.BEAN_NAME)
-	PjDao pjDao;
+	protected PjDao pjDao;
 
 	/**
 	 * 用户DAO
 	 */
 	@Resource(name = UsrDao.BEAN_NAME)
-	UsrDao usrDao;
+	protected UsrDao usrDao;
 
 	/**
 	 * 项目组DAO
 	 */
 	@Resource(name = PjGrDao.BEAN_NAME)
-	PjGrDao pjGrDao;
+	protected PjGrDao pjGrDao;
 
 	/**
 	 * 项目组用户DAO
 	 */
 	@Resource(name = PjGrUsrDao.BEAN_NAME)
-	PjGrUsrDao pjGrUsrDao;
+	protected PjGrUsrDao pjGrUsrDao;
 
 	/**
 	 * 项目权限DAO
 	 */
 	@Resource(name = PjAuthDao.BEAN_NAME)
-	PjAuthDao pjAuthDao;
+	protected PjAuthDao pjAuthDao;
 
 	/**
 	 * 导出到配置文件

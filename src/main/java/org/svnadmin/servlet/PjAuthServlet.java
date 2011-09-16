@@ -14,11 +14,30 @@ import org.svnadmin.service.PjGrService;
 import org.svnadmin.service.UsrService;
 import org.svnadmin.util.SpringUtils;
 
+/**
+ * 项目权限
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
+ * 
+ */
 public class PjAuthServlet extends PjBaseServlet {
-	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8684748093607178473L;
+	/**
+	 * 项目权限服务层
+	 */
 	PjAuthService pjAuthService = SpringUtils.getBean(PjAuthService.BEAN_NAME);
+	/**
+	 * 项目组服务层
+	 */
 	PjGrService pjGrService = SpringUtils.getBean(PjGrService.BEAN_NAME);
+	/**
+	 * 用户服务层
+	 */
 	UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
 
 	@Override
@@ -29,7 +48,6 @@ public class PjAuthServlet extends PjBaseServlet {
 		}
 	}
 
-
 	@Override
 	protected void delete(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -37,10 +55,10 @@ public class PjAuthServlet extends PjBaseServlet {
 		String gr = request.getParameter("gr");
 		String usr = request.getParameter("usr");
 		String res = request.getParameter("res");
-		
-		if(StringUtils.isNotBlank(gr)){
+
+		if (StringUtils.isNotBlank(gr)) {
 			pjAuthService.deleteByGr(pj, gr, res);
-		}else if(StringUtils.isNotBlank(usr)){
+		} else if (StringUtils.isNotBlank(usr)) {
 			pjAuthService.deleteByUsr(pj, usr, res);
 		}
 	}
@@ -50,14 +68,14 @@ public class PjAuthServlet extends PjBaseServlet {
 
 		String pj = request.getParameter("pj");
 		String res = request.getParameter("res");
-		
+
 		String[] grs = request.getParameterValues("grs");
 		String[] usrs = request.getParameterValues("usrs");
-		
+
 		String rw = request.getParameter("rw");
-		
-		pjAuthService.save(pj,res,rw,grs,usrs);
-		
+
+		pjAuthService.save(pj, res, rw, grs, usrs);
+
 	}
 
 	@Override
@@ -70,14 +88,14 @@ public class PjAuthServlet extends PjBaseServlet {
 	protected void forword(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		request.setAttribute("usrList",usrService.list());
-		
+		request.setAttribute("usrList", usrService.list());
+
 		request.setAttribute("pjgrlist",
 				pjGrService.list(request.getParameter("pj")));
-		
+
 		request.setAttribute("pjreslist",
 				pjAuthService.getResList(request.getParameter("pj")));
-		
+
 		request.getRequestDispatcher("pjauth.jsp").forward(request, response);
 	}
 

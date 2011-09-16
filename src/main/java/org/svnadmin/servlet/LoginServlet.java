@@ -14,14 +14,28 @@ import org.svnadmin.service.UsrService;
 import org.svnadmin.util.SpringUtils;
 
 /**
- * Servlet implementation class LoginServlet
+ * 登录
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
+ * 
  */
 public class LoginServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2037344827672377791L;
+
+	/**
+	 * 日志
+	 */
 	private final Logger LOG = Logger.getLogger(this.getClass());
 
-	UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
+	/**
+	 * 用户服务层
+	 */
+	protected UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
 
 	@Override
 	protected void doGet(HttpServletRequest request,
@@ -29,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 		this.doPost(request, response);
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
@@ -43,14 +58,15 @@ public class LoginServlet extends HttpServlet {
 		String psw = request.getParameter("psw");
 		try {
 
-			if(StringUtils.isBlank(usr)){
+			if (StringUtils.isBlank(usr)) {
 				throw new RuntimeException("请输入帐号");
 			}
-			
-			request.getSession().setAttribute(Constants.SESSION_KEY, usrService.login(usr, psw));
+
+			request.getSession().setAttribute(Constants.SESSION_KEY,
+					usrService.login(usr, psw));
 
 			response.sendRedirect("pj");
-			
+
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			request.setAttribute(Constants.ERROR, e.getMessage());

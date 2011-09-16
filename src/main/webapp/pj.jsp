@@ -42,7 +42,7 @@ function checkForm(f){
 			<td>项目</td>
 			<td>
 			<%if(hasAdminRight){ %>
-			<input type="text" name="pj" value="<%=entity.getPj()==null?"":entity.getPj()%>" onkeyup="value=value.replace(/[^_\-A-Za-z0-9]/g,'')"><span style="color:red;">*</span></td>
+			<input type="text" name="pj" value="<%=entity.getPj()==null?"":entity.getPj()%>" onkeyup="value=value.replace(/[^_\-A-Za-z0-9]/g,'')"><span style="color:red;">*</span>
 			<%}else{ %>
 			<input type="hidden" name="pj" value="<%=entity.getPj()==null?"":entity.getPj()%>">
 			<%=entity.getPj()==null?"":entity.getPj()%>
@@ -96,7 +96,7 @@ function checkForm(f){
 		<td>删除</td>
 	</thead>
 	<%
-	java.util.List<Pj> list = (java.util.List)request.getAttribute("list");
+	java.util.List<Pj> list = (java.util.List<Pj>)request.getAttribute("list");
 
 	if(list!=null){
 	  for(int i = 0;i<list.size();i++){

@@ -1,10 +1,9 @@
 package org.svnadmin.entity;
 
-
 /**
  * 组
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 public class PjGr {

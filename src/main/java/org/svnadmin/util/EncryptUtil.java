@@ -3,18 +3,22 @@ package org.svnadmin.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import sun.misc.BASE64Encoder;
-
 /**
  * 加密工具
  * 
- * @author Harvey
- * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
  */
 public class EncryptUtil {
+	/**
+	 * 
+	 */
 	private static final String cvt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 			+ "abcdefghijklmnopqrstuvwxyz0123456789#@$";
 
+	/**
+	 * 
+	 */
 	private static final int fillchar = '*';
 
 	/**
@@ -104,10 +108,11 @@ public class EncryptUtil {
 	 *            明文
 	 * @return 密文
 	 */
+	@SuppressWarnings("restriction")
 	public static String encriptSHA1(String str) {
 		try {
-			return new BASE64Encoder().encode(MessageDigest.getInstance("SHA1")
-					.digest(str.getBytes()));
+			return new sun.misc.BASE64Encoder().encode(MessageDigest
+					.getInstance("SHA1").digest(str.getBytes()));
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

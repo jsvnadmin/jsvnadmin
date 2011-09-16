@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.Usr;
@@ -15,15 +14,11 @@ import org.svnadmin.entity.Usr;
 /**
  * 用户DAO
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 @Repository(UsrDao.BEAN_NAME)
 public class UsrDao extends Dao {
-	/**
-	 * 日志
-	 */
-	private final Logger LOG = Logger.getLogger(this.getClass());
 
 	/**
 	 * Bean名称

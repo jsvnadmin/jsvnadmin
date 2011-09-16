@@ -3,7 +3,7 @@ package org.svnadmin.entity;
 /**
  * 用户
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 public class Usr {

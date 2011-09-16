@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.svnadmin.entity.PjUsr;
 
@@ -15,13 +14,14 @@ import org.svnadmin.entity.PjUsr;
  * 
  * 项目的用户。 只对单库方式有用,包括svn协议和http协议(单库)，可以每个项目设置用户的密码。
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 @Repository(PjUsrDao.BEAN_NAME)
 public class PjUsrDao extends Dao {
-	private final Logger LOG = Logger.getLogger(this.getClass());
-
+	/**
+	 * Bean名称
+	 */
 	public static final String BEAN_NAME = "pjUsrDao";
 
 	/**

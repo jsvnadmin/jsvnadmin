@@ -8,20 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.Pj;
 
 /**
- * 项目
+ * 项目DAO
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 @Repository(PjDao.BEAN_NAME)
 public class PjDao extends Dao {
-	private final Logger LOG = Logger.getLogger(this.getClass());
+	/**
+	 * Bean名称
+	 */
 	public static final String BEAN_NAME = "pjDao";
 
 	/**
@@ -107,12 +108,13 @@ public class PjDao extends Dao {
 			pstmt.setString(index++, usr);
 			pstmt.setString(index++, usr);
 			pstmt.setString(index++, usr);
-			pstmt.setString(index++, "%"+Constants.GROUP_MANAGER);//TODO 主要是兼容3.0版本
+			// TODO 主要是兼容3.0版本
+			pstmt.setString(index++, "%" + Constants.GROUP_MANAGER);
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Pj pj = readPj(rs);
-				String manager = rs.getString("manager");//是否是管理员组的用户
+				String manager = rs.getString("manager");// 是否是管理员组的用户
 				pj.setManager(StringUtils.isNotBlank(manager));
 				list.add(pj);
 			}
@@ -125,6 +127,13 @@ public class PjDao extends Dao {
 		}
 	}
 
+	/**
+	 * @param rs
+	 *            ResultSet
+	 * @return 项目
+	 * @throws SQLException
+	 *             jdbc异常
+	 */
 	public Pj readPj(ResultSet rs) throws SQLException {
 		Pj result = new Pj();
 		result.setPj(rs.getString("pj"));
@@ -139,6 +148,7 @@ public class PjDao extends Dao {
 	 * 删除
 	 * 
 	 * @param pj
+	 *            项目
 	 */
 	public void delete(String pj) {
 		String sql = "delete from pj where pj = ?";
@@ -159,6 +169,13 @@ public class PjDao extends Dao {
 		}
 	}
 
+	/**
+	 * 增加项目
+	 * 
+	 * @param pj
+	 *            项目
+	 * @return 影响数量
+	 */
 	public int insert(Pj pj) {
 		String sql = "insert into pj (pj,path,url,des,type) values (?,?,?,?,?)";
 
@@ -183,6 +200,13 @@ public class PjDao extends Dao {
 		}
 	}
 
+	/**
+	 * 保存项目
+	 * 
+	 * @param pj
+	 *            项目
+	 * @return 影响数量
+	 */
 	public int update(Pj pj) {
 		String sql = "update pj set path=?,url=?,des=?,type=? where pj = ?";
 
@@ -207,6 +231,15 @@ public class PjDao extends Dao {
 		}
 	}
 
+	/**
+	 * 获取具有相同路径或访问地址的项目数量
+	 * 
+	 * @param path
+	 *            路径
+	 * @param url
+	 *            访问地址
+	 * @return 具有相同路径或访问地址的项目数量
+	 */
 	public int getCount(String path, String url) {
 		String sql = "select count(1) from pj where path=? or url=?";
 		Connection conn = null;

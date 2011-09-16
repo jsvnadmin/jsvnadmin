@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.PjGrUsr;
@@ -15,12 +14,14 @@ import org.svnadmin.entity.PjGrUsr;
 /**
  * 项目的组的用户
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 @Repository(PjGrUsrDao.BEAN_NAME)
 public class PjGrUsrDao extends Dao {
-	private final Logger LOG = Logger.getLogger(this.getClass());
+	/**
+	 * Bean名称
+	 */
 	public static final String BEAN_NAME = "pjGrUsrDao";
 
 	/**
