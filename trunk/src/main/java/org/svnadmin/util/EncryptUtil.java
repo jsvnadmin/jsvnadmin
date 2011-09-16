@@ -108,7 +108,6 @@ public class EncryptUtil {
 	 *            明文
 	 * @return 密文
 	 */
-	@SuppressWarnings("restriction")
 	public static String encriptSHA1(String str) {
 		try {
 			return new sun.misc.BASE64Encoder().encode(MessageDigest
