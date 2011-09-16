@@ -3,7 +3,7 @@ package org.svnadmin.exceptions;
 /**
  * 超时异常
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 public class TimeoutException extends RuntimeException {

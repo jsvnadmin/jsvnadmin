@@ -10,43 +10,74 @@ import org.springframework.transaction.annotation.Transactional;
 import org.svnadmin.dao.PjGrUsrDao;
 import org.svnadmin.entity.PjGrUsr;
 
+/**
+ * 项目组用户服务层
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
+ * 
+ */
 @Service(PjGrUsrService.BEAN_NAME)
 public class PjGrUsrService {
+	/**
+	 * Bean名称
+	 */
 	public static final String BEAN_NAME = "pjGrUsrService";
-	@Resource(name=PjGrUsrDao.BEAN_NAME)
-	PjGrUsrDao pjGrUsrDao;
- 
-	
-	@Resource(name=SvnService.BEAN_NAME)
-	SvnService svnService;
-	
-	public PjGrUsr get(String pj, String gr,String usr) {
-		return pjGrUsrDao.get(pj, gr,usr);
+	/**
+	 * 项目组用户DAO
+	 */
+	@Resource(name = PjGrUsrDao.BEAN_NAME)
+	protected PjGrUsrDao pjGrUsrDao;
+
+	/**
+	 * SVN服务层
+	 */
+	@Resource(name = SvnService.BEAN_NAME)
+	protected SvnService svnService;
+
+	/**
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @param usr
+	 *            用户
+	 * @return 组用户
+	 */
+	public PjGrUsr get(String pj, String gr, String usr) {
+		return pjGrUsrDao.get(pj, gr, usr);
 	}
-	
+
+	/**
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @return 组用户列表
+	 */
 	public List<PjGrUsr> list(String pj, String gr) {
 		return pjGrUsrDao.getList(pj, gr);
 	}
 
+	/**
+	 * 保存
+	 * 
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @param usrs
+	 *            用户
+	 */
 	@Transactional
-	public void save(String pj, String gr, String usr) {
-		PjGrUsr pjGrUsr = new PjGrUsr();
-		pjGrUsr.setPj(pj);
-		pjGrUsr.setGr(gr);
-		pjGrUsr.setUsr(usr);
-		pjGrUsrDao.save(pjGrUsr);
+	public void save(String pj, String gr, String[] usrs) {
 
-		svnService.exportConfig(pj);
-	}
-	@Transactional
-	public void save(String pj, String gr,String[] usrs) {
-		
-		if(usrs==null || usrs.length == 0){
+		if (usrs == null || usrs.length == 0) {
 			return;
 		}
-		
+
 		for (String usr : usrs) {
-			if(StringUtils.isBlank(usr)){
+			if (StringUtils.isBlank(usr)) {
 				continue;
 			}
 			PjGrUsr pjGrUsr = new PjGrUsr();
@@ -55,10 +86,20 @@ public class PjGrUsrService {
 			pjGrUsr.setUsr(usr);
 			pjGrUsrDao.save(pjGrUsr);
 		}
-		//export
+		// export
 		svnService.exportConfig(pj);
 	}
 
+	/**
+	 * 删除
+	 * 
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @param usr
+	 *            用户
+	 */
 	@Transactional
 	public void delete(String pj, String gr, String usr) {
 		pjGrUsrDao.delete(pj, gr, usr);

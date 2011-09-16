@@ -1,17 +1,17 @@
 package org.svnadmin;
 
-
 /**
  * 常量
- * @author Harvey
- *
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
  */
 public class Constants {
 	/**
 	 * 用户在session中id
 	 */
 	public static final String SESSION_KEY = "_session_key_";
-	
+
 	/**
 	 * 
 	 */
@@ -38,11 +38,12 @@ public class Constants {
 	/**
 	 * 项目默认的组
 	 */
-	public static final String[] GROUPS = { GROUP_MANAGER, "developer", "tester" };
-	
+	public static final String[] GROUPS = { GROUP_MANAGER, "developer",
+			"tester" };
+
 	/**
 	 * 管理员角色代码
 	 */
-	public static final String USR_ROLE_ADMIN="admin";
-	
+	public static final String USR_ROLE_ADMIN = "admin";
+
 }

@@ -15,11 +15,28 @@ import org.svnadmin.service.UsrService;
 import org.svnadmin.util.EncryptUtil;
 import org.svnadmin.util.SpringUtils;
 
+/**
+ * 项目用户(采用svn或http单库方式是，用户可以对每个项目设置不用的密码)
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
+ */
 public class PjUsrServlet extends PjServlet {
-	private static final long serialVersionUID = 1L;
 
-	UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
-	PjUsrService pjUsrService = SpringUtils.getBean(PjUsrService.BEAN_NAME);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4020326530937387440L;
+
+	/**
+	 * 用户服务层
+	 */
+	protected UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
+	/**
+	 * 项目用户服务层
+	 */
+	protected PjUsrService pjUsrService = SpringUtils
+			.getBean(PjUsrService.BEAN_NAME);
 
 	@Override
 	protected void before(HttpServletRequest request,
@@ -43,7 +60,7 @@ public class PjUsrServlet extends PjServlet {
 		pjUsrService.delete(request.getParameter("pj"),
 				request.getParameter("usr"));
 	}
-	
+
 	@Override
 	protected void save(HttpServletRequest request, HttpServletResponse response) {
 
@@ -73,15 +90,15 @@ public class PjUsrServlet extends PjServlet {
 
 		boolean hasManagerRight = this.hasManagerRight(request, response);
 		request.setAttribute("hasManagerRight", hasManagerRight);
-		
+
 		if (hasManagerRight) {
 			// 账户
 			List<Usr> usrList = usrService.list(request.getParameter("pj"));
 			request.setAttribute("usrList", usrList);
 		} else {
-			PjUsr entity = pjUsrService.get(request
-					.getParameter("pj"), getUsrFromSession(request).getUsr());
-			if(entity == null){
+			PjUsr entity = pjUsrService.get(request.getParameter("pj"),
+					getUsrFromSession(request).getUsr());
+			if (entity == null) {
 				entity = new PjUsr();
 				entity.setPj(request.getParameter("pj"));
 				entity.setUsr(getUsrFromSession(request).getUsr());

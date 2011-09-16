@@ -7,19 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.svnadmin.entity.PjGr;
 
 /**
  * 项目组
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 @Repository(PjGrDao.BEAN_NAME)
 public class PjGrDao extends Dao {
-	private final Logger LOG = Logger.getLogger(this.getClass());
+	/**
+	 * Bean名称
+	 */
 	public static final String BEAN_NAME = "pjGrDao";
 
 	/**

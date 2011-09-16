@@ -5,7 +5,7 @@ response.setHeader("Cache-Control", "no-cache, post-check=0, pre-check=0");
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "Thu, 01 Dec 1970 16:00:00 GMT");
 
-String ctx = (String)request.getContextPath();
+String ctx = request.getContextPath();
 
 Usr _usr = (Usr)request.getSession().getAttribute(org.svnadmin.Constants.SESSION_KEY);
 String errorMsg = (String)request.getAttribute(org.svnadmin.Constants.ERROR);

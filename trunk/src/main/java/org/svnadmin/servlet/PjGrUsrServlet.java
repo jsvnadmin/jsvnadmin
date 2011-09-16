@@ -9,16 +9,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.PjGrUsr;
-import org.svnadmin.service.PjGrUsrService;
 import org.svnadmin.service.UsrService;
 import org.svnadmin.util.SpringUtils;
 
+/**
+ * 项目组用户
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
+ * 
+ */
 public class PjGrUsrServlet extends PjBaseServlet {
-	private static final long serialVersionUID = 1L;
 
-	PjGrUsrService pjGrUsrService = SpringUtils.getBean(PjGrUsrService.BEAN_NAME);
-	UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1506192047326005839L;
+	/**
+	 * 用户服务层
+	 */
+	protected UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
+
 	@Override
 	protected void before(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -51,7 +62,10 @@ public class PjGrUsrServlet extends PjBaseServlet {
 	@Override
 	protected void forword(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		request.setAttribute("usrList",usrService.listUnSelected(request.getParameter("pj"), request.getParameter("gr")));
+		request.setAttribute(
+				"usrList",
+				usrService.listUnSelected(request.getParameter("pj"),
+						request.getParameter("gr")));
 		request.getRequestDispatcher("pjgrusr.jsp").forward(request, response);
 	}
 

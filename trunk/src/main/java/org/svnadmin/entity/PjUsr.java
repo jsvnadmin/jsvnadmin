@@ -1,9 +1,9 @@
 package org.svnadmin.entity;
 
 /**
- * 项目用户
+ * 项目用户 。只对单库方式有用,包括svn协议和http协议(单库)，可以每个项目设置用户的密码
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 public class PjUsr extends Usr {

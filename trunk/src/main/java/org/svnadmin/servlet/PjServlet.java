@@ -11,10 +11,23 @@ import org.svnadmin.entity.Pj;
 import org.svnadmin.service.PjService;
 import org.svnadmin.util.SpringUtils;
 
+/**
+ * 项目
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
+ * 
+ */
 public class PjServlet extends PjBaseServlet {
-	private static final long serialVersionUID = 1L;
 
-	PjService pjService = SpringUtils.getBean(PjService.BEAN_NAME);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6996739562959142169L;
+	/**
+	 * 项目服务层
+	 */
+	protected PjService pjService = SpringUtils.getBean(PjService.BEAN_NAME);
 
 	@Override
 	protected void get(HttpServletRequest request, HttpServletResponse response) {
@@ -37,7 +50,7 @@ public class PjServlet extends PjBaseServlet {
 		entity.setUrl(request.getParameter("url"));
 		entity.setDes(request.getParameter("des"));
 		entity.setType(request.getParameter("type"));
-		pjService.save(getUsrFromSession(request).getUsr(),entity);
+		pjService.save(entity);
 
 		request.setAttribute("entity", entity);
 	}
@@ -46,10 +59,10 @@ public class PjServlet extends PjBaseServlet {
 	protected void list(HttpServletRequest request, HttpServletResponse response) {
 		boolean hasAdminRight = this.hasAdminRight(request, response);
 		List<Pj> list = null;
-		if(hasAdminRight){
-			list = pjService.list();//所有项目
-		}else{
-			list = pjService.list(getUsrFromSession(request).getUsr());//登录用户可以看到的项目
+		if (hasAdminRight) {
+			list = pjService.list();// 所有项目
+		} else {
+			list = pjService.list(getUsrFromSession(request).getUsr());// 登录用户可以看到的项目
 		}
 		request.setAttribute("list", list);
 	}
@@ -60,10 +73,10 @@ public class PjServlet extends PjBaseServlet {
 
 		boolean hasAdminRight = this.hasAdminRight(request, response);
 		request.setAttribute("hasAdminRight", hasAdminRight);
-		
+
 		boolean hasManagerRight = this.hasManagerRight(request, response);
 		request.setAttribute("hasManagerRight", hasManagerRight);
-		
+
 		request.getRequestDispatcher("pj.jsp").forward(request, response);
 	}
 

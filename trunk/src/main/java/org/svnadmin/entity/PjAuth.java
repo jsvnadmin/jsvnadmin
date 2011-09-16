@@ -3,7 +3,7 @@ package org.svnadmin.entity;
 /**
  * 权限
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 public class PjAuth {

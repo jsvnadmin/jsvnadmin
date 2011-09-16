@@ -3,7 +3,7 @@ package org.svnadmin.entity;
 /**
  * 项目
  * 
- * @author Harvey
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
 public class Pj {
@@ -27,7 +27,7 @@ public class Pj {
 	 * 类型
 	 */
 	private String type;
-	
+
 	/**
 	 * 用户是否是这个项目的管理员
 	 */
@@ -116,7 +116,8 @@ public class Pj {
 	}
 
 	/**
-	 * @param manager 用户是否是这个项目的管理员
+	 * @param manager
+	 *            用户是否是这个项目的管理员
 	 */
 	public void setManager(boolean manager) {
 		this.manager = manager;

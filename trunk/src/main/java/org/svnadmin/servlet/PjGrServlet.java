@@ -12,10 +12,24 @@ import org.svnadmin.entity.PjGr;
 import org.svnadmin.service.PjGrService;
 import org.svnadmin.util.SpringUtils;
 
+/**
+ * 项目组
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
+ * 
+ */
 public class PjGrServlet extends PjBaseServlet {
-	private static final long serialVersionUID = 1L;
 
-	PjGrService pjGrService = SpringUtils.getBean(PjGrService.BEAN_NAME);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8090979393792275422L;
+	/**
+	 * 项目组服务层
+	 */
+	protected PjGrService pjGrService = SpringUtils
+			.getBean(PjGrService.BEAN_NAME);
 
 	@Override
 	protected void before(HttpServletRequest request,

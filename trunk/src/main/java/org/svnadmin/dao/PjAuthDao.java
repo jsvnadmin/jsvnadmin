@@ -8,16 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.PjAuth;
 
+/**
+ * 项目资源的权限DAO
+ * 
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 1.0
+ * 
+ */
 @Repository(PjAuthDao.BEAN_NAME)
 public class PjAuthDao extends Dao {
-	private final Logger LOG = Logger.getLogger(this.getClass());
+	/**
+	 * Bean名称
+	 */
 	public static final String BEAN_NAME = "pjAuthDao";
 
+	/**
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @param res
+	 *            资源
+	 * @return 项目组资源的权限
+	 */
 	public PjAuth getByGr(String pj, String gr, String res) {
 		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj = ? and gr=? and res=? ";
 
@@ -45,6 +62,15 @@ public class PjAuthDao extends Dao {
 		return null;
 	}
 
+	/**
+	 * @param pj
+	 *            项目
+	 * @param usr
+	 *            用户
+	 * @param res
+	 *            资源
+	 * @return 项目用户资源的权限
+	 */
 	public PjAuth getByUsr(String pj, String usr, String res) {
 		String sql = "select pj,res,rw,usr,' ' gr from pj_usr_auth where pj = ? and usr=? and res=? ";
 
@@ -72,6 +98,11 @@ public class PjAuthDao extends Dao {
 		return null;
 	}
 
+	/**
+	 * @param pj
+	 *            项目
+	 * @return 项目资源的权限列表
+	 */
 	public List<PjAuth> getList(String pj) {
 		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj=? "
 				+ "UNION "
@@ -102,6 +133,11 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * @param rootPath
+	 *            svn root path
+	 * @return 具有相同svn root的项目资源的权限列表
+	 */
 	public List<PjAuth> getListByRootPath(String rootPath) {
 		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
 				+ "UNION "
@@ -134,6 +170,13 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * @param rs
+	 *            ResultSet
+	 * @return 项目资源的权限
+	 * @throws SQLException
+	 *             jdbc异常
+	 */
 	PjAuth readPjAuth(ResultSet rs) throws SQLException {
 		PjAuth result = new PjAuth();
 		result.setPj(rs.getString("pj"));
@@ -149,6 +192,16 @@ public class PjAuthDao extends Dao {
 		return result;
 	}
 
+	/**
+	 * 删除项目 组资源的权限
+	 * 
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 * @param res
+	 *            资源
+	 */
 	public void deleteByGr(String pj, String gr, String res) {
 		String sql = "delete from pj_gr_auth where pj = ? and gr=? and res=? ";
 		Connection conn = null;
@@ -170,6 +223,16 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * 删除项目用户资源的权限
+	 * 
+	 * @param pj
+	 *            项目
+	 * @param usr
+	 *            用户
+	 * @param res
+	 *            资源
+	 */
 	public void deleteByUsr(String pj, String usr, String res) {
 		String sql = "delete from pj_usr_auth where pj = ? and usr=? and res=? ";
 		Connection conn = null;
@@ -191,6 +254,12 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * 删除项目 资源的权限
+	 * 
+	 * @param pj
+	 *            项目
+	 */
 	public void deletePj(String pj) {
 		// pj_gr_auth
 		String sql = "delete from pj_gr_auth where pj = ?";
@@ -226,6 +295,14 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * 删除项目 组资源的权限
+	 * 
+	 * @param pj
+	 *            项目
+	 * @param gr
+	 *            组
+	 */
 	public void deletePjGr(String pj, String gr) {
 		String sql = "delete from pj_gr_auth where pj = ? and gr=?";
 		Connection conn = null;
@@ -246,6 +323,12 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * 删除用户的项目资源的权限
+	 * 
+	 * @param usr
+	 *            用户
+	 */
 	public void deleteUsr(String usr) {
 		String sql = "delete from pj_usr_auth where usr=?";
 		Connection conn = null;
@@ -265,6 +348,12 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * 保存项目组权限
+	 * 
+	 * @param pjAuth
+	 *            项目组权限
+	 */
 	public void saveByGr(PjAuth pjAuth) {
 		if (this.getByGr(pjAuth.getPj(), pjAuth.getGr(), pjAuth.getRes()) == null) {
 			String sql = "insert into pj_gr_auth (pj,gr,res,rw) values (?,?,?,?)";
@@ -311,6 +400,12 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * 保存项目用户权限
+	 * 
+	 * @param pjAuth
+	 *            项目用户权限
+	 */
 	public void saveByUsr(PjAuth pjAuth) {
 		if (this.getByUsr(pjAuth.getPj(), pjAuth.getUsr(), pjAuth.getRes()) == null) {
 			String sql = "insert into pj_usr_auth (pj,usr,res,rw) values (?,?,?,?)";
@@ -357,6 +452,11 @@ public class PjAuthDao extends Dao {
 		}
 	}
 
+	/**
+	 * @param pj
+	 *            项目
+	 * @return 项目的资源列表
+	 */
 	public List<String> getResList(String pj) {
 		String sql = "select distinct res from pj_gr_auth where pj=? "
 				+ "UNION select distinct res from pj_usr_auth where pj=? order by res";
