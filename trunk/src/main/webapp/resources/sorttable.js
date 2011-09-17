@@ -35,6 +35,7 @@ sorttable = {
       if (table.className.search(/\bsortable\b/) != -1) {
         sorttable.makeSortable(table);
 		sorttable.makeHightlightTable(table.tBodies[0]);//by Harvey 2011-09-03
+		sorttable.addHeadTitle(table);//by Harvey 2011-09-17
       }
     });
     
@@ -50,6 +51,19 @@ sorttable = {
 		this.className=this._sorttable_cls;
 	  });
     }
+  },
+  addHeadTitle:function(table){
+	// Safari doesn't support table.tHead, sigh
+	 if (table.tHead == null) table.tHead = table.getElementsByTagName('thead')[0];
+	 if (table.tHead.rows.length != 1) return; // can't cope with two header rows
+	 headrow = table.tHead.rows[0].cells;
+	 for (var i=0; i<headrow.length; i++) {
+		 text = sorttable.getInnerText(headrow[i]);
+		 if(text == null){
+			 text = "";
+		 }
+		 headrow[i].title="Sort "+ text;
+	 }
   },
   //end by Harvey 2011-09-03
   makeSortable: function(table) {
@@ -182,7 +196,7 @@ sorttable = {
     for (var i=0; i<table.tBodies[0].rows.length; i++) {
       text = sorttable.getInnerText(table.tBodies[0].rows[i].cells[column]);
       if (text != '') {
-        if (text.match(/^-?[?¤]?[\d,.]+%?$/)) {
+        if (text.match(/^-?[?ï¿½]?[\d,.]+%?$/)) {
           return sorttable.sort_numeric;
         }
         // check for a date: dd/mm/yyyy or dd/mm/yy 
