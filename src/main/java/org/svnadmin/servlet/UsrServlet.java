@@ -41,13 +41,16 @@ public class UsrServlet extends BaseServlet {
 	@Override
 	protected void delete(HttpServletRequest request,
 			HttpServletResponse response) {
+		if(!this.hasAdminRight(request, response)){
+			throw new RuntimeException("你没有权限删除用户!");
+		}
 		usrService.delete(request.getParameter("usr"));
 
 		if (request.getParameter("usr").equals(
 				getUsrFromSession(request).getUsr())) {// 当前用户
 			request.getSession().removeAttribute(Constants.SESSION_KEY);
 			request.getSession().invalidate();
-			throw new TimeoutException("没有登录");
+			throw new TimeoutException("重新登录");
 		}
 	}
 

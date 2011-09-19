@@ -54,13 +54,13 @@ tr.over{background: #ECF2AF;}
 	<tr style="border-width:0px 0 0 0px;">
 		<td align="center" style="font-size:20;font-weight:bold;border-width:0px 0 0 0px;">
 			SVN ADMIN
-			<sub style="font-size: 10px;font-weight:normal;">V ${project.version}</sub>
+			<a style="text-decoration:none;" target="_blank" title="56099823@qq.com" href="http://code.google.com/p/jsvnadmin/"><sub style="font-size: 10px;font-weight:normal;">V ${project.version}</sub></a>
 		</td>
 	</tr>
 	<tr style="border-width:0px 0 0 0px;">
 		<td align="right" style="border-width:0px 0 0 0px;">
-			 <a href="usr">用户</a> 
-			 <a href="pj">项目</a> 
+			 <a href="usr" title="56099823@qq.com">用户</a> 
+			 <a href="pj" title="56099823@qq.com">项目</a> 
 			 <%=_usr.getUsr()%>
 			 <a href="login?act=logout">退出</a>
 		</td>

@@ -31,6 +31,7 @@ public class PjServlet extends PjBaseServlet {
 
 	@Override
 	protected void get(HttpServletRequest request, HttpServletResponse response) {
+		this.validateManager(request, response);//检查权限
 		request.setAttribute("entity",
 				pjService.get(request.getParameter("pj")));
 	}
@@ -38,12 +39,13 @@ public class PjServlet extends PjBaseServlet {
 	@Override
 	protected void delete(HttpServletRequest request,
 			HttpServletResponse response) {
+		this.validateManager(request, response);//检查权限
 		pjService.delete(request.getParameter("pj"));
 	}
 
 	@Override
 	protected void save(HttpServletRequest request, HttpServletResponse response) {
-
+		this.validateManager(request, response);//检查权限
 		Pj entity = new Pj();
 		entity.setPj(request.getParameter("pj"));
 		entity.setPath(request.getParameter("path"));
