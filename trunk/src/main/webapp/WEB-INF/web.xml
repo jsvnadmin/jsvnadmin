@@ -34,6 +34,10 @@
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.jsp</location>
+	</error-page>
 	<servlet>
 		<servlet-name>login</servlet-name>
 		<servlet-class>org.svnadmin.servlet.LoginServlet</servlet-class>

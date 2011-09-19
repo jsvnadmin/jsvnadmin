@@ -55,4 +55,15 @@ public class PjBaseServlet extends BaseServlet {
 		gr = Constants.GROUP_MANAGER;
 		return this.pjGrUsrService.get(pj, gr, usr.getUsr()) != null;
 	}
+	
+	/**
+	 * 检查是否有项目管理员的权限
+	 * @param request 请求
+	 * @param response 响应
+	 */
+	protected void validateManager(HttpServletRequest request,HttpServletResponse response) {
+		if(!this.hasManagerRight(request, response)){
+			throw new RuntimeException("你没有访问权限!");
+		}
+	}
 }

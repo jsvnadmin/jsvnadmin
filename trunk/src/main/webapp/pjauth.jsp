@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@page import="org.svnadmin.Constants"%>
 <%@page import="org.svnadmin.util.EncryptUtil"%>
-<%@include file="inc.jsp"%>
+<%@include file="header.jsp"%>
 <span style="color:green;font-weight:bold;"><a href="pj">项目管理(<%=request.getParameter("pj")%>)</a> --> 权限管理</span><br><br>
-
 <%
 org.svnadmin.entity.PjAuth entity = (org.svnadmin.entity.PjAuth)request.getAttribute("entity");
 if(entity==null)entity=new org.svnadmin.entity.PjAuth();

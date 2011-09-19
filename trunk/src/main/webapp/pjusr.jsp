@@ -1,11 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="org.svnadmin.util.EncryptUtil"%>
-<%@include file="inc.jsp"%>
+<%@include file="header.jsp"%>
 <span style="color:green;font-weight:bold;"><a href="pj">项目管理(<%=request.getParameter("pj")%>)</a> --> <a href="pjusr?pj=<%=request.getParameter("pj")%>">用户管理</a></span>
 <em style="color:blue;">(注意:这里设置的用户密码只对这个项目有效)</em>
 <br><br>
-
 <%
 boolean hasManagerRight = (Boolean)request.getAttribute("hasManagerRight");
 %>

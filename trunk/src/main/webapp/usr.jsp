@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@page import="org.svnadmin.Constants"%>
 <%@page import="org.svnadmin.util.EncryptUtil"%>
-<%@include file="inc.jsp"%>
+<%@include file="header.jsp"%>
 <span style="color:green;font-weight:bold;">用户管理</span><br><br>
-
 <%
 boolean hasAdminRight = (Boolean)request.getAttribute("hasAdminRight");
 %>

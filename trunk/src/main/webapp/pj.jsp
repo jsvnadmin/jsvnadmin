@@ -2,7 +2,7 @@
 <%@page import="org.svnadmin.util.EncryptUtil"%>
 <%@page import="org.svnadmin.entity.*"%>
 <%@page import="org.svnadmin.Constants"%>
-<%@include file="inc.jsp"%>
+<%@include file="header.jsp"%>
 <span style="color:green;font-weight:bold;">项目管理</span><br><br>
 
 <%
