@@ -79,14 +79,15 @@ function checkForm(f){
 	java.util.List<org.svnadmin.entity.Usr> list = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("list");
 
 	if(list!=null){
-	  for(int i = 0;i<list.size();i++){
+		int no = 1;	  
+		for(int i = 0;i<list.size();i++){
 		  org.svnadmin.entity.Usr usr = list.get(i);
 		  if("*".equals(usr.getUsr())){
 			  continue;
 		  }
 		%>
 		<tr>
-		<td><%=(i+1) %></td>
+		<td><%=(no++) %></td>
 		<td>
 			<a href="<%=ctx%>/usr?act=get&usr=<%=usr.getUsr()%>"><%=usr.getUsr() %></a>
 		</td>
