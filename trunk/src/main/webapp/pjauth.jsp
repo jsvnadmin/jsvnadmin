@@ -35,7 +35,7 @@ function checkForm(f){
 			<td><input type="hidden" name="pj" value="<%=request.getParameter("pj")%>"><%=request.getParameter("pj")%></td>
 			<td>资源</td>
 			<td>
-				<input type="text" name="res" value="<%=entity.getRes()==null?"":entity.getRes()%>" style="width:400px;" onkeyup="value=value.replace(/[^\*\[\]:/_\.\-A-Za-z0-9]/g,'')"><span style="color:red;">*</span>
+				<input type="text" name="res" value="<%=entity.getRes()==null?"":entity.getRes()%>" style="width:400px;"><span style="color:red;">*</span>
 				<select onchange="this.form.res.value=this.value">
 				<option value="">选择资源</option>
 				 <%
