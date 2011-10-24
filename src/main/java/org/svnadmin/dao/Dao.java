@@ -45,7 +45,20 @@ public class Dao {
 	protected Connection getConnection() {
 		return DataSourceUtils.getConnection(getDataSource());
 	}
-
+	/**
+	 * 验证是否可以连接上数据库 see Issue 12
+	 * 
+	 * @return
+	 * @throws SQLException
+	 */
+	public void validatConnection() throws SQLException {
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+		} finally {
+			this.close(null, null, conn);
+		}
+	}
 	/**
 	 * 关闭资源
 	 * 

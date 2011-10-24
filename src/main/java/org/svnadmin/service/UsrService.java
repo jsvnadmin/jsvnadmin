@@ -229,5 +229,12 @@ public class UsrService {
 		}
 		return entity;
 	}
-
+	
+	/**
+	 * 验证是否连接数据库成功 Issue 12
+	 * @throws Exception
+	 */
+	public void validatConnection() throws Exception{
+		this.usrDao.validatConnection();
+	}
 }
