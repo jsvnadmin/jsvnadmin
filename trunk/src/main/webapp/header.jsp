@@ -59,8 +59,8 @@ tr.over{background: #ECF2AF;}
 	</tr>
 	<tr style="border-width:0px 0 0 0px;">
 		<td align="right" style="border-width:0px 0 0 0px;">
-			 <a href="usr" title="56099823@qq.com">用户</a> 
-			 <a href="pj" title="56099823@qq.com">项目</a> 
+			 <a href="usr">用户</a> 
+			 <a href="pj">项目</a> 
 			 <%=_usr.getUsr()%>
 			 <a href="login?act=logout">退出</a>
 		</td>
