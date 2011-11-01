@@ -27,6 +27,7 @@ import org.svnadmin.entity.PjAuth;
 import org.svnadmin.entity.PjGrUsr;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.util.EncryptUtil;
+import org.svnadmin.util.I18N;
 
 /**
  * 导出svn配置信息服务层
@@ -103,7 +104,7 @@ public class SvnService {
 		}
 		File parent = new File(pj.getPath());
 		if (!parent.exists() || !parent.isDirectory()) {
-			throw new RuntimeException("找不到仓库 " + pj.getPath());
+			throw new RuntimeException(I18N.getLbl("svn.notFoundResp", "找不到仓库 路径{0}",new Object[]{pj.getPath()}));
 		}
 
 		if (Constants.HTTP.equalsIgnoreCase(pj.getType())) {// HTTP(单库) SVNPath

@@ -19,6 +19,7 @@ import org.svnadmin.dao.UsrDao;
 import org.svnadmin.entity.Pj;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.util.EncryptUtil;
+import org.svnadmin.util.I18N;
 
 /**
  * 用户
@@ -222,10 +223,10 @@ public class UsrService {
 		// 正常登录
 		Usr entity = this.get(usr);
 		if (entity == null) {
-			throw new RuntimeException("不存在用户 " + usr);
+			throw new RuntimeException(I18N.getLbl("login.error.notfoundusr", "不存在用户{0} ",new Object[]{usr}));
 		}
 		if (!entity.getPsw().equals(EncryptUtil.encrypt(psw))) {
-			throw new RuntimeException("密码错误 ");
+			throw new RuntimeException(I18N.getLbl("login.error.wrongpassword", "密码错误 "));
 		}
 		return entity;
 	}

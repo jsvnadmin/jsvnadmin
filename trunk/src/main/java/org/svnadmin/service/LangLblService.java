@@ -6,6 +6,7 @@ package org.svnadmin.service;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.svnadmin.dao.LangLblDao;
 import org.svnadmin.entity.LangLbl;
@@ -36,7 +37,7 @@ public class LangLblService {
 	/**
 	 * @param langLbl
 	 */
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void insert(LangLbl langLbl) {
 		langLblDao.insert(langLbl);
 	}

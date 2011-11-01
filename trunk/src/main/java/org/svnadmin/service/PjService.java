@@ -16,6 +16,7 @@ import org.svnadmin.dao.PjGrUsrDao;
 import org.svnadmin.dao.PjUsrDao;
 import org.svnadmin.entity.Pj;
 import org.svnadmin.entity.PjGr;
+import org.svnadmin.util.I18N;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 
@@ -138,12 +139,12 @@ public class PjService {
 		if (insert) {
 			// 数据库里已经存在相同的路径或url的项目
 			if (this.pjDao.getCount(pj.getPath(), pj.getUrl()) > 0) {
-				throw new RuntimeException("数据库里已经存在相同的路径或url的仓库项目，请检查路径或url");
+				throw new RuntimeException(I18N.getLbl("pj.save.error.existPathOrUrl", "数据库里已经存在相同的路径或url的仓库项目，请检查路径或url"));
 			}
 		} else {
 			// 数据库里已经存在相同的路径或url的项目
 			if (this.pjDao.getCount(pj.getPath(), pj.getUrl()) > 1) {
-				throw new RuntimeException("数据库里已经存在多个相同的路径或url的仓库项目，请检查路径或url");
+				throw new RuntimeException(I18N.getLbl("pj.save.error.existMutilPathOrUrl","数据库里已经存在多个相同的路径或url的仓库项目，请检查路径或url"));
 			}
 		}
 		// 创建仓库
@@ -153,8 +154,8 @@ public class PjService {
 				SVNRepositoryFactory.createLocalRepository(respository, true,
 						false);
 			} catch (SVNException e) {
-				throw new RuntimeException("创建仓库失败." + pj.getPath() + " "
-						+ e.getMessage());
+				throw new RuntimeException(I18N.getLbl("pj.save.error.createRepository","创建仓库失败.{0}",new Object[]{pj.getPath()}) 
+				+ " : "+ e.getMessage());
 			}
 		}
 		// 增加默认的组
