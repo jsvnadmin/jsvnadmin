@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.PjGr;
 import org.svnadmin.service.PjGrService;
+import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**
@@ -35,7 +36,7 @@ public class PjGrServlet extends PjBaseServlet {
 	protected void before(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (StringUtils.isBlank(request.getParameter("pj"))) {
-			throw new RuntimeException("不可以直接访问，请从项目的菜单进来这个页面!");
+			throw new RuntimeException(I18N.getLbl(request, "sys.error.pj.empty", "不可以直接访问，请从项目的菜单进来这个页面!"));
 		}
 		this.validateManager(request, response);//检查权限
 	}

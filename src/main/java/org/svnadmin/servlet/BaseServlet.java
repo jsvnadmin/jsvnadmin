@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.exceptions.TimeoutException;
+import org.svnadmin.util.I18N;
 
 /**
  * Servlet 的父类
@@ -64,7 +65,7 @@ public class BaseServlet extends HttpServlet {
 	 */
 	public static Usr getUsrFromSession(HttpSession session) {
 		try {
-			return (Usr) session.getAttribute(Constants.SESSION_KEY);
+			return (Usr) session.getAttribute(Constants.SESSION_KEY_USER);
 		} catch (Exception e) {
 			return null;
 		}
@@ -89,8 +90,8 @@ public class BaseServlet extends HttpServlet {
 	 *            请求
 	 */
 	protected void validate(HttpServletRequest request) {
-		if (request.getSession().getAttribute(Constants.SESSION_KEY) == null) {
-			throw new TimeoutException("没有登录");
+		if (request.getSession().getAttribute(Constants.SESSION_KEY_USER) == null) {
+			throw new TimeoutException(I18N.getLbl(request,"sys.timeout","超时或未登录"));
 		}
 	}
 

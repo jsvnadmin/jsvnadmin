@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.svnadmin.Constants;
 import org.svnadmin.service.UsrService;
+import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**
@@ -48,7 +49,7 @@ public class LoginServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		if ("logout".equals(request.getParameter("act"))) {
-			request.getSession().removeAttribute(Constants.SESSION_KEY);
+			request.getSession().removeAttribute(Constants.SESSION_KEY_USER);
 			request.getSession().invalidate();
 			response.sendRedirect("login.jsp");
 			return;
@@ -59,10 +60,10 @@ public class LoginServlet extends HttpServlet {
 		try {
 
 			if (StringUtils.isBlank(usr)) {
-				throw new RuntimeException("请输入帐号");
+				throw new RuntimeException(I18N.getLbl(request, "login.error.usr.empty", "请输入帐号"));
 			}
 
-			request.getSession().setAttribute(Constants.SESSION_KEY,
+			request.getSession().setAttribute(Constants.SESSION_KEY_USER,
 					usrService.login(usr, psw));
 
 			response.sendRedirect("pj");

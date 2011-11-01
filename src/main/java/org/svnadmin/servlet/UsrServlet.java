@@ -13,6 +13,7 @@ import org.svnadmin.entity.Usr;
 import org.svnadmin.exceptions.TimeoutException;
 import org.svnadmin.service.UsrService;
 import org.svnadmin.util.EncryptUtil;
+import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**
@@ -42,15 +43,15 @@ public class UsrServlet extends BaseServlet {
 	protected void delete(HttpServletRequest request,
 			HttpServletResponse response) {
 		if(!this.hasAdminRight(request, response)){
-			throw new RuntimeException("你没有权限删除用户!");
+			throw new RuntimeException(I18N.getLbl(request, "usr.error.delete.noright", "你没有权限删除用户!"));
 		}
 		usrService.delete(request.getParameter("usr"));
 
 		if (request.getParameter("usr").equals(
 				getUsrFromSession(request).getUsr())) {// 当前用户
-			request.getSession().removeAttribute(Constants.SESSION_KEY);
+			request.getSession().removeAttribute(Constants.SESSION_KEY_USER);
 			request.getSession().invalidate();
-			throw new TimeoutException("重新登录");
+			throw new TimeoutException(I18N.getLbl(request, "usr.info.relogin", "重新登录"));
 		}
 	}
 
@@ -69,7 +70,7 @@ public class UsrServlet extends BaseServlet {
 		usrService.save(entity);
 
 		if (entity.getUsr().equals(getUsrFromSession(request).getUsr())) {// 当前用户
-			request.getSession().setAttribute(Constants.SESSION_KEY, entity);
+			request.getSession().setAttribute(Constants.SESSION_KEY_USER, entity);
 		}
 		request.setAttribute("entity", entity);
 	}

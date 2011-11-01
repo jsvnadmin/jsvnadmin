@@ -4,9 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model ID="{B9E0B9C5-44E1-4B7B-B89B-AAA3C89FEFB1}" Loaded="No" Name="svnadmin_oracle" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="svnadmin_oracle.pdm"/>
-		<Model Expanded="Yes" ID="{B9E0B9C5-44E1-4B7B-B89B-AAA3C89FEFB1}" Loaded="No" Name="svnadmin_mysql" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="svnadmin_mysql.pdm"/>
-		<Model Expanded="Yes" ID="{18013A2C-D45E-4C00-9F95-C1F7718F43E3}" Name="svnadmin_sqlserver" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="svnadmin_sqlserver.pdm"/>
+		<Model Expanded="Yes" ID="{B9E0B9C5-44E1-4B7B-B89B-AAA3C89FEFB1}" Name="svnadmin_mysql" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="svnadmin_mysql.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
