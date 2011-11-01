@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.Lang;
 import org.svnadmin.entity.LangLbl;
-import org.svnadmin.entity.Usr;
 import org.svnadmin.service.LangLblService;
 import org.svnadmin.service.LangService;
-import org.svnadmin.servlet.BaseServlet;
 
 /**
  * 多语言工具类
