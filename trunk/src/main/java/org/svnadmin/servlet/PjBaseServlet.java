@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.service.PjGrUsrService;
+import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**
@@ -63,7 +64,7 @@ public class PjBaseServlet extends BaseServlet {
 	 */
 	protected void validateManager(HttpServletRequest request,HttpServletResponse response) {
 		if(!this.hasManagerRight(request, response)){
-			throw new RuntimeException("你没有访问权限!");
+			throw new RuntimeException(I18N.getLbl(request, "sys.error.nomanagerright", "你没有访问权限!"));
 		}
 	}
 }

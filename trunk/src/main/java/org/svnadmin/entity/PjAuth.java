@@ -1,12 +1,14 @@
 package org.svnadmin.entity;
 
+import java.io.Serializable;
+
 /**
  * 权限
  * 
  * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
-public class PjAuth {
+public class PjAuth implements Serializable{
 	/**
 	 * 资源
 	 */

@@ -8,9 +8,13 @@ package org.svnadmin;
  */
 public class Constants {
 	/**
-	 * 用户在session中id
+	 * lang 保存在session中得key
 	 */
-	public static final String SESSION_KEY = "_session_key_";
+	public static final String SESSION_KEY_LANG = "_session_key_lang_";
+	/**
+	 * 用户在session中key
+	 */
+	public static final String SESSION_KEY_USER = "_session_key_user_";
 
 	/**
 	 * 

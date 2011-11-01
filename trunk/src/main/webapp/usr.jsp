@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@page import="org.svnadmin.Constants"%>
-<%@page import="org.svnadmin.util.EncryptUtil"%>
+<%@page import="org.svnadmin.util.I18N"%>
 <%@include file="header.jsp"%>
-<span style="color:green;font-weight:bold;">用户管理</span><br><br>
+<span style="color:green;font-weight:bold;"><%=I18N.getLbl(request,"usr.title","用户管理") %></span><br><br>
 <%
 boolean hasAdminRight = (Boolean)request.getAttribute("hasAdminRight");
 %>
@@ -14,12 +14,12 @@ if(entity==null)entity=new org.svnadmin.entity.Usr();
 <script>
 function checkForm(f){
 	if(f.elements["usr"].value==""){
-		alert("用户不可以为空");
+		alert("<%=I18N.getLbl(request,"usr.error.usr","用户不可以为空") %>");
 		f.elements["usr"].focus();
 		return false;
 	}
 	if(f.elements["psw"].value==""  && f.elements["newPsw"]!=null && f.elements["newPsw"].value==""){
-		alert("密码不可以为空");
+		alert("<%=I18N.getLbl(request,"usr.error.psw","密码不可以为空") %>");
 		f.elements["psw"].focus();
 		return false;
 	}
@@ -30,7 +30,7 @@ function checkForm(f){
 	<input type="hidden" name="act" value="save">
 	<table>
 		<tr>
-			<td>用户</td>
+			<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td>
 				<%if(hasAdminRight){ %>
 					<input type="text" name="usr" value="<%=entity.getUsr()==null?"":entity.getUsr()%>" 
@@ -42,23 +42,23 @@ function checkForm(f){
 				<%} %>				
 			</td>
 			
-			<td>新密码</td>
+			<td><%=I18N.getLbl(request,"usr.psw","密码") %></td>
 			<td>
 			<input type="password" name="newPsw" value="">
 			<input type="hidden" name="psw" value="<%=entity.getPsw()==null?"":entity.getPsw()%>">
 			</td>
 			
 			<%if(hasAdminRight){ %>
-			<td>角色</td>
+			<td><%=I18N.getLbl(request,"usr.role","角色") %></td>
 			<td>
 				<select name="role">
-					<option value="">选择角色</option>
-					<option value="<%=Constants.USR_ROLE_ADMIN%>" <%=Constants.USR_ROLE_ADMIN.equals(entity.getRole())?"selected='selected'":""%>>管理员</option>
+					<option value=""><%=I18N.getLbl(request,"usr.role.select","选择角色") %></option>
+					<option value="<%=Constants.USR_ROLE_ADMIN%>" <%=Constants.USR_ROLE_ADMIN.equals(entity.getRole())?"selected='selected'":""%>>admin</option>
 				</select>
 			</td>
 			<%} %>
 			<td>
-				<input type="submit" value="提交">
+				<input type="submit" value="<%=I18N.getLbl(request,"usr.op.submit","提交") %>">
 			</td>
 		</tr>
 	</table>
@@ -70,10 +70,10 @@ function checkForm(f){
 
 	<thead>
 		<td>NO.</td>
-		<td>用户</td>
-		<td>密码</td>
-		<td>角色</td>
-		<td>删除</td>
+		<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+		<td><%=I18N.getLbl(request,"usr.psw","密码") %></td>
+		<td><%=I18N.getLbl(request,"usr.role","角色") %></td>
+		<td><%=I18N.getLbl(request,"usr.op.delete","删除") %></td>
 	</thead>
 	<%
 	java.util.List<org.svnadmin.entity.Usr> list = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("list");
@@ -93,7 +93,7 @@ function checkForm(f){
 		</td>
 		<td><%=usr.getPsw() %></td>
 		<td><%=usr.getRole()==null?"":usr.getRole() %></td>
-		<td><a href="javascript:if(confirm('确认删除?')){del('<%=ctx%>/usr?usr=<%=usr.getUsr()%>')}">删除</a></td>
+		<td><a href="javascript:if(confirm('<%=I18N.getLbl(request,"usr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/usr?usr=<%=usr.getUsr()%>')}"><%=I18N.getLbl(request,"usr.op.delete","删除") %></a></td>
 	</tr>
 		<%	
 	}}

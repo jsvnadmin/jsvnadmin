@@ -1,12 +1,14 @@
 package org.svnadmin.entity;
 
+import java.io.Serializable;
+
 /**
  * 组
  * 
  * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
-public class PjGr {
+public class PjGr implements Serializable{
 	/**
 	 * 项目
 	 */

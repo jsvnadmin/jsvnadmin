@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@page import="org.svnadmin.util.EncryptUtil"%>
+<%@page import="org.svnadmin.util.I18N"%>
 <%@include file="header.jsp"%>
-<span style="color:green;font-weight:bold;"><a href="pj">项目管理(<%=request.getParameter("pj")%>)</a> --> <a href="pjgr?pj=<%=request.getParameter("pj")%>">用户组管理(<%=request.getParameter("gr")%>)</a>-->设置用户</span><br><br>
+<span style="color:green;font-weight:bold;"><a href="pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <a href="pjgr?pj=<%=request.getParameter("pj")%>"><%=I18N.getLbl(request,"pjgr.title","用户组管理") %>(<%=request.getParameter("gr")%>)</a>--><%=I18N.getLbl(request,"pjgrusr.title","项目组用户管理") %></span><br><br>
 
 <script>
 function checkForm(f){
 	if(f.elements["usrs"].value==""){
-		alert("用户不可以为空");
+		alert("<%=I18N.getLbl(request,"pjgrusr.error.usr","用户不可以为空") %>");
 		f.elements["usrs"].focus();
 		return false;
 	}
@@ -29,16 +29,16 @@ function checkForm(f){
 		<%}}%>
 	</select>
 	
-	<input type="submit" value="增加用户">
+	<input type="submit" value="<%=I18N.getLbl(request,"pjgrusr.op.submit","增加用户") %>">
 </form>
 
 <table class="sortable">
 	<thead>
-		<td>NO.</td>
-		<td>项目</td>
-		<td>组</td>
-		<td>用户</td>
-		<td>删除</td>
+		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
+		<td><%=I18N.getLbl(request,"pj.pj","项目") %></td>
+		<td><%=I18N.getLbl(request,"pj_gr.gr","项目组") %></td>
+		<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+		<td><%=I18N.getLbl(request,"pjgrusr.op.delete","删除") %></td>
 	</thead>
 	<%
 	java.util.List<org.svnadmin.entity.PjGrUsr> list = (java.util.List<org.svnadmin.entity.PjGrUsr>)request.getAttribute("list");
@@ -52,7 +52,7 @@ function checkForm(f){
 		<td><%=pjGrUsr.getPj() %></td>
 		<td><%=pjGrUsr.getGr() %></td>
 		<td><%=pjGrUsr.getUsr() %></td>
-		<td><a href="javascript:if(confirm('确认删除?')){del('<%=ctx%>/pjgrusr?&pj=<%=pjGrUsr.getPj()%>&gr=<%=pjGrUsr.getGr()%>&usr=<%=pjGrUsr.getUsr()%>')}">删除</a></td>
+		<td><a href="javascript:if(confirm('<%=I18N.getLbl(request,"pjgrusr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pjgrusr?&pj=<%=pjGrUsr.getPj()%>&gr=<%=pjGrUsr.getGr()%>&usr=<%=pjGrUsr.getUsr()%>')}"><%=I18N.getLbl(request,"pjgrusr.op.delete","删除") %></a></td>
 	</tr>
 		<%	
 	}}

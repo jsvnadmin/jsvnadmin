@@ -13,6 +13,7 @@ import org.svnadmin.entity.Usr;
 import org.svnadmin.service.PjUsrService;
 import org.svnadmin.service.UsrService;
 import org.svnadmin.util.EncryptUtil;
+import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**
@@ -42,7 +43,7 @@ public class PjUsrServlet extends PjServlet {
 	protected void before(HttpServletRequest request,
 			HttpServletResponse response) {
 		if (StringUtils.isBlank(request.getParameter("pj"))) {
-			throw new RuntimeException("不可以直接访问，请从项目的菜单进来这个页面!");
+			throw new RuntimeException(I18N.getLbl(request, "sys.error.pj.empty", "不可以直接访问，请从项目的菜单进来这个页面!"));
 		}
 	}
 
