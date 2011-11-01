@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +23,7 @@ import org.svnadmin.util.I18N;
  * @since 1.0
  * 
  */
-public class BaseServlet extends HttpServlet {
+public class BaseServlet extends ServletSupport {
 	/**
 	 * 
 	 */
@@ -96,13 +95,7 @@ public class BaseServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		this.doPost(request, response);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request,
+	protected void excute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			this.validate(request);

@@ -137,5 +137,29 @@ public class I18N {
 	public static synchronized void clearCache(){
 		cache.clear();
 	}
-	
+
+	/**
+	 * 提供Service层或DAO使用，会从当前的线程中获取语言
+	 * @param id 语言id
+	 * @param defValue 默认值
+	 * @return 格式化后的多语言
+	 * 
+	 * @see LangProvider
+	 */
+	public static final String getLbl(String id,String defValue){
+		return getLbl(LangProvider.getCurrentLang(), id, defValue, null);
+	}
+	/**
+	 * 提供Service层或DAO使用，会从当前的线程中获取语言
+	 * @param id
+	 * @param defValue 默认值
+	 * @param args 参数
+	 * @return 格式化后的多语言
+	 * 
+	 * @see LangProvider
+	 */
+	public static final String getLbl(String id,String defValue,Object[] args){
+		return getLbl(LangProvider.getCurrentLang(), id, defValue, args);
+	}
+
 }
