@@ -148,22 +148,9 @@
 
 		<!-- Start JDBC -->
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc</artifactId>
-			<version>2005</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${jdbc.mysql.version}</version>
-			<type>jar</type>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>${jdbc.oracle.version}</version>
 			<type>jar</type>
 			<scope>runtime</scope>
 		</dependency>
@@ -173,35 +160,16 @@
 
 	<repositories>
 		<repository>
-			<id>nexus_public_repository</id>
+			<id>svnkit_repository</id>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<url>http://helpugreat.gicp.net:8080/nexus/content/groups/public</url>
-		</repository>
-
-		<repository>
-			<id>nexus_snapshots-repository</id>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-			<url>http://helpugreat.gicp.net:8080/nexus/content/repositories/snapshots</url>
+			<url>http://maven.svnkit.com/maven2/</url>
 		</repository>
 	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>nexus_pluginRepository</id>
-			<url>http://helpugreat.gicp.net:8080/nexus/content/groups/public</url>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<build>
 		<finalName>${war.name}</finalName>
