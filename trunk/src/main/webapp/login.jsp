@@ -33,6 +33,10 @@ try{
 	</script>
 </head>
 <body>
+<%-- 选择语言 --%>
+<div style="float:right">
+	<a href="<%=ctx%>/lang"><%=I18N.getLbl(request,"sys.lbl.changlang","选择语言") %></a>
+</div>
 <%-- error --%>
 <%
 String errorMsg = (String)request.getAttribute(org.svnadmin.Constants.ERROR);

@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.svnadmin.entity.I18n;
@@ -199,6 +201,31 @@ public class I18nDao extends Dao {
 			this.close(rs, pstmt, conn);
 		}
 		return false;
+	}
+	/**
+	 * @return 获取系统现有的语言
+	 */
+	public List<String> getLangs() {
+		String sql = "select distinct lang from i18n order by lang";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<String> results = new ArrayList<String>();
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				results.add(rs.getString("lang"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+		return results;
 	}
 
 }

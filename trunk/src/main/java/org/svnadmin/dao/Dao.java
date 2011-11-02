@@ -48,8 +48,7 @@ public class Dao {
 	/**
 	 * 验证是否可以连接上数据库 see Issue 12
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @throws SQLException jdbc异常
 	 */
 	public void validatConnection() throws SQLException {
 		Connection conn = null;

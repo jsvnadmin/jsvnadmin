@@ -233,7 +233,7 @@ public class UsrService {
 	
 	/**
 	 * 验证是否连接数据库成功 Issue 12
-	 * @throws Exception
+	 * @throws Exception 验证失败异常
 	 */
 	public void validatConnection() throws Exception{
 		this.usrDao.validatConnection();

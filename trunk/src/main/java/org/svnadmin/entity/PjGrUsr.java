@@ -10,6 +10,10 @@ import java.io.Serializable;
  */
 public class PjGrUsr implements Serializable{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2031955995574649327L;
+	/**
 	 * 项目
 	 */
 	private String pj;

@@ -3,6 +3,8 @@
  */
 package org.svnadmin.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -54,5 +56,12 @@ public class I18nService {
 	 */
 	public boolean existsLang(String lang) {
 		return i18nDao.existsLang(lang);
+	}
+	
+	/**
+	 * @return 获取系统现有的语言
+	 */
+	public List<String> getLangs(){
+		return this.i18nDao.getLangs();
 	}
 }
