@@ -154,6 +154,21 @@
 			<type>jar</type>
 			<scope>runtime</scope>
 		</dependency>
+		<!--
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc</artifactId>
+			<version>2005</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc</artifactId>
+			<version>${jdbc.oracle.version}</version>
+			<type>jar</type>
+			<scope>runtime</scope>
+		</dependency>
+		-->
 		<!-- End JDBC -->
 
 	</dependencies>
@@ -250,5 +265,4 @@
 		</plugins>
 
 	</build>
-
 </project>
