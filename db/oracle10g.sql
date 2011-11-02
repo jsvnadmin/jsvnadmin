@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10g                           */
-/* Created on:     2011/9/13 18:45:06                           */
+/* Created on:     2011/11/2 8:56:49                            */
 /*==============================================================*/
 
 
@@ -28,6 +28,8 @@ alter table "pj_usr_auth"
 alter table "pj_usr_auth"
    drop constraint FK_PJ_USR_A_REFERENCE_USR;
 
+drop table "i18n" cascade constraints;
+
 drop table "pj" cascade constraints;
 
 drop table "pj_gr" cascade constraints;
@@ -41,6 +43,16 @@ drop table "pj_usr" cascade constraints;
 drop table "pj_usr_auth" cascade constraints;
 
 drop table "usr" cascade constraints;
+
+/*==============================================================*/
+/* Table: "i18n"                                                */
+/*==============================================================*/
+create table "i18n"  (
+   "lang"               VARCHAR2(20)                    not null,
+   "id"                 VARCHAR2(255)                   not null,
+   "lbl"                VARCHAR2(255)                   not null,
+   constraint PK_I18N primary key ("lang", "id")
+);
 
 /*==============================================================*/
 /* Table: "pj"                                                  */
