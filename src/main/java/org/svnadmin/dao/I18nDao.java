@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
-import org.svnadmin.entity.LangLbl;
+import org.svnadmin.entity.I18n;
 
 /**
  * 语言DAO
@@ -17,21 +17,21 @@ import org.svnadmin.entity.LangLbl;
  * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * @since 3.0.2
  */
-@Repository(LangLblDao.BEAN_NAME)
-public class LangLblDao extends Dao {
+@Repository(I18nDao.BEAN_NAME)
+public class I18nDao extends Dao {
 	/**
 	 * Bean名称
 	 */
-	public static final String BEAN_NAME="langLblDao";
+	public static final String BEAN_NAME="i18nDao";
 
 	/**
 	 * 
-	 * @param lang 
-	 * @param id 
-	 * @return
+	 * @param lang 语言
+	 * @param id key
+	 * @return 多语言
 	 */
-	public LangLbl get(String lang,String id) {
-		String sql = "select lang,id,lbl from lang_lbl where lang=? and id=?";
+	public I18n get(String lang,String id) {
+		String sql = "select lang,id,lbl from i18n where lang=? and id=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -44,7 +44,7 @@ public class LangLblDao extends Dao {
 
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				return readLangLbl(rs);
+				return readI18n(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,16 +55,16 @@ public class LangLblDao extends Dao {
 		return null;
 	}
 	/**
-	 * 从ResultSet中读取readLangLbl对象
+	 * 从ResultSet中读取i18n对象
 	 * 
 	 * @param rs
 	 *            ResultSet
-	 * @return readLangLbl对象
+	 * @return i18n对象
 	 * @throws SQLException
 	 *             JDBC异常
 	 */
-	LangLbl readLangLbl(ResultSet rs) throws SQLException {
-		LangLbl result = new LangLbl();
+	I18n readI18n(ResultSet rs) throws SQLException {
+		I18n result = new I18n();
 		result.setLang(rs.getString("lang"));
 		result.setId(rs.getString("id"));
 		result.setLbl(rs.getString("lbl"));
@@ -72,11 +72,11 @@ public class LangLblDao extends Dao {
 	}
 	/**
 	 * 删除
-	 * @param lang 
+	 * @param lang 语言
 	 * 
 	 */
 	public void delete(String lang) {
-		String sql = "delete from lang_lbl where lang=?";
+		String sql = "delete from i18n where lang=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -95,12 +95,12 @@ public class LangLblDao extends Dao {
 	}
 	/**
 	 * 删除
-	 * @param lang 
-	 * @param id 
+	 * @param lang 语言
+	 * @param id key
 	 * 
 	 */
 	public void delete(String lang,String id) {
-		String sql = "delete from lang_lbl where lang=? and id=?";
+		String sql = "delete from i18n where lang=? and id=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -122,21 +122,21 @@ public class LangLblDao extends Dao {
 	/**
 	 * 更新
 	 * 
-	 * @param langLbl
+	 * @param i18n 多语言
 	 * 
 	 * @return 更新数量
 	 */
-	public int update(LangLbl langLbl) {
-		String sql = "update lang_lbl set lbl=? where lang=? and id=?";
+	public int update(I18n i18n) {
+		String sql = "update i18n set lbl=? where lang=? and id=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
-			pstmt.setString(index++, langLbl.getLbl());
-			pstmt.setString(index++, langLbl.getLang());
-			pstmt.setString(index++, langLbl.getId());
+			pstmt.setString(index++, i18n.getLbl());
+			pstmt.setString(index++, i18n.getLang());
+			pstmt.setString(index++, i18n.getId());
 
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -150,21 +150,21 @@ public class LangLblDao extends Dao {
 	/**
 	 * 增加
 	 * 
-	 * @param langLbl
+	 * @param i18n 多语言
 	 * 
 	 * @return 更新数量
 	 */
-	public int insert(LangLbl langLbl) {
-		String sql = "insert into lang_lbl (lang,id,lbl) values (?,?,?)";
+	public int insert(I18n i18n) {
+		String sql = "insert into i18n (lang,id,lbl) values (?,?,?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
-			pstmt.setString(index++, langLbl.getLang());
-			pstmt.setString(index++, langLbl.getId());
-			pstmt.setString(index++, langLbl.getLbl());
+			pstmt.setString(index++, i18n.getLang());
+			pstmt.setString(index++, i18n.getId());
+			pstmt.setString(index++, i18n.getLbl());
 
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -173,6 +173,32 @@ public class LangLblDao extends Dao {
 		} finally {
 			this.close(null, pstmt, conn);
 		}
+	}
+	/**
+	 * 是否存在这种语言
+	 * @param lang 语言
+	 * @return true表示数据库存在这个语言，否则返回false
+	 */
+	public boolean existsLang(String lang) {
+		String sql = "select count(1) from i18n where lang=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, lang);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1)>0;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+		return false;
 	}
 
 }
