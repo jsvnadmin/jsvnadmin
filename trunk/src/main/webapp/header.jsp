@@ -60,10 +60,11 @@ tr.over{background: #ECF2AF;}
 	</tr>
 	<tr style="border-width:0px 0 0 0px;">
 		<td align="right" style="border-width:0px 0 0 0px;">
-			 <a href="usr"><%=I18N.getLbl(request,"main.link.user","用户")%></a> 
-			 <a href="pj"><%=I18N.getLbl(request,"main.link.pj","项目")%></a> 
+			 <a href="<%=ctx%>/lang"><%=I18N.getLbl(request,"sys.lbl.changlang","选择语言") %></a>
+			 <a href="<%=ctx%>/usr"><%=I18N.getLbl(request,"main.link.user","用户")%></a> 
+			 <a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"main.link.pj","项目")%></a> 
 			 <%=_usr.getUsr()%>
-			 <a href="login?act=logout"><%=I18N.getLbl(request,"main.link.logout","退出")%></a>
+			 <a href="<%=ctx%>/login?act=logout"><%=I18N.getLbl(request,"main.link.logout","退出")%></a>
 		</td>
 	</tr>
 </table>
