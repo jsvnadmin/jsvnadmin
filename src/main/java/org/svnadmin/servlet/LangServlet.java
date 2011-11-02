@@ -25,7 +25,7 @@ public class LangServlet extends ServletSupport {
 	private static final long serialVersionUID = 4206233408784602306L;
 
 	/**
-	 * 用户服务层
+	 * 服务层
 	 */
 	protected I18nService i18nService = SpringUtils.getBean(I18nService.BEAN_NAME);
 
