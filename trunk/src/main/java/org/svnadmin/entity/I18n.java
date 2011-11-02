@@ -10,7 +10,11 @@ import java.io.Serializable;
  * @since 3.0.2
  *
  */
-public class LangLbl implements Serializable {
+public class I18n implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 语言
 	 */
@@ -36,25 +40,25 @@ public class LangLbl implements Serializable {
 		this.lang = lang;
 	}
 	/**
-	 * @return
+	 * @return key
 	 */
 	public String getId() {
 		return id;
 	}
 	/**
-	 * @param id
+	 * @param id key
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 	/**
-	 * @return
+	 * @return label
 	 */
 	public String getLbl() {
 		return lbl;
 	}
 	/**
-	 * @param lbl
+	 * @param lbl label
 	 */
 	public void setLbl(String lbl) {
 		this.lbl = lbl;
