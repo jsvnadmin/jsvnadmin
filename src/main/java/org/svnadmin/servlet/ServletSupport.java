@@ -22,11 +22,12 @@ import org.svnadmin.util.LangProvider;
  */
 public abstract class ServletSupport extends HttpServlet{
 
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -4025985104182878768L;
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -48,7 +49,7 @@ public abstract class ServletSupport extends HttpServlet{
 	 * @param request 请求
 	 * @param response 响应
 	 * @throws ServletException 异常
-	 * @throws IOException IOy异常
+	 * @throws IOException IO异常
 	 */
 	protected abstract void excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException;
