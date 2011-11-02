@@ -45,10 +45,10 @@ public abstract class ServletSupport extends HttpServlet{
 	}
 
 	/**
-	 * @param request
-	 * @param response
-	 * @throws ServletException
-	 * @throws IOException
+	 * @param request 请求
+	 * @param response 响应
+	 * @throws ServletException 异常
+	 * @throws IOException IOy异常
 	 */
 	protected abstract void excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException;

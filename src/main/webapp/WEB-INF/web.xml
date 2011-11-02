@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="WebApp_ID" version="2.5">
+	id="svnadmin" version="2.5">
 	<display-name>svnadmin</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -99,5 +99,14 @@
 	<servlet-mapping>
 		<servlet-name>pjauth</servlet-name>
 		<url-pattern>/pjauth</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>lang</display-name>
+		<servlet-name>lang</servlet-name>
+		<servlet-class>org.svnadmin.servlet.LangServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>lang</servlet-name>
+		<url-pattern>/lang</url-pattern>
 	</servlet-mapping>
 </web-app>

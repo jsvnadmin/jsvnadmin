@@ -8,6 +8,10 @@ package org.svnadmin.entity;
  */
 public class PjUsr extends Usr {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5863709168694149752L;
+	/**
 	 * 项目ID
 	 */
 	private String pj;

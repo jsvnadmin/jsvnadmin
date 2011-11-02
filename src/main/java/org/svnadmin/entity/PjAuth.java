@@ -10,6 +10,10 @@ import java.io.Serializable;
  */
 public class PjAuth implements Serializable{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8744287510861451872L;
+	/**
 	 * 资源
 	 */
 	private String res;

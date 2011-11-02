@@ -14,7 +14,7 @@ public class I18n implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8731707774048772734L;
 	/**
 	 * 语言
 	 */
