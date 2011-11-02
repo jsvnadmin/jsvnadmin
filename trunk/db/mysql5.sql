@@ -1,12 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/11/1 15:24:36                           */
+/* Created on:     2011/11/2 8:54:37                            */
 /*==============================================================*/
 
 
-drop table if exists lang;
-
-drop table if exists lang_lbl;
+drop table if exists i18n;
 
 drop table if exists pj;
 
@@ -23,19 +21,9 @@ drop table if exists pj_usr_auth;
 drop table if exists usr;
 
 /*==============================================================*/
-/* Table: lang                                                  */
+/* Table: i18n                                                  */
 /*==============================================================*/
-create table lang
-(
-   lang                 varchar(20) not null,
-   des                  varchar(128) not null,
-   primary key (lang)
-);
-
-/*==============================================================*/
-/* Table: lang_lbl                                              */
-/*==============================================================*/
-create table lang_lbl
+create table i18n
 (
    lang                 varchar(20) not null,
    id                   varchar(255) not null,
@@ -123,9 +111,6 @@ create table usr
    role                 varchar(10),
    primary key (usr)
 );
-
-alter table lang_lbl add constraint FK_Reference_12 foreign key (lang)
-      references lang (lang) on delete restrict on update restrict;
 
 alter table pj_gr add constraint FK_Relationship_2 foreign key (pj)
       references pj (pj) on delete restrict on update restrict;
