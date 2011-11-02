@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2000                    */
-/* Created on:     2011/9/14 9:28:23                            */
+/* Created on:     2011/11/2 8:57:32                            */
 /*==============================================================*/
 
 
@@ -62,6 +62,13 @@ go
 
 if exists (select 1
             from  sysobjects
+           where  id = object_id('i18n')
+            and   type = 'U')
+   drop table i18n
+go
+
+if exists (select 1
+            from  sysobjects
            where  id = object_id('pj')
             and   type = 'U')
    drop table pj
@@ -107,6 +114,17 @@ if exists (select 1
            where  id = object_id('usr')
             and   type = 'U')
    drop table usr
+go
+
+/*==============================================================*/
+/* Table: i18n                                                  */
+/*==============================================================*/
+create table i18n (
+   lang                 varchar(20)          not null,
+   id                   varchar(255)         not null,
+   lbl                  varchar(255)         not null,
+   constraint PK_I18N primary key nonclustered (lang, id)
+)
 go
 
 /*==============================================================*/
