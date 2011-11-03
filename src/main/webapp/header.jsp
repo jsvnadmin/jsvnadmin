@@ -50,7 +50,11 @@ tr.over{background: #ECF2AF;}
 </style>
 
 </head>
-
+<%-- 选择语言 --%>
+<div style="float:right">
+	<%@include file="chagelang.jsp"%>
+</div>
+<%-- 导航 --%>
 <table width="100%" style="border-width:0px 0 0 0px;">
 	<tr style="border-width:0px 0 0 0px;">
 		<td align="center" style="font-size:20;font-weight:bold;border-width:0px 0 0 0px;">
@@ -60,9 +64,11 @@ tr.over{background: #ECF2AF;}
 	</tr>
 	<tr style="border-width:0px 0 0 0px;">
 		<td align="right" style="border-width:0px 0 0 0px;">
-			 <a href="<%=ctx%>/lang"><%=I18N.getLbl(request,"sys.lbl.changlang","选择语言") %></a>
 			 <a href="<%=ctx%>/usr"><%=I18N.getLbl(request,"main.link.user","用户")%></a> 
 			 <a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"main.link.pj","项目")%></a> 
+			 <%if(BaseServlet.hasAdminRight(request)){ %>
+			 <a href="<%=ctx%>/i18n"><%=I18N.getLbl(request,"main.link.i18n","语言")%></a> 
+			 <%} %>
 			 <%=_usr.getUsr()%>
 			 <a href="<%=ctx%>/login?act=logout"><%=I18N.getLbl(request,"main.link.logout","退出")%></a>
 		</td>

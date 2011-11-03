@@ -27,6 +27,8 @@ public class I18n implements Serializable {
 	 * 
 	 */
 	private String lbl;
+	
+	private int total;
 	/**
 	 * @return 语言
 	 */
@@ -62,6 +64,12 @@ public class I18n implements Serializable {
 	 */
 	public void setLbl(String lbl) {
 		this.lbl = lbl;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	
 }

@@ -39,7 +39,7 @@ public class PjBaseServlet extends BaseServlet {
 	 */
 	protected boolean hasManagerRight(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (this.hasAdminRight(request, response)) {
+		if (hasAdminRight(request)) {
 			return true;
 		}
 		Usr usr = getUsrFromSession(request);

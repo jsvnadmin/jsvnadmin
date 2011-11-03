@@ -4,6 +4,7 @@
 package org.svnadmin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -36,7 +37,7 @@ public class I18nService {
 	
 	/**
 	 * @param lang 语言
-	 * @param id key
+	 * @param id 键值
 	 * @return I18n
 	 */
 	public I18n getI18n(String lang, String id) {
@@ -48,6 +49,14 @@ public class I18nService {
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void insert(I18n i18n) {
 		i18nDao.insert(i18n);
+	}
+	/**
+	 * 更新
+	 * @param i18n 多语言
+	 */
+	@Transactional
+	public void update(I18n i18n){
+		i18nDao.update(i18n);
 	}
 	/**
 	 * 是否存在这种语言
@@ -63,5 +72,44 @@ public class I18nService {
 	 */
 	public List<String> getLangs(){
 		return this.i18nDao.getLangs();
+	}
+	/**
+	 * @param id 键值
+	 * @return 相同键值的语言列表
+	 */
+	public Map<String,I18n> getI18ns(String id) {
+		return i18nDao.getI18ns(id);
+	}
+	/**
+	 * @return 键值列表
+	 */
+	public List<I18n> getIds() {
+		return this.i18nDao.getIds();
+	}
+	/**
+	 * @param list 保存的列表
+	 */
+	@Transactional
+	public void save(List<I18n> list) {
+		for (I18n i18n : list) {
+			if(this.getI18n(i18n.getLang(), i18n.getId()) == null){
+				this.insert(i18n);
+			}else{
+				this.update(i18n);
+			}
+		}
+	}
+	
+	/**
+	 * 保存
+	 * @param i18n 语言
+	 */
+	@Transactional
+	public void save(I18n i18n){
+		if(this.getI18n(i18n.getLang(), i18n.getId())!=null){//已经存在
+			this.update(i18n);
+		}else{
+			this.insert(i18n);
+		}
 	}
 }

@@ -42,7 +42,7 @@ public class UsrServlet extends BaseServlet {
 	@Override
 	protected void delete(HttpServletRequest request,
 			HttpServletResponse response) {
-		if(!this.hasAdminRight(request, response)){
+		if(!hasAdminRight(request)){
 			throw new RuntimeException(I18N.getLbl(request, "usr.error.delete.noright", "你没有权限删除用户!"));
 		}
 		usrService.delete(request.getParameter("usr"));
@@ -77,7 +77,7 @@ public class UsrServlet extends BaseServlet {
 
 	@Override
 	protected void list(HttpServletRequest request, HttpServletResponse response) {
-		boolean hasAdminRight = this.hasAdminRight(request, response);
+		boolean hasAdminRight = hasAdminRight(request);
 		if (hasAdminRight) {
 			List<Usr> list = usrService.list();
 			request.setAttribute("list", list);
@@ -88,7 +88,7 @@ public class UsrServlet extends BaseServlet {
 	protected void forword(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		boolean hasAdminRight = this.hasAdminRight(request, response);
+		boolean hasAdminRight = hasAdminRight(request);
 		request.setAttribute("hasAdminRight", hasAdminRight);
 
 		if (!hasAdminRight) {

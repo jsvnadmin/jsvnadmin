@@ -101,12 +101,30 @@
 		<url-pattern>/pjauth</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<display-name>lang</display-name>
-		<servlet-name>lang</servlet-name>
-		<servlet-class>org.svnadmin.servlet.LangServlet</servlet-class>
+		<display-name>changelang</display-name>
+		<servlet-name>changelang</servlet-name>
+		<servlet-class>org.svnadmin.servlet.ChangeLangServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>lang</servlet-name>
-		<url-pattern>/lang</url-pattern>
+		<servlet-name>changelang</servlet-name>
+		<url-pattern>/changelang</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>i18n</display-name>
+		<servlet-name>i18n</servlet-name>
+		<servlet-class>org.svnadmin.servlet.I18nServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>i18n</servlet-name>
+		<url-pattern>/i18n</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>i18nadd</display-name>
+		<servlet-name>i18nadd</servlet-name>
+		<servlet-class>org.svnadmin.servlet.I18nAddServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>i18nadd</servlet-name>
+		<url-pattern>/i18nadd</url-pattern>
 	</servlet-mapping>
 </web-app>

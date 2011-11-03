@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 import org.svnadmin.entity.I18n;
@@ -29,7 +31,7 @@ public class I18nDao extends Dao {
 	/**
 	 * 
 	 * @param lang 语言
-	 * @param id key
+	 * @param id 键值
 	 * @return 多语言
 	 */
 	public I18n get(String lang,String id) {
@@ -57,6 +59,35 @@ public class I18nDao extends Dao {
 		return null;
 	}
 	/**
+	 * @param id 键值
+	 * @return 相同键值的语言列表
+	 */
+	public Map<String,I18n> getI18ns(String id) {
+		String sql = "select lang,id,lbl from i18n where id=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<String,I18n> results = new HashMap<String,I18n>();
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, id);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				I18n i18n = readI18n(rs);
+				results.put(i18n.getLang(),i18n);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+		return results;
+	}
+	/**
 	 * 从ResultSet中读取i18n对象
 	 * 
 	 * @param rs
@@ -71,54 +102,6 @@ public class I18nDao extends Dao {
 		result.setId(rs.getString("id"));
 		result.setLbl(rs.getString("lbl"));
 		return result;
-	}
-	/**
-	 * 删除
-	 * @param lang 语言
-	 * 
-	 */
-	public void delete(String lang) {
-		String sql = "delete from i18n where lang=?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = this.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			int index = 1;
-			pstmt.setString(index++, lang);
-
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			this.close(null, pstmt, conn);
-		}
-	}
-	/**
-	 * 删除
-	 * @param lang 语言
-	 * @param id key
-	 * 
-	 */
-	public void delete(String lang,String id) {
-		String sql = "delete from i18n where lang=? and id=?";
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = this.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			int index = 1;
-			pstmt.setString(index++, lang);
-			pstmt.setString(index++, id);
-			
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			this.close(null, pstmt, conn);
-		}
 	}
 
 	/**
@@ -227,5 +210,32 @@ public class I18nDao extends Dao {
 		}
 		return results;
 	}
-
+	/**
+	 * @return 键值列表
+	 */
+	public List<I18n> getIds() {
+		String sql = "select id,count(id) total from i18n group by id order by id";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<I18n> results = new ArrayList<I18n>();
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				I18n i18n = new I18n();
+				i18n.setId(rs.getString("id"));
+				i18n.setTotal(rs.getInt("total"));
+				results.add(i18n);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+		return results;
+	}
 }
