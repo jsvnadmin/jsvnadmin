@@ -2,7 +2,7 @@
 <%@page import="org.svnadmin.Constants"%>
 <%@page import="org.svnadmin.util.I18N"%>
 <%@include file="header.jsp"%>
-<span style="color:green;font-weight:bold;"><a href="pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <%=I18N.getLbl(request,"pjgr.title","用户组管理") %></span><br><br>
+<span style="color:green;font-weight:bold;"><a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <%=I18N.getLbl(request,"pjgr.title","用户组管理") %></span><br><br>
 <%
 org.svnadmin.entity.PjGr entity = (org.svnadmin.entity.PjGr)request.getAttribute("entity");
 if(entity==null)entity=new org.svnadmin.entity.PjGr();

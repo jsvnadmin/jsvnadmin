@@ -69,7 +69,7 @@ function checkForm(f){
 <table class="sortable">
 
 	<thead>
-		<td>NO.</td>
+		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
 		<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 		<td><%=I18N.getLbl(request,"usr.psw","密码") %></td>
 		<td><%=I18N.getLbl(request,"usr.role","角色") %></td>

@@ -35,7 +35,7 @@ try{
 <body>
 <%-- 选择语言 --%>
 <div style="float:right">
-	<a href="<%=ctx%>/lang"><%=I18N.getLbl(request,"sys.lbl.changlang","选择语言") %></a>
+	<%@include file="chagelang.jsp"%>
 </div>
 <%-- error --%>
 <%

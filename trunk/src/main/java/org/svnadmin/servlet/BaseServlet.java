@@ -89,7 +89,7 @@ public class BaseServlet extends ServletSupport {
 	 *            请求
 	 */
 	protected void validate(HttpServletRequest request) {
-		if (request.getSession().getAttribute(Constants.SESSION_KEY_USER) == null) {
+		if (!hasLogin(request)) {
 			throw new TimeoutException(I18N.getLbl(request,"sys.timeout","超时或未登录"));
 		}
 	}
@@ -262,19 +262,24 @@ public class BaseServlet extends ServletSupport {
 	/**
 	 * @param request
 	 *            请求
-	 * @param response
-	 *            响应
 	 * @return 当前登录的用户是否有管理员角色
 	 * @see Constants#USR_ROLE_ADMIN
 	 * @see Usr#getRole()
 	 */
-	protected boolean hasAdminRight(HttpServletRequest request,
-			HttpServletResponse response) {
+	public static boolean hasAdminRight(HttpServletRequest request) {
 		Usr usr = getUsrFromSession(request);
 		if (Constants.USR_ROLE_ADMIN.equals(usr.getRole())) {
 			return true;
 		}
 		return false;
 	}
-
+	
+	/**
+	 * @param request 请求
+	 * @return true表示已经登录，否则false
+	 * @since 3.0.2
+	 */
+	public static boolean hasLogin(HttpServletRequest request){
+		return request.getSession().getAttribute(Constants.SESSION_KEY_USER) != null;
+	}
 }

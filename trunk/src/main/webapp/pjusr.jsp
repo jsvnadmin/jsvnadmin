@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="org.svnadmin.util.I18N"%>
 <%@include file="header.jsp"%>
-<span style="color:green;font-weight:bold;"><a href="pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <a href="pjusr?pj=<%=request.getParameter("pj")%>"><%=I18N.getLbl(request,"pjusr.title","项目用户管理") %></a></span>
+<span style="color:green;font-weight:bold;"><a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <a href="<%=ctx%>/pjusr?pj=<%=request.getParameter("pj")%>"><%=I18N.getLbl(request,"pjusr.title","项目用户管理") %></a></span>
 <em style="color:blue;"><%=I18N.getLbl(request,"pjusr.info","(注意:这里设置的用户密码只对这个项目有效)") %></em>
 <br><br>
 <%

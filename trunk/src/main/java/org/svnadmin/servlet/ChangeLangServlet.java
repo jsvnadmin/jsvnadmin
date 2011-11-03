@@ -1,7 +1,6 @@
 package org.svnadmin.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ import org.svnadmin.util.SpringUtils;
  * @since 3.0.2
  * 
  */
-public class LangServlet extends ServletSupport {
+public class ChangeLangServlet extends ServletSupport {
 	/**
 	 * 
 	 */
@@ -32,19 +31,15 @@ public class LangServlet extends ServletSupport {
 	@Override
 	protected void excute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		if ("change".equals(request.getParameter("act"))) {
-			String lang = request.getParameter("lang");
-			if(lang !=null && lang.length()>0){
-				request.getSession().setAttribute(Constants.SESSION_KEY_LANG, lang);//保存到当前session
-			}
+		String lang = request.getParameter("lang");
+		if(lang !=null && lang.length()>0){
+			request.getSession().setAttribute(Constants.SESSION_KEY_LANG, lang);//保存到当前session
 		}
-		
-		List<String> langs = i18nService.getLangs();
-		request.setAttribute("langs", langs);
-		
-		request.getRequestDispatcher("lang.jsp").forward(request, response);
-
+		if(BaseServlet.hasLogin(request)){
+			response.sendRedirect("pj");
+		}else{
+			response.sendRedirect("login.jsp");
+		}
 	}
 
 }

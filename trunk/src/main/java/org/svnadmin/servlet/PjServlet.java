@@ -59,7 +59,7 @@ public class PjServlet extends PjBaseServlet {
 
 	@Override
 	protected void list(HttpServletRequest request, HttpServletResponse response) {
-		boolean hasAdminRight = this.hasAdminRight(request, response);
+		boolean hasAdminRight = hasAdminRight(request);
 		List<Pj> list = null;
 		if (hasAdminRight) {
 			list = pjService.list();// 所有项目
@@ -73,7 +73,7 @@ public class PjServlet extends PjBaseServlet {
 	protected void forword(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
 
-		boolean hasAdminRight = this.hasAdminRight(request, response);
+		boolean hasAdminRight = hasAdminRight(request);
 		request.setAttribute("hasAdminRight", hasAdminRight);
 
 		boolean hasManagerRight = this.hasManagerRight(request, response);
