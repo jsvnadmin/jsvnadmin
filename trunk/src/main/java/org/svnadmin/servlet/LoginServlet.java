@@ -62,7 +62,6 @@ public class LoginServlet extends ServletSupport {
 			response.sendRedirect("pj");
 
 		} catch (Exception e) {
-			LOG.error(e.getMessage());
 			request.setAttribute(Constants.ERROR, e.getMessage());
 			request.getRequestDispatcher("login.jsp")
 					.forward(request, response);
