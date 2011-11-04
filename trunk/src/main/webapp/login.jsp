@@ -57,11 +57,11 @@ if(usrCount == 0){
 		<table>
 		
 			<tr>
-				<td><%=I18N.getLbl(request,"usr.usr","帐号") %></td>
+				<td align="right"><%=I18N.getLbl(request,"usr.usr","帐号") %></td>
 				<td><input type="text" name="usr" value="<%=request.getParameter("usr")==null?"":request.getParameter("usr")%>"></td>
 			</tr>
 			<tr>
-				<td><%=I18N.getLbl(request,"usr.psw","密码") %></td>
+				<td align="right"><%=I18N.getLbl(request,"usr.psw","密码") %></td>
 				<td><input type="password" name="psw" value="<%=request.getParameter("psw")==null?"":request.getParameter("psw")%>"></td>
 			</tr>
 			<tr>

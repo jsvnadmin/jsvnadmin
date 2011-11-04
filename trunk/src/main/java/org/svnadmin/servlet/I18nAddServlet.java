@@ -46,8 +46,12 @@ public class I18nAddServlet extends BaseServlet {
 		entity.setLbl(request.getParameter("lbl"));
 		
 		request.setAttribute("entity", entity);
+		
+		if(i18nService.getI18n(entity.getLang(), entity.getId())!=null){
+			throw new RuntimeException(I18N.getLbl(request, "i18n.error.duplicatelang", "已经存在相同的语言"));
+		}
 		//保存
-		i18nService.save(entity);
+		i18nService.insert(entity);
 		
 		//当前语言
 		I18n entity2 = new I18n();
