@@ -101,7 +101,7 @@ public class I18N {
 		String key = lang+"$"+id;
 		//from cache
 		if(cache.containsKey(key)){
-			return cache.get(key);
+			return format(cache.get(key), args);
 		}
 		//from database
 		I18n i18n = i18nService.getI18n(lang,id);
@@ -112,19 +112,27 @@ public class I18N {
 			i18n.setLbl(defValue);
 			i18nService.insert(i18n);
 		}
-		String lbl = i18n.getLbl();
-		if(lbl == null){
-			lbl = i18n.getId();//没有设置lbl，则取id
-		}else if(args!=null){
-//			format = new MessageFormat(pattern);
-//	        format.setLocale(locale);
-//	        format.applyPattern(pattern);
-//			str = format.format(args)
-			lbl = MessageFormat.format(lbl, args);
+		
+		cache.put(key, i18n.getLbl());//put into cache
+		
+		return format(i18n.getLbl(), args);
+	}
+	
+	/**
+	 * 格式化消息
+	 * @param pattern
+	 * @param arguments
+	 * @return
+	 */
+	private static String format(String pattern,Object[] arguments){
+//		format = new MessageFormat(pattern);
+//      format.setLocale(locale);
+//      format.applyPattern(pattern);
+//		str = format.format(args)
+		if(pattern == null){
+			return "";
 		}
-		//put into cache
-		cache.put(key, lbl);
-		return lbl;
+		return MessageFormat.format(pattern, arguments);
 	}
 	
 	/**
