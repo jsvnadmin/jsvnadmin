@@ -55,18 +55,9 @@ public class I18N {
 		}
 		if(result == null){
 			result = Locale.SIMPLIFIED_CHINESE.toString();//default zh_CN
+			getLbl(result, result, Locale.SIMPLIFIED_CHINESE.getDisplayLanguage());//增加当前语言到数据库i18n
 		}
 		
-		//增加当前语言到数据库i18n
-		String def = result;
-		if("zh_CN".equals(result)||"zh".equals(result)){
-			def = "简体中文";
-		}else if("zh_TW".equals(result) || "zh_HK".equals(result)){
-			def = "繁體中文";
-		}else if("en_US".equals(result) || "en".equals(result)){
-			def = "英文";
-		}
-		getLbl(result, result, def);
 		
 		request.getSession().setAttribute(Constants.SESSION_KEY_LANG, result);//set to session
 		return result;
@@ -120,9 +111,9 @@ public class I18N {
 	
 	/**
 	 * 格式化消息
-	 * @param pattern
-	 * @param arguments
-	 * @return
+	 * @param pattern the pattern for this message format
+	 * @param arguments 参数
+	 * @return 格式化后的消息
 	 */
 	private static String format(String pattern,Object[] arguments){
 //		format = new MessageFormat(pattern);
