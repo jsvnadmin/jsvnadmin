@@ -92,11 +92,7 @@ public class I18nService {
 	@Transactional
 	public void save(List<I18n> list) {
 		for (I18n i18n : list) {
-			if(this.getI18n(i18n.getLang(), i18n.getId()) == null){
-				this.insert(i18n);
-			}else{
-				this.update(i18n);
-			}
+			this.save(i18n);
 		}
 	}
 	

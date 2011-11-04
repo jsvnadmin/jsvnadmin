@@ -31,9 +31,9 @@ function checkForm(f){
 	<input type="hidden" name="act" value="save">
 	<table>
 		<tr>
-			<td><%=I18N.getLbl(request,"pj.pj","项目") %></td>
+			<td align="right"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td><input type="hidden" name="pj" value="<%=request.getParameter("pj")%>"><%=request.getParameter("pj")%></td>
-			<td><%=I18N.getLbl(request,"pjauth.res","资源") %></td>
+			<td align="right"><%=I18N.getLbl(request,"pjauth.res","资源") %></td>
 			<td>
 				<input type="text" name="res" value="<%=entity.getRes()==null?"":entity.getRes()%>" style="width:400px;"><span style="color:red;">*</span>
 				<select onchange="this.form.res.value=this.value">
@@ -50,7 +50,7 @@ function checkForm(f){
 			</td>
 		</tr>
 		<tr>
-			<td><%=I18N.getLbl(request,"pj_gr.gr","用户组") %></td>
+			<td align="right"><%=I18N.getLbl(request,"pj_gr.gr","用户组") %></td>
 			<td>
 				<select name="grs" multiple="multiple">
 					<%
@@ -62,7 +62,7 @@ function checkForm(f){
 					<option value="<%=pjGr.getGr()%>"><%=pjGr.getGr()%></option>
 					<%}}%>
 				</select>
-			<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+			<td align="right"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td>
 				<select name="usrs" multiple="multiple">
 					<%
@@ -77,7 +77,7 @@ function checkForm(f){
 			</td>
 		</tr>
 		<tr>
-			<td><%=I18N.getLbl(request,"pjauth.rw","权限") %></td>
+			<td align="right"><%=I18N.getLbl(request,"pjauth.rw","权限") %></td>
 			<td colspan="3">
 			<select name="rw">
 					<option value="" <%="".equals(entity.getRw())?"selected='selected'":""%> ><%=I18N.getLbl(request,"pjauth.rw.none","没有权限") %></option>

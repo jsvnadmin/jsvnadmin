@@ -27,7 +27,9 @@ function checkForm(f){
 			<%
 				for(I18n i18n : ids){
 			%>
-			<%=i18n.getTotal()!=langs.size()?"!":""%>&nbsp;
+			<% if(i18n.getTotal()!=langs.size()){%>
+			<img alt="" src="<%=ctx%>/resources/incomplete.gif">
+			<%} %>
 			<a href="<%=ctx%>/i18n?id=<%=i18n.getId()%>"><%=i18n.getId()%></a><br>
 			<%} %>
 		</td>
@@ -36,7 +38,7 @@ function checkForm(f){
 				<input type="hidden" name="act" value="save">
 				<table>
 					<tr>
-						<td><%=I18N.getLbl(request, "i18n.id", "键值")%></td>
+						<td align="right"><%=I18N.getLbl(request, "i18n.id", "键值")%></td>
 						<td style="width:100%;">
 						   	<%=request.getParameter("id")==null?"":request.getParameter("id")%>
 						   	<input type="hidden" name="id" value="<%=request.getParameter("id")==null?"":request.getParameter("id")%>" >
@@ -47,7 +49,7 @@ function checkForm(f){
 							String lang = langs.get(i);
 					%>
 					<tr>
-						<td>
+						<td align="right">
 							<%=I18N.getLbl(request, lang, lang)%>(<%=lang%>)
 							<input type="hidden" name="lang_<%=i%>" value="<%=lang%>" >
 						</td>

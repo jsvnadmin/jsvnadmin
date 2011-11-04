@@ -41,6 +41,9 @@ public class I18nServlet extends BaseServlet {
 	@Override
 	protected void save(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
+		if(StringUtils.isBlank(id)){
+			return;
+		}
 		int i =0;
 		List<I18n> list = new ArrayList<I18n>();
 		String lang;
@@ -54,6 +57,8 @@ public class I18nServlet extends BaseServlet {
 			i++;
 		}
 		i18nService.save(list);
+		//清空缓存
+		I18N.clearCache();
 	}
 
 	@Override
