@@ -8,6 +8,45 @@ org.svnadmin.entity.PjAuth entity = (org.svnadmin.entity.PjAuth)request.getAttri
 if(entity==null)entity=new org.svnadmin.entity.PjAuth();
 %>
 <script>
+$(function(){
+    //移到右边
+    $('#add').click(function() {
+           //获取选中的选项，删除并追加给对方
+           $('#select1 option:selected').appendTo('#select2');
+    });
+    //移到左边
+    $('#remove').click(function() {
+           $('#select2 option:selected').appendTo('#select1');
+    });
+    //全部移到右边
+    $('#add_all').click(function() {
+           //获取全部的选项,删除并追加给对方
+           $('#select1 option').appendTo('#select2');
+    });
+    //全部移到左边
+    $('#remove_all').click(function() {
+           $('#select2 option').appendTo('#select1');
+    });
+    //双击选项
+    $('#select1').dblclick(function(){     //绑定双击事件
+           //获取全部的选项,删除并追加给对方
+           $("option:selected",this).appendTo('#select2');     //追加给对方
+    });
+    //双击选项
+    $('#select2').dblclick(function(){
+           $("option:selected",this).appendTo('#select1');
+    });
+  //双击选项
+    $('#select3').dblclick(function(){     //绑定双击事件
+           //获取全部的选项,删除并追加给对方
+           $("option:selected",this).appendTo('#select4');     //追加给对方
+    });
+    //双击选项
+    $('#select4').dblclick(function(){
+           $("option:selected",this).appendTo('#select3');
+    });
+});
+
 function checkForm(f){
 	if(f.elements["pj"].value==""){
 		alert("<%=I18N.getLbl(request,"pjauth.error.pj","项目不可以为空") %>");
@@ -52,7 +91,7 @@ function checkForm(f){
 		<tr>
 			<td align="right"><%=I18N.getLbl(request,"pj_gr.gr","用户组") %></td>
 			<td>
-				<select name="grs" multiple="multiple">
+				<select id="select3" multiple="multiple" style="width: 100px;height:160px;">
 					<%
 					java.util.List<org.svnadmin.entity.PjGr> pjgrlist = (java.util.List<org.svnadmin.entity.PjGr>)request.getAttribute("pjgrlist");
 					if(pjgrlist!=null){	
@@ -62,9 +101,15 @@ function checkForm(f){
 					<option value="<%=pjGr.getGr()%>"><%=pjGr.getGr()%></option>
 					<%}}%>
 				</select>
+			<td align="right"><%=I18N.getLbl(request,"pj_gr.gr.selected","已选中组") %></td>
+			<td>
+				<select id="select4" name="grs" multiple="multiple" style="width: 100px;height:160px;">
+			</td>
+		</tr>
+				<tr>
 			<td align="right"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td>
-				<select name="usrs" multiple="multiple">
+			<select id="select1" multiple="multiple" style="width: 100px;height:160px;">
 					<%
 					java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
 					if(usrlist!=null){	
@@ -73,7 +118,11 @@ function checkForm(f){
 					%>
 					<option value="<%=usr.getUsr()%>"><%=usr.getUsr()%></option>
 					<%}}%>
-				</select>
+			</select>
+			</td>
+			<td align="right"><%=I18N.getLbl(request,"usr.usr.selected","已选中用户") %></td>
+			<td>
+			<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;">
 			</td>
 		</tr>
 		<tr>
