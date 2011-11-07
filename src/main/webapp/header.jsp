@@ -23,7 +23,7 @@ Usr _usr = BaseServlet.getUsrFromSession(request);
 <%
 return;
 }%>
-
+<script src="js/jquery-1.7.min.js" type="text/javascript"></script>
 <script src="<%=ctx%>/resources/sorttable.js"></script>
 <style type="text/css" media="screen">
 <!--

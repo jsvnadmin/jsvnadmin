@@ -4,6 +4,36 @@
 <span style="color:green;font-weight:bold;"><a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"pj.title","项目管理") %>(<%=request.getParameter("pj")%>)</a> --> <a href="<%=ctx%>/pjgr?pj=<%=request.getParameter("pj")%>"><%=I18N.getLbl(request,"pjgr.title","用户组管理") %>(<%=request.getParameter("gr")%>)</a>--><%=I18N.getLbl(request,"pjgrusr.title","项目组用户管理") %></span><br><br>
 
 <script>
+$(function(){
+    //移到右边
+    $('#add').click(function() {
+           //获取选中的选项，删除并追加给对方
+           $('#select1 option:selected').appendTo('#select2');
+    });
+    //移到左边
+    $('#remove').click(function() {
+           $('#select2 option:selected').appendTo('#select1');
+    });
+    //全部移到右边
+    $('#add_all').click(function() {
+           //获取全部的选项,删除并追加给对方
+           $('#select1 option').appendTo('#select2');
+    });
+    //全部移到左边
+    $('#remove_all').click(function() {
+           $('#select2 option').appendTo('#select1');
+    });
+    //双击选项
+    $('#select1').dblclick(function(){     //绑定双击事件
+           //获取全部的选项,删除并追加给对方
+           $("option:selected",this).appendTo('#select2');     //追加给对方
+    });
+    //双击选项
+    $('#select2').dblclick(function(){
+           $("option:selected",this).appendTo('#select1');
+    });
+});
+
 function checkForm(f){
 	if(f.elements["usrs"].value==""){
 		alert("<%=I18N.getLbl(request,"pjgrusr.error.usr","用户不可以为空") %>");
@@ -18,8 +48,16 @@ function checkForm(f){
 	<input type="hidden" name="act" value="save">
 	<input type="hidden" name="pj" value="<%=request.getParameter("pj")%>">
 	<input type="hidden" name="gr" value="<%=request.getParameter("gr")%>">
-	<select name="usrs" multiple="multiple">
-		<%
+	<table>
+	<tr>
+	<td><%=I18N.getLbl(request,"pjgrusr.added.lbl","已添加用户") %></td>
+	<td><%=I18N.getLbl(request,"pjgrusr.add.lbl","待添加用户") %>
+</td>
+	</tr>
+	<tr>
+	<td>
+	<select multiple="multiple" id="select1" style="width:100px;height:160px;">
+	<%
 		java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
 		if(usrlist!=null){	
 		for(int i = 0;i<usrlist.size();i++){
@@ -27,8 +65,14 @@ function checkForm(f){
 		%>
 		<option value="<%=usr.getUsr()%>"><%=usr.getUsr()%></option>
 		<%}}%>
+		</select>
+	</td>
+	<td>
+	<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;">
 	</select>
-	
+	</td>
+	</tr>	
+	</table>
 	<input type="submit" value="<%=I18N.getLbl(request,"pjgrusr.op.submit","增加用户") %>">
 </form>
 
