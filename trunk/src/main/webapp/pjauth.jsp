@@ -165,7 +165,15 @@ function checkForm(f){
 		<td><%=pjAuth.getPj() %></td>
 		<td><%=pjAuth.getRes() %></td>
 		<td><%=pjAuth.getGr()==null?"":pjAuth.getGr() %><%=pjAuth.getUsr()==null?"":pjAuth.getUsr() %></td>
-		<td><%=pjAuth.getRw() %></td>
+		<td>
+			<% if("r".equals(pjAuth.getRw())){ %>
+				<%=I18N.getLbl(request,"pjauth.rw.r","可读") %>
+			<%}else if("rw".equals(pjAuth.getRw())){%>
+				<%=I18N.getLbl(request,"pjauth.rw.rw","可读可写") %>
+			<%}else{%>
+				<%=I18N.getLbl(request,"pjauth.rw.none","没有权限") %>
+			<%}%>
+		</td>
 		<td>
 		<a href="javascript:if(confirm('<%=I18N.getLbl(request,"pjauth.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pjauth?pj=<%=pjAuth.getPj()%>&res=<%=pjAuth.getRes()%>&gr=<%=pjAuth.getGr()%>&usr=<%=pjAuth.getUsr()%>')}"><%=I18N.getLbl(request,"pjauth.op.delete","删除") %></a>
 		</td>
