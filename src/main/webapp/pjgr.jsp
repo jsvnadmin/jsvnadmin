@@ -71,7 +71,7 @@ function checkForm(f){
 		<td><a href="<%=ctx%>/pjgrusr?pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>"><%=I18N.getLbl(request,"pjgr.op.setuser","设置用户") %></a></td>
 		<td>
 			<%if((pjGr.getPj()+"_"+Constants.GROUP_MANAGER).equals(pjGr.getGr()) || Constants.GROUP_MANAGER.equals(pjGr.getGr())){%>&nbsp;<%}else{%>
-			<a href="javascript:if(confirm('<%=I18N.getLbl(request,"pjgr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pjgr?&pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>')}"><%=I18N.getLbl(request,"pjgr.op.delete","删除") %></a>
+			<a href="javascript:if(confirm('<%=I18N.getLbl(request,"pjgr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pjgr?pj=<%=pjGr.getPj()%>&gr=<%=pjGr.getGr()%>')}"><%=I18N.getLbl(request,"pjgr.op.delete","删除") %></a>
 			<%}%>
 		</td>
 	</tr>
