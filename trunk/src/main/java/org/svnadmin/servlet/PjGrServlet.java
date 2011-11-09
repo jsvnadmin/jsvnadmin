@@ -63,6 +63,7 @@ public class PjGrServlet extends PjBaseServlet {
 		entity.setPj(request.getParameter("pj"));
 		entity.setGr(request.getParameter("gr"));
 		entity.setDes(request.getParameter("des"));
+		request.setAttribute("entity", entity);
 
 		pjGrService.save(entity);
 

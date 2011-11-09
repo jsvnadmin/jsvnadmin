@@ -73,6 +73,7 @@ public class PjUsrServlet extends PjServlet {
 		} else {
 			entity.setPsw(request.getParameter("psw"));
 		}
+		request.setAttribute("entity", entity);
 
 		pjUsrService.save(entity);
 

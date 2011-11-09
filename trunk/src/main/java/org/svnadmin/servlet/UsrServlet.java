@@ -66,6 +66,7 @@ public class UsrServlet extends BaseServlet {
 			entity.setPsw(request.getParameter("psw"));
 		}
 		entity.setRole(request.getParameter("role"));
+		request.setAttribute("entity", entity);
 
 		usrService.save(entity);
 
