@@ -58,6 +58,33 @@ public class I18nDao extends Dao {
 		}
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @return 多语言列表
+	 */
+	public List<I18n> getList() {
+		String sql = "select lang,id,lbl from i18n order by lang,id";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<I18n> results = new ArrayList<I18n>();
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				results.add(readI18n(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+		return results;
+	}
 	/**
 	 * @param id 键值
 	 * @return 相同键值的语言列表

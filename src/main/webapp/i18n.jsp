@@ -61,7 +61,10 @@ function checkForm(f){
 					<tr>
 						<td colspan="2" align="center">
 							<input type="submit" value="<%=I18N.getLbl(request,"i18n.op.submit","提交") %>">
+							&nbsp;&nbsp;
 							<a href="<%=ctx%>/i18nadd"><%=I18N.getLbl(request,"i18n.op.addlang","增加语言") %></a>
+							&nbsp;&nbsp;
+							<a href="<%=ctx%>/i18n?act=download"><%=I18N.getLbl(request,"i18n.op.export","导出多语言贡献给svnadmin项目组") %></a>
 						</td>
 					</tr>
 				</table>

@@ -1,5 +1,8 @@
 package org.svnadmin.servlet;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -108,6 +111,11 @@ public class BaseServlet extends ServletSupport {
 				this.save(request, response);
 			} else if (this.isGet(request)) {
 				this.get(request, response);
+			} else if (this.isDownload(request)) {
+				this.download(request, response);
+				return;//终止
+			}else{
+				this.unknow(request, response);
 			}
 
 			this.list(request, response);
@@ -182,6 +190,17 @@ public class BaseServlet extends ServletSupport {
 			HttpServletResponse response) throws IOException, ServletException {
 		this.forword(request, response);
 	}
+	/**
+	 * 除了delete,get,save,download外的action
+	 * 
+	 * @param request
+	 *            请求
+	 * @param response
+	 *            响应
+	 * @since 3.0.2
+	 */
+	protected void unknow(HttpServletRequest request,HttpServletResponse response) {
+	}
 
 	/**
 	 * 列表
@@ -231,6 +250,68 @@ public class BaseServlet extends ServletSupport {
 	protected void get(HttpServletRequest request, HttpServletResponse response) {
 
 	}
+	/**
+	 * 下载操作
+	 * 
+	 * @param request
+	 *            请求
+	 * @param response
+	 *            响应
+	 * @since 3.0.2
+	 */
+	protected void download(HttpServletRequest request, HttpServletResponse response) {
+		
+	}
+	/**
+	 * 下载
+	 * @param content 内容
+	 * @param request 请求
+	 * @param response 响应
+	 * @throws IOException IO异常
+	 * @since 3.0.2
+	 */
+	protected void doDownload(byte[] content, HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		response.setHeader("Pragma", "No-cache");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 1);
+		response.setContentType("text/plain; charset=UTF-8");
+		response.setHeader("Content-Disposition","attachment;filename=i18n.sql");
+		response.setHeader("Content-Length", ""+content.length);
+		
+		BufferedOutputStream bos = null;
+		BufferedInputStream bis = null;
+		try {
+			bis = new BufferedInputStream(new ByteArrayInputStream(content));
+
+			bos = new BufferedOutputStream(response.getOutputStream());
+			byte[] input = new byte[1024];
+			boolean eof = false;
+			while (!eof) {
+				int length = bis.read(input);
+				if (length == -1) {
+					eof = true;
+				} else {
+					bos.write(input, 0, length);
+				}
+			}
+		} finally {
+			if (bis != null) {
+				try {
+					bis.close();
+				} catch (Exception e) {
+				}
+			}
+			if (bos != null) {
+				bos.flush();
+				try {
+					bos.close();
+				} catch (Exception e) {
+				}
+				bos = null;
+			}
+		}
+	}
 
 	/**
 	 * @param request
@@ -257,6 +338,16 @@ public class BaseServlet extends ServletSupport {
 	 */
 	protected boolean isGet(HttpServletRequest request) {
 		return "get".equals(request.getParameter("act"));
+	}
+	/**
+	 * 是否是下载的请求
+	 * @param request
+	 *            请求
+	 * @return 请求是否是获取实体类
+	 * @since 3.0.2
+	 */
+	protected boolean isDownload(HttpServletRequest request) {
+		return "download".equals(request.getParameter("act"));
 	}
 
 	/**
