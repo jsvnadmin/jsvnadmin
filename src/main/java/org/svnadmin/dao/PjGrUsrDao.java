@@ -137,7 +137,7 @@ public class PjGrUsrDao extends Dao {
 		// String sql =
 		// "select pj,usr,gr from pj_gr_usr where pj in (select distinct pj from pj where type=? and path like ?) order by pj,gr,usr";
 		String sql = "select a.pj,a.gr,b.usr from pj_gr a left join pj_gr_usr b on (a.pj=b.pj and a.gr=b.gr) "
-				+ "where a.pj in (select distinct pj from pj where type=? and path like ?) order by a.pj,a.gr,b.usr";
+				+ " where a.pj in (select distinct pj from pj where type=? and path like ?) order by a.pj,a.gr,b.usr";
 		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
 
 		Connection conn = null;

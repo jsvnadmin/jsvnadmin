@@ -88,15 +88,15 @@ public class PjDao extends Dao {
 	 */
 	public List<Pj> getList(String usr) {
 		String sql = "select p.pj,p.path,p.url,p.des,p.type,pm.pj manager from ( "
-				+ "select distinct a.pj,a.path,a.url,a.des,a.type from pj a where  "
-				+ "exists (select b.usr from pj_gr_usr b where a.pj=b.pj and b.usr=?)  "
-				+ "or exists(select c.usr from pj_usr_auth c where a.pj=c.pj and c.usr=?) "
-				+ ") p "
-				+ "left join ( "
-				+ "select distinct a.pj from pj a where  "
+				+ " select distinct a.pj,a.path,a.url,a.des,a.type from pj a where  "
+				+ " exists (select b.usr from pj_gr_usr b where a.pj=b.pj and b.usr=?)  "
+				+ " or exists(select c.usr from pj_usr_auth c where a.pj=c.pj and c.usr=?) "
+				+ " ) p "
+				+ " left join ( "
+				+ " select distinct a.pj from pj a where  "
 				// TODO like ? 应该是 = ? ,用like主要是兼容3.0版本 see: Issue 4
-				+ "exists (select b.usr from pj_gr_usr b where a.pj=b.pj and b.usr=? and b.gr like ?)"
-				+ ") pm on p.pj=pm.pj";
+				+ " exists (select b.usr from pj_gr_usr b where a.pj=b.pj and b.usr=? and b.gr like ?)"
+				+ " ) pm on p.pj=pm.pj";
 		List<Pj> list = new ArrayList<Pj>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
