@@ -105,9 +105,9 @@ public class PjAuthDao extends Dao {
 	 */
 	public List<PjAuth> getList(String pj) {
 		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj=? "
-				+ "UNION "
-				+ "select pj,res,rw,' ' gr,usr from pj_usr_auth where pj=? "
-				+ "order by res,gr,usr";
+				+ " UNION "
+				+ " select pj,res,rw,' ' gr,usr from pj_usr_auth where pj=? "
+				+ " order by res,gr,usr";
 		List<PjAuth> list = new ArrayList<PjAuth>();
 
 		Connection conn = null;
@@ -140,9 +140,9 @@ public class PjAuthDao extends Dao {
 	 */
 	public List<PjAuth> getListByRootPath(String rootPath) {
 		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
-				+ "UNION "
-				+ "select pj,res,rw,' ' gr,usr from pj_usr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
-				+ "order by res,gr,usr";
+				+ " UNION "
+				+ " select pj,res,rw,' ' gr,usr from pj_usr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
+				+ " order by res,gr,usr";
 		List<PjAuth> list = new ArrayList<PjAuth>();
 
 		Connection conn = null;
@@ -459,7 +459,7 @@ public class PjAuthDao extends Dao {
 	 */
 	public List<String> getResList(String pj) {
 		String sql = "select distinct res from pj_gr_auth where pj=? "
-				+ "UNION select distinct res from pj_usr_auth where pj=? order by res";
+				+ " UNION select distinct res from pj_usr_auth where pj=? order by res";
 
 		List<String> list = new ArrayList<String>();
 		Connection conn = null;
