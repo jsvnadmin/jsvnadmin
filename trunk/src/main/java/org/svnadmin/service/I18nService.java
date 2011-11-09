@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -85,6 +86,25 @@ public class I18nService {
 	 */
 	public List<I18n> getIds() {
 		return this.i18nDao.getIds();
+	}
+	/**
+	 * 获取导出的脚步语句
+	 * @return 多语言列表
+	 */
+	public String getInsertInto() {
+		List<I18n> i18nList = this.i18nDao.getList();
+		if(i18nList!=null && !i18nList.isEmpty()){
+			StringBuffer content = new StringBuffer();
+			for (I18n i18n : i18nList) {
+				content.append("insert into i18n (lang,id,lbl) values (");
+				content.append("'").append(StringUtils.replace(i18n.getLang(), "'", "''")).append("',");
+				content.append("'").append(StringUtils.replace(i18n.getId(), "'", "''")).append("',");
+				content.append("'").append(StringUtils.replace(i18n.getLbl(), "'", "''")).append("'");
+				content.append(");\n");
+			}
+			return content.toString();
+		}
+		return null;
 	}
 	/**
 	 * @param list 保存的列表

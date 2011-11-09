@@ -73,6 +73,16 @@ public class I18N {
 		return getLbl(getDefaultLang(request), id, defValue, null);
 	}
 	/**
+	 * @param request 请求
+	 * @param id 语言id
+	 * @param defValue 默认值
+	 * @param args 参数
+	 * @return 格式化后的多语言
+	 */
+	public static final String getLbl(HttpServletRequest request,String id,String defValue,Object[] args){
+		return getLbl(getDefaultLang(request), id, defValue, args);
+	}
+	/**
 	 * @param lang 语言
 	 * @param id 语言id
 	 * @param defValue 默认值

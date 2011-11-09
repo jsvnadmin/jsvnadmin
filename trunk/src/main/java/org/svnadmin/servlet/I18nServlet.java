@@ -39,6 +39,20 @@ public class I18nServlet extends BaseServlet {
 	}
 	
 	@Override
+	protected void download(HttpServletRequest request,
+			HttpServletResponse response) {
+		String sql = i18nService.getInsertInto();
+		if(sql != null && sql.length()>0){
+			try {
+				this.doDownload(sql.getBytes("UTF-8"), request, response);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(I18N.getLbl(request, "i18n.error.export", "导出错误{0} ",new String[]{e.getMessage()}));
+			}
+		}
+	}
+
+	@Override
 	protected void save(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		if(StringUtils.isBlank(id)){
