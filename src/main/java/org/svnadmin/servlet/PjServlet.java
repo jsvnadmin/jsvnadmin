@@ -52,9 +52,10 @@ public class PjServlet extends PjBaseServlet {
 		entity.setUrl(request.getParameter("url"));
 		entity.setDes(request.getParameter("des"));
 		entity.setType(request.getParameter("type"));
-		pjService.save(entity);
-
 		request.setAttribute("entity", entity);
+		pjService.save(entity);
+		request.setAttribute("entity", entity);
+
 	}
 
 	@Override
