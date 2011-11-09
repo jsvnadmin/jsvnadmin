@@ -93,7 +93,7 @@ public class UsrDao extends Dao {
 	 */
 	public List<Usr> listUnSelected(String pj, String gr) {
 		String sql = "select usr,psw,role from usr a where a.usr <> '*' "
-				+ "and not exists (select usr from pj_gr_usr b where a.usr = b.usr and b.pj=? and b.gr=?) order by a.usr";
+				+ " and not exists (select usr from pj_gr_usr b where a.usr = b.usr and b.pj=? and b.gr=?) order by a.usr";
 		List<Usr> list = new ArrayList<Usr>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -124,13 +124,13 @@ public class UsrDao extends Dao {
 	 */
 	public List<Usr> getList(String pj) {
 		String sql = "select p.usr,p.role,CASE WHEN pu.psw IS NOT NULL THEN pu.psw ELSE p.psw END psw from ("
-				+ "select a.usr,a.role,a.psw from usr a "
-				+ "where "
-				+ "exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj=?) "
-				+ "or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj=?) "
-				+ ") p "
-				+ "left join pj_usr pu on (p.usr=pu.usr) where p.usr <> '*'"
-				+ "order by p.usr; ";
+				+ " select a.usr,a.role,a.psw from usr a "
+				+ " where "
+				+ " exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj=?) "
+				+ " or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj=?) "
+				+ " ) p "
+				+ " left join pj_usr pu on (p.usr=pu.usr) where p.usr <> '*'"
+				+ " order by p.usr ";
 
 		List<Usr> list = new ArrayList<Usr>();
 		Connection conn = null;
@@ -163,13 +163,13 @@ public class UsrDao extends Dao {
 	 */
 	public List<Usr> getListByRootPath(String rootPath) {
 		String sql = "select p.usr,p.role,CASE WHEN pu.psw IS NOT NULL THEN pu.psw ELSE p.psw END psw from ("
-				+ "select a.usr,a.role,a.psw from usr a "
-				+ "where "
-				+ "exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj in (select distinct pj from pj where type=? and path like ?)) "
-				+ "or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj in (select distinct pj from pj where type=? and path like ?)) "
-				+ ") p "
-				+ "left join pj_usr pu on (p.usr=pu.usr) where p.usr <> '*'"
-				+ "order by p.usr; ";
+				+ " select a.usr,a.role,a.psw from usr a "
+				+ " where "
+				+ " exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj in (select distinct pj from pj where type=? and path like ?)) "
+				+ " or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj in (select distinct pj from pj where type=? and path like ?)) "
+				+ " ) p "
+				+ " left join pj_usr pu on (p.usr=pu.usr) where p.usr <> '*'"
+				+ " order by p.usr ";
 
 		List<Usr> list = new ArrayList<Usr>();
 		Connection conn = null;
