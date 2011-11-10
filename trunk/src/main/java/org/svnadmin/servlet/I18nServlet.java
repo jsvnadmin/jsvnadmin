@@ -44,6 +44,8 @@ public class I18nServlet extends BaseServlet {
 		String sql = i18nService.getInsertInto();
 		if(sql != null && sql.length()>0){
 			try {
+				response.setContentType("text/plain; charset=UTF-8");
+				response.setHeader("Content-Disposition","attachment;filename=i18n.sql");
 				this.doDownload(sql.getBytes("UTF-8"), request, response);
 			} catch (IOException e) {
 				e.printStackTrace();
