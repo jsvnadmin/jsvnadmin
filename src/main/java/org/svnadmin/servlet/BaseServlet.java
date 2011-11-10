@@ -263,7 +263,13 @@ public class BaseServlet extends ServletSupport {
 		
 	}
 	/**
-	 * 下载
+	 * 下载<br>
+	 * 例子：<br>
+	 * <code>
+	 * response.setContentType("text/plain; charset=UTF-8");<br>
+	 * response.setHeader("Content-Disposition","attachment;filename=i18n.sql");<br>
+	 * this.doDownload(str.getBytes("UTF-8"), request, response);<br>
+	 * </code>
 	 * @param content 内容
 	 * @param request 请求
 	 * @param response 响应
@@ -275,8 +281,6 @@ public class BaseServlet extends ServletSupport {
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 1);
-		response.setContentType("text/plain; charset=UTF-8");
-		response.setHeader("Content-Disposition","attachment;filename=i18n.sql");
 		response.setHeader("Content-Length", ""+content.length);
 		
 		BufferedOutputStream bos = null;
