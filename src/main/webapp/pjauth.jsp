@@ -9,24 +9,44 @@ if(entity==null)entity=new org.svnadmin.entity.PjAuth();
 %>
 <script>
 $(function(){
-    //移到右边
-    $('#add').click(function() {
+    //移到用户组右边
+    $('#group_add').click(function() {
+           //获取选中的选项，删除并追加给对方
+           $('#select3 option:selected').appendTo('#select4');
+    });
+    //移到用户组左边
+    $('#group_del').click(function() {
+           $('#select4 option:selected').appendTo('#select3');
+    });
+    //全部移到用户组右边
+    $('#group_add_all').click(function() {
+           //获取全部的选项,删除并追加给对方
+           $('#select3 option').appendTo('#select4');
+    });
+    //全部移到用户组左边
+    $('#group_del_all').click(function() {
+           $('#select4 option').appendTo('#select3');
+    });
+    
+    //移到用户右边
+    $('#user_add').click(function() {
            //获取选中的选项，删除并追加给对方
            $('#select1 option:selected').appendTo('#select2');
     });
-    //移到左边
-    $('#remove').click(function() {
+    //移到用户左边
+    $('#user_del').click(function() {
            $('#select2 option:selected').appendTo('#select1');
     });
-    //全部移到右边
-    $('#add_all').click(function() {
+    //全部移到用户右边
+    $('#user_add_all').click(function() {
            //获取全部的选项,删除并追加给对方
            $('#select1 option').appendTo('#select2');
     });
-    //全部移到左边
-    $('#remove_all').click(function() {
+    //全部移到用户左边
+    $('#user_del_all').click(function() {
            $('#select2 option').appendTo('#select1');
     });
+    
     //双击选项
     $('#select1').dblclick(function(){     //绑定双击事件
            //获取全部的选项,删除并追加给对方
@@ -101,7 +121,13 @@ function checkForm(f){
 					<option value="<%=pjGr.getGr()%>"><%=pjGr.getGr()%></option>
 					<%}}%>
 				</select>
-			<td align="right"><%=I18N.getLbl(request,"pj_gr.gr.selected","已选中组") %></td>
+			<td align="right">
+				<input id="group_add" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.add","添加选中>")%>"  style="width:100;"><br>
+				<input id="group_add_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.add_all","添加全部>>") %>"  style="width:100;"><br><br>
+				<input id="group_del" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.del","<删除选中")%>"  style="width:100;"><br>
+				<input id="group_del_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.del_all","<<删除全部")%>"  style="width:100;"><br><br>
+				<%=I18N.getLbl(request,"pj_gr.gr.selected","已选中组") %>
+			</td>
 			<td>
 				<select id="select4" name="grs" multiple="multiple" style="width: 100px;height:160px;">
 			</td>
@@ -120,7 +146,13 @@ function checkForm(f){
 					<%}}%>
 			</select>
 			</td>
-			<td align="right"><%=I18N.getLbl(request,"usr.usr.selected","已选中用户") %></td>
+			<td align="right">
+				<input id="user_add" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.add","添加选中>") %>"  style="width:100;"><br>
+				<input id="user_add_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.addall","添加全部>>") %>"  style="width:100;"><br><br>
+				<input id="user_del" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.del","<删除选中  ") %>"  style="width:100;"><br>
+				<input id="user_del_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.del_all","<<删除全部")%>"  style="width:100;"><br><br>
+				<%=I18N.getLbl(request,"usr.usr.selected","已选中用户") %>
+			</td>
 			<td>
 			<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;">
 			</td>
