@@ -39,6 +39,14 @@
 		<location>/error.jsp</location>
 	</error-page>
 	<servlet>
+		<servlet-name>ajax</servlet-name>
+		<servlet-class>org.svnadmin.servlet.AjaxServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ajax</servlet-name>
+		<url-pattern>/ajax</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>login</servlet-name>
 		<servlet-class>org.svnadmin.servlet.LoginServlet</servlet-class>
 	</servlet>
