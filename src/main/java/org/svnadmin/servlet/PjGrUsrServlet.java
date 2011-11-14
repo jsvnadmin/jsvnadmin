@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.PjGrUsr;
-import org.svnadmin.service.UsrService;
 import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
@@ -26,10 +25,6 @@ public class PjGrUsrServlet extends PjBaseServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1506192047326005839L;
-	/**
-	 * 用户服务层
-	 */
-	protected UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
 
 	@Override
 	protected void before(HttpServletRequest request,

@@ -11,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.PjAuth;
 import org.svnadmin.service.PjAuthService;
 import org.svnadmin.service.PjGrService;
-import org.svnadmin.service.UsrService;
 import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
@@ -36,10 +35,6 @@ public class PjAuthServlet extends PjBaseServlet {
 	 * 项目组服务层
 	 */
 	PjGrService pjGrService = SpringUtils.getBean(PjGrService.BEAN_NAME);
-	/**
-	 * 用户服务层
-	 */
-	UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
 
 	@Override
 	protected void before(HttpServletRequest request,

@@ -44,17 +44,7 @@ public class PjBaseServlet extends BaseServlet {
 		}
 		Usr usr = getUsrFromSession(request);
 		String pj = request.getParameter("pj");
-		if (pj == null) {
-			return false;
-		}
-		// TODO delete me 为了兼容3.0版本 see: Issue 4
-		String gr = pj + "_" + Constants.GROUP_MANAGER;
-		if (this.pjGrUsrService.get(pj, gr, usr.getUsr()) != null) {
-			return true;
-		}
-		// 3.0.1版本以后
-		gr = Constants.GROUP_MANAGER;
-		return this.pjGrUsrService.get(pj, gr, usr.getUsr()) != null;
+		return pjGrUsrService.hasManagerRight(usr, pj);
 	}
 	
 	/**
