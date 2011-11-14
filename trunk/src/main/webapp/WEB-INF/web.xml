@@ -44,7 +44,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ajax</servlet-name>
-		<url-pattern>/ajax</url-pattern>
+		<url-pattern>*.ajax</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>login</servlet-name>
