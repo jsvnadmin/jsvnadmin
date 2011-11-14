@@ -108,8 +108,14 @@ public class AjaxServlet  extends BaseServlet{
     		while(names.hasMoreElements()){
     			String name = (String)names.nextElement();
     			if(SERVICE_BEAN_NAME_KEY.equals(name))continue;//exclude service bean name
-    			String value = request.getParameter(name);//TODO 参数传多个值?
-    			results.put(name, value);
+    			String[] values = request.getParameterValues(name);
+    			if(values == null){
+    				results.put(name, null);
+    			}else if(values.length==1){
+    				results.put(name, values[0]);//request.getParameter(name)
+    			}else{
+    				results.put(name, values);
+    			}
     		}
     		return results;
     	}
