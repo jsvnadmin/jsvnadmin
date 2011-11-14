@@ -238,4 +238,16 @@ public class UsrService {
 	public void validatConnection() throws Exception{
 		this.usrDao.validatConnection();
 	}
+	
+	/**
+	 * 是否有管理员的权限
+	 * @param usr 用户
+	 * @return 有管理员权限返回true,否则返回false
+	 */
+	public boolean hasAdminRight(Usr usr){
+		if (Constants.USR_ROLE_ADMIN.equals(usr.getRole())) {
+			return true;
+		}
+		return false;
+	}
 }

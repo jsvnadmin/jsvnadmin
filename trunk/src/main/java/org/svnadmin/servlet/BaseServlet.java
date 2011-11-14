@@ -17,7 +17,9 @@ import org.apache.log4j.Logger;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.exceptions.TimeoutException;
+import org.svnadmin.service.UsrService;
 import org.svnadmin.util.I18N;
+import org.svnadmin.util.SpringUtils;
 
 /**
  * Servlet 的父类
@@ -36,6 +38,12 @@ public class BaseServlet extends ServletSupport {
 	 */
 	protected Logger LOG = Logger.getLogger(BaseServlet.class);
 
+	/**
+	 * 用户服务层
+	 */
+	protected static UsrService usrService = SpringUtils
+			.getBean(UsrService.BEAN_NAME);
+	
 	/**
 	 * 获取当前登录的用户
 	 * 
@@ -362,11 +370,7 @@ public class BaseServlet extends ServletSupport {
 	 * @see Usr#getRole()
 	 */
 	public static boolean hasAdminRight(HttpServletRequest request) {
-		Usr usr = getUsrFromSession(request);
-		if (Constants.USR_ROLE_ADMIN.equals(usr.getRole())) {
-			return true;
-		}
-		return false;
+		return usrService.hasAdminRight(getUsrFromSession(request));
 	}
 	
 	/**

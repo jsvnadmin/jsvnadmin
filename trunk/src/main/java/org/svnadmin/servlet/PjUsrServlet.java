@@ -11,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.PjUsr;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.service.PjUsrService;
-import org.svnadmin.service.UsrService;
 import org.svnadmin.util.EncryptUtil;
 import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
@@ -29,10 +28,6 @@ public class PjUsrServlet extends PjServlet {
 	 */
 	private static final long serialVersionUID = -4020326530937387440L;
 
-	/**
-	 * 用户服务层
-	 */
-	protected UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
 	/**
 	 * 项目用户服务层
 	 */

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.svnadmin.util.I18N;
 import org.svnadmin.util.LangProvider;
+import org.svnadmin.util.UsrProvider;
 
 /**
  * servlet的基类
@@ -39,9 +40,11 @@ public abstract class ServletSupport extends HttpServlet{
 			throws ServletException, IOException {
 		try{
 			LangProvider.setLang(I18N.getDefaultLang(request));
+			UsrProvider.setUsr(BaseServlet.getUsrFromSession(request));
 			this.excute(request, response);
 		}finally{
 			LangProvider.removeLang();
+			UsrProvider.removeUsr();
 		}
 	}
 

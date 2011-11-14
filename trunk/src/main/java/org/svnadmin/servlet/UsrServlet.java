@@ -11,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.exceptions.TimeoutException;
-import org.svnadmin.service.UsrService;
 import org.svnadmin.util.EncryptUtil;
 import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
@@ -28,10 +27,6 @@ public class UsrServlet extends BaseServlet {
 	 * 序列化ID
 	 */
 	private static final long serialVersionUID = 5448367307094487885L;
-	/**
-	 * 用户服务层
-	 */
-	protected UsrService usrService = SpringUtils.getBean(UsrService.BEAN_NAME);
 
 	@Override
 	protected void get(HttpServletRequest request, HttpServletResponse response) {

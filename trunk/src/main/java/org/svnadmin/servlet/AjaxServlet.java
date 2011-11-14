@@ -21,7 +21,7 @@ import org.svnadmin.util.SpringUtils;
 /**
  * ajax调用入口<br>
  * 例子:
- * ajax?service=ajaxTreeService
+ * tree.ajax?service=ajaxTreeService
  * 
  * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * @since 3.0.2
