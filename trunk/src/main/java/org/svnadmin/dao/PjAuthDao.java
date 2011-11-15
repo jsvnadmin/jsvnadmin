@@ -101,6 +101,43 @@ public class PjAuthDao extends Dao {
 	/**
 	 * @param pj
 	 *            项目
+	 * @param res 资源
+	 * @return 项目资源的权限列表
+	 */
+	public List<PjAuth> getList(String pj,String res) {
+		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj=? and res = ? "
+				+ " UNION "
+				+ " select pj,res,rw,' ' gr,usr from pj_usr_auth where pj=? and res = ? "
+				+ " order by res,gr,usr";
+		List<PjAuth> list = new ArrayList<PjAuth>();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, pj);
+			pstmt.setString(index++, res);
+			pstmt.setString(index++, pj);
+			pstmt.setString(index++, res);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(readPjAuth(rs));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+	}
+	/**
+	 * @param pj
+	 *            项目
 	 * @return 项目资源的权限列表
 	 */
 	public List<PjAuth> getList(String pj) {

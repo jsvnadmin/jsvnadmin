@@ -77,7 +77,7 @@ public class PjAuthServlet extends PjBaseServlet {
 
 	@Override
 	protected void list(HttpServletRequest request, HttpServletResponse response) {
-		List<PjAuth> list = pjAuthService.list(request.getParameter("pj"));
+		List<PjAuth> list = pjAuthService.list(request.getParameter("pj"),request.getParameter("path"));
 		request.setAttribute("list", list);
 	}
 
@@ -92,8 +92,11 @@ public class PjAuthServlet extends PjBaseServlet {
 
 		request.setAttribute("pjreslist",
 				pjAuthService.getResList(request.getParameter("pj")));
-
-		request.getRequestDispatcher("pjauth.jsp").forward(request, response);
+		if(StringUtils.isBlank(request.getParameter("path"))){
+			request.getRequestDispatcher("pjauth.jsp").forward(request, response);
+		}else{
+			request.getRequestDispatcher("pjauthpath.jsp").forward(request, response);
+		}
 	}
 
 }

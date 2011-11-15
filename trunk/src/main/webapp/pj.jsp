@@ -110,7 +110,9 @@ function checkForm(f){
 		<td title="<%=pj.getPj() %>">
 			<%if(hasAdminRight || pj.isManager()){%><%=pj.getPath() %><%}else{%>&nbsp;<%}%>
 		</td>
-		<td title="<%=pj.getPj() %>"><%=pj.getUrl() %></td>
+		<td title="<%=pj.getPj() %>">
+			<a href="<%=ctx%>/rep?pj=<%=pj.getPj()%>"><%=pj.getUrl() %></a>
+		</td>
 		<td title="<%=pj.getPj() %>"><%=pj.getType()%></td>
 		<td title="<%=pj.getPj() %>"><%=pj.getDes() %></td>
 		<td title="<%=pj.getPj() %>">
