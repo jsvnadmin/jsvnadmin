@@ -1,0 +1,74 @@
+package org.tree.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.tree.entity.Tree;
+
+public abstract class AbstractTreeService implements TreeService {
+
+	private static final Log LOG = LogFactory.getLog(AbstractTreeService.class);
+
+	public String getHTML(Map<String, Object> parameters) {
+		try {
+			String id = (String) parameters.get(TREE_ID_VAR);
+			String parentId = (String) parameters.get(TREE_PARENTID_VAR);
+
+			if (StringUtils.isBlank(id) && StringUtils.isBlank(parentId)) {
+				return null;
+			}
+
+			StringBuffer html = new StringBuffer();
+
+			if (StringUtils.isNotBlank(id)) {
+				// 说明是第一层
+				Tree tree = getTreeFactory().find(id);
+				if (tree == null) {
+					LOG.info("not found tree. id = " + id);
+					return null;
+				}
+				parseTree(html, tree, parameters);
+			} else if (StringUtils.isNotBlank(parentId)) {
+				// 找出所有的子树
+				List<Tree> treeList = getTreeFactory().findChildren(parentId);
+				for (Tree tree : treeList) {
+					if (tree == null) {
+						continue;
+					}
+					parseTree(html, tree, parameters);
+				}
+			}
+			return html.toString();
+
+			// LOG.info(html.toString());
+		} catch (Exception e) {
+			LOG.error(e);
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	protected void parseTree(StringBuffer treeHtml, Tree tree,
+			Map<String, Object> parameters) {
+		StringBuffer html;
+		try {
+			html = getTreeFactory().findTreeNodeService(tree).getHTML(tree,
+					parameters);
+		} catch (Exception e) {
+			LOG.error(e);
+			e.printStackTrace();
+			html = null;
+		} finally {
+		}
+
+		if (html == null) {
+			LOG.debug("not found tree html data." + tree);
+			return;
+		}
+		treeHtml.append(html);
+	}
+
+}
