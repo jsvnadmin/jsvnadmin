@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.svnadmin.Constants;
 import org.svnadmin.service.UsrService;
 import org.svnadmin.util.I18N;
@@ -26,11 +25,6 @@ public class LoginServlet extends ServletSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 2037344827672377791L;
-
-	/**
-	 * 日志
-	 */
-	private final Logger LOG = Logger.getLogger(this.getClass());
 
 	/**
 	 * 用户服务层

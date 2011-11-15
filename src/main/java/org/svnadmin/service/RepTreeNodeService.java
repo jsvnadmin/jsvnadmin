@@ -6,7 +6,6 @@ package org.svnadmin.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -43,8 +42,10 @@ import org.tree.entity.TreeNode;
 import org.tree.service.AbstractTreeNodeService;
 
 /**
- * @author Harvey
- *
+ * 仓库目录结构树节点服务层
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 3.0.2
+ * 
  */
 @Service(RepTreeNodeService.BEAN_NAME)
 public class RepTreeNodeService extends AbstractTreeNodeService {

@@ -10,6 +10,12 @@ import org.tree.entity.Tree;
 import org.tree.entity.TreeNode;
 
 
+/**
+ * 抽象树节点服务层
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 3.0.2
+ * 
+ */
 public abstract class AbstractTreeNodeService implements TreeNodeService {
 	
 	public StringBuffer getHTML(Tree tree, Map<String, Object> parameters) {
@@ -20,7 +26,7 @@ public abstract class AbstractTreeNodeService implements TreeNodeService {
 		}
 		html.append("<ul>");
 		for (int i = 0; nodes != null && i < nodes.size(); i++) {
-			TreeNode treeNode = (TreeNode) nodes.get(i);
+			TreeNode treeNode = nodes.get(i);
 
 			// htmlsrc
 			html.append("<li");
@@ -98,8 +104,19 @@ public abstract class AbstractTreeNodeService implements TreeNodeService {
 		return html;
 	}
 
+	/**
+	 * 获取子节点
+	 * @param parent 树
+	 * @param parameters 参数
+	 * @return 子节点
+	 */
 	protected abstract List<TreeNode> getTreeNodes(Tree parent,Map<String, Object> parameters);
 
+	/**
+	 * 处理参数
+	 * @param handlers html
+	 * @param params 参数
+	 */
 	protected void prepareParameters(StringBuffer handlers,Map<String, Object> params) {
 		if (params == null)
 			return;
@@ -144,6 +161,8 @@ public abstract class AbstractTreeNodeService implements TreeNodeService {
 	 * 
 	 * @param handlers
 	 *            The StringBuffer that output will be appended to.
+	 * @param name 属性名称
+	 * @param value 属性值
 	 */
 	protected void prepareAttribute(StringBuffer handlers, String name,
 			Object value) {
@@ -157,8 +176,9 @@ public abstract class AbstractTreeNodeService implements TreeNodeService {
 	}
 	
 	/**
-	 * 是否是叶子节点
-	 * @return
+	 * @param tree 树
+	 * @param treeNode 节点
+	 * @return 是否是叶子节点
 	 */
 	protected boolean isLeaf(Tree tree,TreeNode treeNode){
 		return treeNode.isLeaf() || tree.isLeaf();

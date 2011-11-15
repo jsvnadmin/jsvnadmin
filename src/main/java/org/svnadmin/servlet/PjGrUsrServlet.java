@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.PjGrUsr;
 import org.svnadmin.util.I18N;
-import org.svnadmin.util.SpringUtils;
 
 /**
  * 项目组用户
