@@ -21,7 +21,7 @@ import org.svnadmin.util.SpringUtils;
 /**
  * ajax调用入口<br>
  * 例子:
- * tree.ajax?service=ajaxTreeService
+ * ajaxTreeService.ajax
  * 
  * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * @since 3.0.2
@@ -37,15 +37,12 @@ public class AjaxServlet  extends BaseServlet{
 	 */
 	private static final Log LOG = LogFactory.getLog(AjaxServlet.class);
 	
-    /**
-     * 从request中获取这个键对应的值，作为ajax调用的service ID
-     */
-    private static final String SERVICE_BEAN_NAME_KEY="service";
 	/**
 	 * 默认的ajax调用content type
 	 */
 	private static final String DEFAULT_CONTENTTYPE = "text/html; charset=UTF-8";
-
+	
+	public static final String AJAX = ".ajax";
 
     @Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,7 +50,17 @@ public class AjaxServlet  extends BaseServlet{
     	try {
     		this.validate(request);
             
-            String serviceName = request.getParameter(SERVICE_BEAN_NAME_KEY);
+    		String uri = request.getRequestURI();
+    		if(!uri.endsWith(AJAX)){
+    			return;
+    		}
+    		String serviceName = "";
+    		int lastSlash = uri.lastIndexOf("/");
+    		if(lastSlash==-1){
+    			serviceName = uri.substring(0, uri.length()-AJAX.length());
+    		}else{
+    			serviceName = uri.substring(lastSlash+1, uri.length()-AJAX.length());
+    		}
             
             if (StringUtils.isBlank(serviceName)) {
             	LOG.warn("service name is null.");
@@ -107,7 +114,6 @@ public class AjaxServlet  extends BaseServlet{
     		Map<String,Object> results = new HashMap<String,Object>();
     		while(names.hasMoreElements()){
     			String name = (String)names.nextElement();
-    			if(SERVICE_BEAN_NAME_KEY.equals(name))continue;//exclude service bean name
     			String[] values = request.getParameterValues(name);
     			if(values == null){
     				results.put(name, null);
