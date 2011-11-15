@@ -11,12 +11,17 @@ import org.tree.service.AbstractTreeService;
 import org.tree.service.TreeFactory;
 
 /**
- * @author Harvey
- *
+ * 默认的树服务层
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 3.0.2
+ * 
  */
 @Service(DefaultTreeService.BEAN_NAME)
 public class DefaultTreeService extends AbstractTreeService implements AjaxService{
 	
+	/**
+	 * Bean名称s
+	 */
 	public static final String BEAN_NAME="ajaxTreeService";
 	
 	public TreeFactory getTreeFactory() {

@@ -13,7 +13,6 @@ import org.svnadmin.entity.Usr;
 import org.svnadmin.exceptions.TimeoutException;
 import org.svnadmin.util.EncryptUtil;
 import org.svnadmin.util.I18N;
-import org.svnadmin.util.SpringUtils;
 
 /**
  * 用户

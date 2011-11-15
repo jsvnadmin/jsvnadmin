@@ -12,14 +12,23 @@ import org.tree.service.TreeFactory;
 import org.tree.service.TreeNodeService;
 
 //TODO 提供JdbcTreeFactory，把树配置数据保存在数据库。
+
 /**
- * @author Harvey
+ * 默认的树工厂类
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 3.0.2
  * 
  */
 public class DefaultTreeFactory implements TreeFactory {
 
+	/**
+	 * 单例
+	 */
 	private static DefaultTreeFactory instance = new DefaultTreeFactory();
 	
+	/**
+	 * 
+	 */
 	private DefaultTreeFactory(){
 		
 	}
@@ -69,6 +78,9 @@ public class DefaultTreeFactory implements TreeFactory {
 	}
 	
 	
+	/**
+	 * 
+	 */
 	private static List<Tree> datas = new ArrayList<Tree>();
 	static{
 		/*

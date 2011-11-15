@@ -3,7 +3,6 @@ package org.svnadmin.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.svnadmin.Constants;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.service.PjGrUsrService;
 import org.svnadmin.util.I18N;

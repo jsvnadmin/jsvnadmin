@@ -35,6 +35,7 @@ public class AjaxServlet  extends BaseServlet{
 	/**
 	 * 日志
 	 */
+	@SuppressWarnings("hiding")
 	private static final Log LOG = LogFactory.getLog(AjaxServlet.class);
 	
 	/**
@@ -42,6 +43,9 @@ public class AjaxServlet  extends BaseServlet{
 	 */
 	private static final String DEFAULT_CONTENTTYPE = "text/html; charset=UTF-8";
 	
+	/**
+	 * 后缀
+	 */
 	public static final String AJAX = ".ajax";
 
     @Override

@@ -28,6 +28,9 @@ public class I18n implements Serializable {
 	 */
 	private String lbl;
 	
+	/**
+	 * ID对应的语言总数
+	 */
 	private int total;
 	/**
 	 * @return 语言
@@ -65,9 +68,15 @@ public class I18n implements Serializable {
 	public void setLbl(String lbl) {
 		this.lbl = lbl;
 	}
+	/**
+	 * @return ID对应的语言总数
+	 */
 	public int getTotal() {
 		return total;
 	}
+	/**
+	 * @param total ID对应的语言总数
+	 */
 	public void setTotal(int total) {
 		this.total = total;
 	}

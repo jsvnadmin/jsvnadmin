@@ -8,8 +8,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.tree.entity.Tree;
 
+/**
+ * 抽象树服务层
+ * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
+ * @since 3.0.2
+ * 
+ */
 public abstract class AbstractTreeService implements TreeService {
 
+	/**
+	 * 日志
+	 */
 	private static final Log LOG = LogFactory.getLog(AbstractTreeService.class);
 
 	public String getHTML(Map<String, Object> parameters) {
@@ -51,6 +60,11 @@ public abstract class AbstractTreeService implements TreeService {
 		}
 	}
 
+	/**
+	 * @param treeHtml html
+	 * @param tree 树
+	 * @param parameters 参数
+	 */
 	protected void parseTree(StringBuffer treeHtml, Tree tree,
 			Map<String, Object> parameters) {
 		StringBuffer html;
