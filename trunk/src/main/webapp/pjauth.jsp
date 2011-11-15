@@ -122,11 +122,10 @@ function checkForm(f){
 					<%}}%>
 				</select>
 			<td align="right">
-				<input id="group_add" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.add","添加选中>")%>"  style="width:100;"><br>
-				<input id="group_add_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.add_all","添加全部>>") %>"  style="width:100;"><br><br>
-				<input id="group_del" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.del","<删除选中")%>"  style="width:100;"><br>
-				<input id="group_del_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.del_all","<<删除全部")%>"  style="width:100;"><br><br>
-				<%=I18N.getLbl(request,"pj_gr.gr.selected","已选中组") %>
+				<input id="group_add" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.add",">")%>"  style="width:100;"><br>
+				<input id="group_add_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.add_all",">>") %>"  style="width:100;"><br><br>
+				<input id="group_del" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.del","<")%>"  style="width:100;"><br>
+				<input id="group_del_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.del_all","<<")%>"  style="width:100;"><br><br>
 			</td>
 			<td>
 				<select id="select4" name="grs" multiple="multiple" style="width: 100px;height:160px;">
@@ -147,11 +146,10 @@ function checkForm(f){
 			</select>
 			</td>
 			<td align="right">
-				<input id="user_add" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.add","添加选中>") %>"  style="width:100;"><br>
-				<input id="user_add_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.addall","添加全部>>") %>"  style="width:100;"><br><br>
-				<input id="user_del" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.del","<删除选中  ") %>"  style="width:100;"><br>
-				<input id="user_del_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.del_all","<<删除全部")%>"  style="width:100;"><br><br>
-				<%=I18N.getLbl(request,"usr.usr.selected","已选中用户") %>
+				<input id="user_add" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.add",">") %>"  style="width:100;"><br>
+				<input id="user_add_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.addall",">>") %>"  style="width:100;"><br><br>
+				<input id="user_del" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.del","<") %>"  style="width:100;"><br>
+				<input id="user_del_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.del_all","<<")%>"  style="width:100;"><br><br>
 			</td>
 			<td>
 			<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;">
