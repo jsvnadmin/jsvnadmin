@@ -1,0 +1,19 @@
+table {
+	border-collapse:collapse;
+	border:solid #999;
+	border-width:1px 0 0 1px;
+}
+table caption {font-size:14px;font-weight:bolder;}
+table th,table td {
+	border:solid #999;
+	border-width:0 1px 1px 0;
+	padding:2px;
+	word-break : keep-all;
+	white-space:nowrap;
+}
+tfoot td {text-align:center;background: #ECF20F;}
+thead td {text-align:center;background: #ECF20F;}
+
+tr.odd{background: #ECFCCC;}
+tr.even{background: #FFFFFF;}
+tr.over{background: #ECF2AF;}

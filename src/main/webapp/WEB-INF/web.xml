@@ -135,4 +135,13 @@
 		<servlet-name>i18nadd</servlet-name>
 		<url-pattern>/i18nadd</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<display-name>rep</display-name>
+		<servlet-name>rep</servlet-name>
+		<servlet-class>org.svnadmin.servlet.RepositoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>rep</servlet-name>
+		<url-pattern>/rep</url-pattern>
+	</servlet-mapping>
 </web-app>

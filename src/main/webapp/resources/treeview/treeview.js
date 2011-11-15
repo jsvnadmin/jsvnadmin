@@ -6,7 +6,8 @@ var AjaxTreeView={
 			url:"ajaxTreeService.ajax",//ajax load url
 			attrs:["treeId","treeParentId"]
 		},
-		toggle:function(o){//li
+		
+		open:function(o){//li
 			var $o=$(o),c="expandable",b=$o.hasClass(c),$div=$o.children("div").first();
 			if(b){//open
 				var isl=!o.loading && !o.loaded && ($o.attr("treeId")!=null||$o.attr("treeParentId")!=null);
@@ -23,7 +24,11 @@ var AjaxTreeView={
 					$o.removeClass("lastExpandable");
 					$o.addClass("lastCollapsable");
 				}
-			}else{//close
+			}
+		},
+		close:function(o){//li
+			var $o=$(o),c="expandable",b=$o.hasClass(c),$div=$o.children("div").first();
+			if(!b){//close
 				$div.removeClass("collapsable-hitarea");
 				$o.removeClass("collapsable");
 				
@@ -33,6 +38,14 @@ var AjaxTreeView={
 					$o.removeClass("lastCollapsable");
 					$o.addClass("lastExpandable");
 				}
+			}
+		},
+		toggle:function(o){//li
+			var $o=$(o),c="expandable",b=$o.hasClass(c);
+			if(b){//open
+				AjaxTreeView.open(o);
+			}else{//close
+				AjaxTreeView.close(o);
 			}
 			
 			if(typeof(AjaxTreeView.config.ontoggle)=="function"){//call ontoggle
