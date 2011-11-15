@@ -28,7 +28,7 @@ try{
 	<title><%=I18N.getLbl(request, "login.title", "SVN ADMIN 登录")%></title>
 	<script type="text/javascript">
 	window.onload=function(){
-		document.forms[0].usr.focus();
+		document.getElementById("usr").focus();
 	}
 	</script>
 </head>
@@ -58,11 +58,11 @@ if(usrCount == 0){
 		
 			<tr>
 				<td align="right"><%=I18N.getLbl(request,"usr.usr","帐号") %></td>
-				<td><input type="text" name="usr" value="<%=request.getParameter("usr")==null?"":request.getParameter("usr")%>"></td>
+				<td><input type="text" id="usr" name="usr" value="<%=request.getParameter("usr")==null?"":request.getParameter("usr")%>"></td>
 			</tr>
 			<tr>
 				<td align="right"><%=I18N.getLbl(request,"usr.psw","密码") %></td>
-				<td><input type="password" name="psw" value="<%=request.getParameter("psw")==null?"":request.getParameter("psw")%>"></td>
+				<td><input type="password" id="psw" name="psw" value="<%=request.getParameter("psw")==null?"":request.getParameter("psw")%>"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="<%=I18N.getLbl(request,"login.btn.login","登录") %>"></td>
