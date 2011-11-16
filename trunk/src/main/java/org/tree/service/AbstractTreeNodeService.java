@@ -37,9 +37,9 @@ public abstract class AbstractTreeNodeService implements TreeNodeService {
 				}
 			} else {// 父节点
 				if(i == nodes.size() -1){//last
-					this.prepareAttribute(html, "class","expandable lastExpandable");
+					this.prepareAttribute(html, "class","closed lastclosed");
 				}else{
-					this.prepareAttribute(html, "class","expandable");
+					this.prepareAttribute(html, "class","closed");
 				}
 				this.prepareAttribute(html, TreeService.TREE_PARENTID_VAR,tree.getId());
 			}
@@ -83,9 +83,9 @@ public abstract class AbstractTreeNodeService implements TreeNodeService {
 				html.append("<span class='file'>");
 			}else{
 				if(i == nodes.size() -1){//last folder
-					html.append("<div class='hitarea expandable-hitarea lastExpandable-hitarea' onclick='$att(this);'></div>");
+					html.append("<div class='hit closed-hit lastclosed-hit' onclick='$att(this);'></div>");
 				}else{
-					html.append("<div class='hitarea expandable-hitarea' onclick='$att(this);'></div>");
+					html.append("<div class='hit closed-hit' onclick='$att(this);'></div>");
 				}
 				html.append("<span class='folder' onclick='$att(this);'>");
 			}

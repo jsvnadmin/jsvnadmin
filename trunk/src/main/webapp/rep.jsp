@@ -55,8 +55,8 @@ function freshTree(){
 			<input type="text" style="width:250px;" id="path" value="<%=request.getAttribute("path")%>"><input onclick="freshTree();" type="button" value="<%=I18N.getLbl(request, "rep.btn.go", "刷新")%>">
 			<div class="filetree treeview" style="width:300px;height:500px;overflow: auto;">
 				<ul>
-					<li id="svnroot" class="expandable lastExpandable" treeId="rep" param="pj=<%=request.getParameter("pj")%>&path=<%=request.getAttribute("path")%>">
-						<div class="hitarea expandable-hitarea lastExpandable-hitarea" onclick='$att(this);'></div>
+					<li id="svnroot" class="closed lastclosed" treeId="rep" param="pj=<%=request.getParameter("pj")%>&path=<%=request.getAttribute("path")%>">
+						<div class="hit closed-hit lastclosed-hit" onclick='$att(this);'></div>
 						<span class="folder" onclick='$att(this);'>
 						<a id="rootlink" href='javascript:void(0);' onclick='$atc(this)'><%=request.getAttribute("root")+""+request.getAttribute("path")%></a>
 						</span>
