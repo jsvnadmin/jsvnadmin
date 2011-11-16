@@ -8,40 +8,50 @@ var AjaxTreeView={
 		},
 		
 		open:function(o){//li
-			var $o=$(o),b=$o.hasClass("expandable"),$div=$o.children("div").first();
+			var $o=$(o),b=$o.hasClass("closed"),$div=$o.children("div").first();
 			if(b){//open
 				var isl=!o.loading && !o.loaded && ($o.attr("treeId")!=null||$o.attr("treeParentId")!=null);
 				if(isl){
 					o.loading=true;
 					AjaxTreeView.load(o);
 				}
-				$div.removeClass("expandable-hitarea");
-				$o.removeClass("expandable");
+				$div.removeClass("closed-hit");
+				$o.removeClass("closed");
 				
-				$div.addClass("collapsable-hitarea");
-				$o.addClass("collapsable");
-				if($o.hasClass("lastExpandable")){
-					$o.removeClass("lastExpandable");
-					$o.addClass("lastCollapsable");
+				$div.addClass("open-hit");
+				$o.addClass("open");
+				//last?
+				if($o.hasClass("lastclosed")){
+					$o.removeClass("lastclosed");
+					$o.addClass("lastopen");
+				}
+				if($div.hasClass("lastclosed-hit")){
+					$div.removeClass("lastclosed-hit");
+					$div.addClass("lastopen-hit");
 				}
 			}
 		},
 		close:function(o){//li
-			var $o=$(o),b=$o.hasClass("collapsable"),$div=$o.children("div").first();
+			var $o=$(o),b=$o.hasClass("open"),$div=$o.children("div").first();
 			if(b){//close
-				$div.removeClass("collapsable-hitarea");
-				$o.removeClass("collapsable");
+				$div.removeClass("open-hit");
+				$o.removeClass("open");
 				
-				$div.addClass("expandable-hitarea");
-				$o.addClass("expandable");
-				if($o.hasClass("lastCollapsable")){
-					$o.removeClass("lastCollapsable");
-					$o.addClass("lastExpandable");
+				$div.addClass("closed-hit");
+				$o.addClass("closed");
+				//last?
+				if($o.hasClass("lastopen")){
+					$o.removeClass("lastopen");
+					$o.addClass("lastclosed");
+				}
+				if($div.hasClass("lastopen-hit")){
+					$div.removeClass("lastopen-hit");
+					$div.addClass("lastclosed-hit");
 				}
 			}
 		},
 		toggle:function(o){//li
-			var $o=$(o),c="expandable",b=$o.hasClass(c);
+			var $o=$(o),c="closed",b=$o.hasClass(c);
 			if(b){//open
 				AjaxTreeView.open(o);
 			}else{//close
