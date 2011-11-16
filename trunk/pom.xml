@@ -21,7 +21,6 @@
 		<commons-logging.version>1.1.1</commons-logging.version>
 		<log4j.version>1.2.16</log4j.version>
 		<servlet.version>2.5</servlet.version>
-		<servlet.jsp.version>2.1</servlet.jsp.version>
 
 		<!-- jdbc -->
 		<jdbc.mysql.version>5.1.14</jdbc.mysql.version>
@@ -39,12 +38,6 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>${servlet.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>${servlet.jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
