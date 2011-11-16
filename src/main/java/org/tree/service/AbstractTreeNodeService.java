@@ -41,7 +41,6 @@ public abstract class AbstractTreeNodeService implements TreeNodeService {
 				}else{
 					this.prepareAttribute(html, "class","expandable");
 				}
-				this.prepareAttribute(html, TreeService.TREE_ID_VAR,tree.getParentId());
 				this.prepareAttribute(html, TreeService.TREE_PARENTID_VAR,tree.getId());
 			}
 

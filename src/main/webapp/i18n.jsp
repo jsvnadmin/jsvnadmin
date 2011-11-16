@@ -21,7 +21,7 @@ function checkForm(f){
 	return true;
 }
 </script>
-<table style="width:100%;">
+<table style="width:100%;" class="thinborder">
 	<tr>
 		<td style="width:20%;">
 			<%
@@ -36,7 +36,7 @@ function checkForm(f){
 		<td valign="top">
 			<form name="i18n" action="<%=ctx%>/i18n" method="post" onsubmit="return checkForm(this);">
 				<input type="hidden" name="act" value="save">
-				<table>
+				<table class="thinborder">
 					<tr>
 						<td align="right"><%=I18N.getLbl(request, "i18n.id", "键值")%></td>
 						<td style="width:100%;">

@@ -25,7 +25,7 @@ AjaxTreeView.config.onclick=function(o,a){
 	}
 };
 $(document).ready(function (){
-	AjaxTreeView.toggle(document.getElementById("svnroot"));
+	AjaxTreeView.open(document.getElementById("svnroot"));
 });
 function freshTree(){
 	var $p = $("#path");
@@ -39,6 +39,7 @@ function freshTree(){
 	}
 	var $r = $("#svnroot");
 	$r.children("ul").first().remove();
+	$("#rootlink").text("<%=request.getAttribute("root")%>"+p);
 	AjaxTreeView.close($r[0]);
 	$r.attr("param","pj=<%=request.getParameter("pj")%>&path="+p);
 	$r[0].loading = false;
@@ -48,16 +49,16 @@ function freshTree(){
 //-->
 </script>
 
-<table style="width:100%;height:80%;">
+<table style="width:100%;height:80%;" class="thinborder">
 	<tr>
 		<td valign="top" style="width:300px;">
-			<input type="text" id="path" value="<%=request.getAttribute("path")%>"><input onclick="freshTree();" type="button" value="<%=I18N.getLbl(request, "rep.btn.go", "刷新")%>">
-			<div class="tree filetree treeview" style="width:300px;height:500px;overflow: auto;">
+			<input type="text" style="width:250px;" id="path" value="<%=request.getAttribute("path")%>"><input onclick="freshTree();" type="button" value="<%=I18N.getLbl(request, "rep.btn.go", "刷新")%>">
+			<div class="filetree treeview" style="width:300px;height:500px;overflow: auto;">
 				<ul>
 					<li id="svnroot" class="expandable lastExpandable" treeId="rep" param="pj=<%=request.getParameter("pj")%>&path=<%=request.getAttribute("path")%>">
-						<div class="hitarea expandable-hitarea lastExpandable-hitarea" onclick='$att(this.parentNode);'></div>
-						<span class="folder" onclick='$att(this.parentNode);'>
-						<a href='javascript:void(0);' onclick='$atc(this)'><%=request.getAttribute("root")%></a>
+						<div class="hitarea expandable-hitarea lastExpandable-hitarea" onclick='$att(this);'></div>
+						<span class="folder" onclick='$att(this);'>
+						<a id="rootlink" href='javascript:void(0);' onclick='$atc(this)'><%=request.getAttribute("root")+""+request.getAttribute("path")%></a>
 						</span>
 					</li>
 				</ul>
@@ -65,7 +66,7 @@ function freshTree(){
 
 		</td>
 		<td valign="top">
-			<iframe height="100%" width="100%" style="border:0px;" name="pjauthWindow" src="<%=ctx%>/pjauth?pj=<%=request.getParameter("pj")%>&path=<%=request.getAttribute("path")%>"></iframe>
+			<iframe height="100%" width="100%" style="border:0px;" frameBorder="0" name="pjauthWindow" src="<%=ctx%>/pjauth?pj=<%=request.getParameter("pj")%>&path=<%=request.getAttribute("path")%>"></iframe>
 		</td>
 	</tr>
 </table>

@@ -38,7 +38,7 @@ function checkForm(f){
 
 <form name="pjusr" action="<%=ctx%>/pjusr" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
-	<table>
+	<table class="thinborder">
 		<tr>
 			<td align="right"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td><input type="hidden" name="pj" value="<%=request.getParameter("pj")%>"><%=request.getParameter("pj")%></td>
@@ -78,7 +78,7 @@ function checkForm(f){
 </form>
 
 <%if(hasManagerRight){ %>
-<table class="sortable">
+<table class="sortable thinborder">
 
 	<thead>
 		<td>NO.</td>

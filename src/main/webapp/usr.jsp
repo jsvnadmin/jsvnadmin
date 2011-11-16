@@ -28,7 +28,7 @@ function checkForm(f){
 </script>
 <form name="usr" action="<%=ctx%>/usr" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
-	<table>
+	<table class="thinborder">
 		<tr>
 			<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td>
@@ -66,7 +66,7 @@ function checkForm(f){
 
 <%if(hasAdminRight){ %>
 
-<table class="sortable">
+<table class="sortable thinborder">
 
 	<thead>
 		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>

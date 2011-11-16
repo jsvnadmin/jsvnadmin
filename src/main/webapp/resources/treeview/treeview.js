@@ -8,7 +8,7 @@ var AjaxTreeView={
 		},
 		
 		open:function(o){//li
-			var $o=$(o),c="expandable",b=$o.hasClass(c),$div=$o.children("div").first();
+			var $o=$(o),b=$o.hasClass("expandable"),$div=$o.children("div").first();
 			if(b){//open
 				var isl=!o.loading && !o.loaded && ($o.attr("treeId")!=null||$o.attr("treeParentId")!=null);
 				if(isl){
@@ -16,7 +16,7 @@ var AjaxTreeView={
 					AjaxTreeView.load(o);
 				}
 				$div.removeClass("expandable-hitarea");
-				$o.removeClass(c);
+				$o.removeClass("expandable");
 				
 				$div.addClass("collapsable-hitarea");
 				$o.addClass("collapsable");
@@ -27,13 +27,13 @@ var AjaxTreeView={
 			}
 		},
 		close:function(o){//li
-			var $o=$(o),c="expandable",b=$o.hasClass(c),$div=$o.children("div").first();
-			if(!b){//close
+			var $o=$(o),b=$o.hasClass("collapsable"),$div=$o.children("div").first();
+			if(b){//close
 				$div.removeClass("collapsable-hitarea");
 				$o.removeClass("collapsable");
 				
 				$div.addClass("expandable-hitarea");
-				$o.addClass(c);
+				$o.addClass("expandable");
 				if($o.hasClass("lastCollapsable")){
 					$o.removeClass("lastCollapsable");
 					$o.addClass("lastExpandable");

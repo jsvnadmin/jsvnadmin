@@ -46,7 +46,7 @@ function selectLocale(sel){
 	
 <form name="i18nadd" action="<%=ctx%>/i18nadd" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
-	<table>
+	<table class="thinborder">
 		<tr>
 			<td colspan="4">
 				<select onchange="selectLocale(this)">
@@ -82,7 +82,7 @@ function selectLocale(sel){
 	</table>
 </form>
 
-<table class="sortable">
+<table class="sortable thinborder">
 
 	<thead>
 		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
