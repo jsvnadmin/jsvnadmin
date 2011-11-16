@@ -8,7 +8,7 @@ String _ctx_path = request.getContextPath();
 	<head>
 		<script src="<%=_ctx_path%>/resources/jquery-1.7.min.js" type="text/javascript"></script>
 		<script src="<%=_ctx_path%>/resources/sorttable.js"></script>
-		<script src="<%=_ctx_path%>/resources/svn.js"></script>
+		<script src="<%=_ctx_path%>/resources/svnadmin.js"></script>
 		<link rel="stylesheet" href="<%=_ctx_path%>/resources/sorttable.css" />
 	</head>
 	<%-- error message --%>

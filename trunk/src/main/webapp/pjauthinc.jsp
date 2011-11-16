@@ -6,7 +6,14 @@ String _ctx = request.getContextPath();
 org.svnadmin.entity.PjAuth entity = (org.svnadmin.entity.PjAuth)request.getAttribute("entity");
 if(entity==null){
 	entity=new org.svnadmin.entity.PjAuth();
-	entity.setRes(request.getParameter("path"));
+	String path = request.getParameter("path");
+	if(path!=null){
+		if(!path.startsWith("/")){
+			path = "/"+path;
+		}
+		String res = "["+request.getParameter("pj")+":"+path+"]";
+		entity.setRes(res);
+	}
 }
 %>
 <script>
@@ -91,7 +98,7 @@ function checkForm(f){
 <form name="pjauth" action="<%=_ctx%>/pjauth" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
 	<input type="hidden" name="path" value="<%=request.getParameter("path")==null?"":request.getParameter("path")%>">
-	<table>
+	<table class="thinborder">
 		<tr>
 			<td align="right"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td><input type="hidden" name="pj" value="<%=request.getParameter("pj")%>"><%=request.getParameter("pj")%></td>
@@ -114,9 +121,9 @@ function checkForm(f){
 		<tr>
 			<td align="right"><%=I18N.getLbl(request,"pj_gr.gr","用户组") %></td>
 			<td valign="top">
-				<table style="border-width:0px 0 0 0px;">
-					<tr style="border-width:0px 0 0 0px;">
-						<td style="border-width:0px 0 0 0px;">
+				<table>
+					<tr>
+						<td>
 							<select id="select3" multiple="multiple" style="width: 100px;height:160px;">
 								<%
 								java.util.List<org.svnadmin.entity.PjGr> pjgrlist = (java.util.List<org.svnadmin.entity.PjGr>)request.getAttribute("pjgrlist");
@@ -128,13 +135,13 @@ function checkForm(f){
 								<%}}%>
 							</select>
 						</td>
-						<td style="border-width:0px 0 0 0px;">
-							<input id="group_add" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.add",">")%>"><br>
-							<input id="group_add_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.add_all",">>") %>"><br><br>
-							<input id="group_del" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.del","<")%>"><br>
-							<input id="group_del_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.group.del_all","<<")%>"><br><br>
+						<td>
+							<input id="group_add" type="button" style="width:30px;" value=">"><br>
+							<input id="group_add_all" type="button" style="width:30px;" value=">>"><br><br>
+							<input id="group_del" type="button" style="width:30px;" value="<"><br>
+							<input id="group_del_all" type="button" style="width:30px;" value="<<"><br><br>
 						</td>
-						<td style="border-width:0px 0 0 0px;">
+						<td>
 							<select id="select4" name="grs" multiple="multiple" style="width: 100px;height:160px;">
 							</select>
 						</td>
@@ -144,9 +151,9 @@ function checkForm(f){
 			
 			<td align="right"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td valign="top">
-				<table style="border-width:0px 0 0 0px;">
-					<tr style="border-width:0px 0 0 0px;">
-						<td style="border-width:0px 0 0 0px;">
+				<table>
+					<tr>
+						<td>
 							<select id="select1" multiple="multiple" style="width: 100px;height:160px;">
 									<%
 									java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
@@ -158,13 +165,13 @@ function checkForm(f){
 									<%}}%>
 							</select>
 						</td>
-						<td style="border-width:0px 0 0 0px;">
-							<input id="user_add" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.add",">") %>"><br>
-							<input id="user_add_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.addall",">>") %>"><br><br>
-							<input id="user_del" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.del","<") %>"><br>
-							<input id="user_del_all" type="button" value="<%=I18N.getLbl(request,"pjauth.btn.user.del_all","<<")%>"><br><br>
+						<td>
+							<input id="user_add" type="button" style="width:30px;" value=">"><br>
+							<input id="user_add_all" type="button" style="width:30px;" value=">>"><br><br>
+							<input id="user_del" type="button" style="width:30px;" value="<"><br>
+							<input id="user_del_all" type="button" style="width:30px;" value="<<"><br><br>
 						</td>
-						<td style="border-width:0px 0 0 0px;">
+						<td>
 							<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;">
 							</select>
 						</td>
@@ -190,7 +197,7 @@ function checkForm(f){
 	</table>
 </form>
 
-<table class="sortable">
+<table class="sortable thinborder">
 
 	<thead>
 		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>

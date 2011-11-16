@@ -23,24 +23,16 @@ public abstract class AbstractTreeService implements TreeService {
 
 	public String getHTML(Map<String, Object> parameters) {
 		try {
-			String id = (String) parameters.get(TREE_ID_VAR);
+			String treeId = (String) parameters.get(TREE_ID_VAR);
 			String parentId = (String) parameters.get(TREE_PARENTID_VAR);
 
-			if (StringUtils.isBlank(id) && StringUtils.isBlank(parentId)) {
+			if (StringUtils.isBlank(treeId) && StringUtils.isBlank(parentId)) {
 				return null;
 			}
 
 			StringBuffer html = new StringBuffer();
 
-			if (StringUtils.isNotBlank(id)) {
-				// 说明是第一层
-				Tree tree = getTreeFactory().find(id);
-				if (tree == null) {
-					LOG.info("not found tree. id = " + id);
-					return null;
-				}
-				parseTree(html, tree, parameters);
-			} else if (StringUtils.isNotBlank(parentId)) {
+			if (StringUtils.isNotBlank(parentId)) {
 				// 找出所有的子树
 				List<Tree> treeList = getTreeFactory().findChildren(parentId);
 				for (Tree tree : treeList) {
@@ -49,6 +41,14 @@ public abstract class AbstractTreeService implements TreeService {
 					}
 					parseTree(html, tree, parameters);
 				}
+			} else if (StringUtils.isNotBlank(treeId)) {
+				// 说明是第一层
+				Tree tree = getTreeFactory().find(treeId);
+				if (tree == null) {
+					LOG.info("not found tree. id = " + treeId);
+					return null;
+				}
+				parseTree(html, tree, parameters);
 			}
 			return html.toString();
 

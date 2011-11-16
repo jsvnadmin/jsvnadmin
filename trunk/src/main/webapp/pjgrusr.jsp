@@ -48,35 +48,37 @@ function checkForm(f){
 	<input type="hidden" name="act" value="save">
 	<input type="hidden" name="pj" value="<%=request.getParameter("pj")%>">
 	<input type="hidden" name="gr" value="<%=request.getParameter("gr")%>">
-	<table>
+	
+	<table class="thinborder">
 	<tr>
-	<td><%=I18N.getLbl(request,"pjgrusr.added.lbl","已添加用户") %></td>
-	<td><%=I18N.getLbl(request,"pjgrusr.add.lbl","待添加用户") %>
-</td>
-	</tr>
-	<tr>
-	<td>
-	<select multiple="multiple" id="select1" style="width:100px;height:160px;">
-	<%
-		java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
-		if(usrlist!=null){	
-		for(int i = 0;i<usrlist.size();i++){
-			org.svnadmin.entity.Usr usr = usrlist.get(i);
-		%>
-		<option value="<%=usr.getUsr()%>"><%=usr.getUsr()%></option>
-		<%}}%>
-		</select>
-	</td>
-	<td>
-	<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;">
-	</select>
-	</td>
+		<td>
+			<select multiple="multiple" id="select1" style="width:100px;height:160px;">
+			<%
+				java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
+				if(usrlist!=null){	
+				for(int i = 0;i<usrlist.size();i++){
+					org.svnadmin.entity.Usr usr = usrlist.get(i);
+				%>
+				<option value="<%=usr.getUsr()%>"><%=usr.getUsr()%></option>
+				<%}}%>
+				</select>
+		</td>
+		<td>
+			<input id="add" type="button" value=">" style="width:30px;"><br>
+			<input id="add_all" type="button" value=">>" style="width:30px;"><br><br>
+			<input id="remove" type="button" value="<" style="width:30px;"><br>
+			<input id="remove_all" type="button" value="<<" style="width:30px;"><br><br>
+			
+		</td>
+		<td>
+			<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;"></select>
+		</td>
 	</tr>	
 	</table>
 	<input type="submit" value="<%=I18N.getLbl(request,"pjgrusr.op.submit","增加用户") %>">
 </form>
 
-<table class="sortable">
+<table class="sortable thinborder">
 	<thead>
 		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
 		<td><%=I18N.getLbl(request,"pj.pj","项目") %></td>

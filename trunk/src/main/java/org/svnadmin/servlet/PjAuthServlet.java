@@ -95,7 +95,7 @@ public class PjAuthServlet extends PjBaseServlet {
 		if(StringUtils.isBlank(request.getParameter("path"))){
 			request.getRequestDispatcher("pjauth.jsp").forward(request, response);
 		}else{
-			request.getRequestDispatcher("pjauthpath.jsp").forward(request, response);
+			request.getRequestDispatcher("pjauthrep.jsp").forward(request, response);
 		}
 	}
 

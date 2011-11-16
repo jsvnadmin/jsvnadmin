@@ -3,6 +3,9 @@
  */
 package org.svnadmin.service;
 
+import java.io.File;
+import java.util.Collection;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
@@ -18,7 +21,9 @@ import org.svnadmin.util.EncryptUtil;
 import org.svnadmin.util.I18N;
 import org.svnadmin.util.UsrProvider;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
+import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNProperties;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
@@ -26,6 +31,7 @@ import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 /**
@@ -126,6 +132,58 @@ public class RepositoryService{
 			if(repository != null){
 				repository.closeSession();
 			}
+		}
+	}
+	
+	
+	/**
+	 * 获取项目指定路径的svn仓库文件系统
+	 * @param pj 项目
+	 * @param path 相对仓库根目录的路径
+	 * @return 目录或文件系统
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Collection<SVNDirEntry> getDir(String pj,String path){
+		if(StringUtils.isBlank(path)){
+			path = "/";//root
+		}
+		if(!path.startsWith("/")){
+			path = "/"+path;
+		}
+		SVNRepository repository = null;
+		try {
+			repository = this.getRepository(pj);
+			SVNProperties properties = new SVNProperties();
+	    	return repository.getDir(path, SVNRevision.HEAD.getNumber(), properties, (Collection) null);
+    	}catch(SVNAuthenticationException e){
+    		LOG.error(e.getMessage());
+			throw new RuntimeException(I18N.getLbl("svn.auth.error", "认证失败"));
+    	}catch (SVNException e) {
+    		LOG.error(e.getMessage());
+    		throw new RuntimeException(e.getMessage());
+		}finally{
+			if(repository!=null){
+				repository.closeSession();
+			}
+		}
+	}
+
+	/**
+     * Creates a local blank FSFS-type repository.
+     * A call to this routine is equivalent to 
+     * <code>createLocalRepository(path, null, enableRevisionProperties, force)</code>.
+     * 
+     * @param  respository                          a repository root location
+     * @return                               a local URL (file:///) of a newly
+     *                                       created repository
+     */
+	public static SVNURL createLocalRepository(File respository){
+		try {
+			return SVNRepositoryFactory.createLocalRepository(respository, true,
+					false);
+		} catch (SVNException e) {
+			throw new RuntimeException(I18N.getLbl("pj.save.error.createRepository","创建仓库失败.{0}",new Object[]{respository.getAbsolutePath()}) 
+			+ " : "+ e.getMessage());
 		}
 	}
 	

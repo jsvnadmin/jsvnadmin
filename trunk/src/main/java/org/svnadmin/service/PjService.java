@@ -17,8 +17,6 @@ import org.svnadmin.dao.PjUsrDao;
 import org.svnadmin.entity.Pj;
 import org.svnadmin.entity.PjGr;
 import org.svnadmin.util.I18N;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 
 /**
  * 项目服务层
@@ -150,13 +148,7 @@ public class PjService {
 		// 创建仓库
 		File respository = new File(pj.getPath());
 		if (!respository.exists() || !respository.isDirectory()) {// 不存在仓库
-			try {
-				SVNRepositoryFactory.createLocalRepository(respository, true,
-						false);
-			} catch (SVNException e) {
-				throw new RuntimeException(I18N.getLbl("pj.save.error.createRepository","创建仓库失败.{0}",new Object[]{pj.getPath()}) 
-				+ " : "+ e.getMessage());
-			}
+			RepositoryService.createLocalRepository(respository);
 		}
 		// 增加默认的组
 		if (insert) {

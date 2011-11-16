@@ -37,7 +37,7 @@ function checkForm(f){
 </script>
 <form name="pj" action="<%=ctx%>/pj" method="post" onsubmit="return checkForm(this);">
 	<input type="hidden" name="act" value="save">
-	<table>
+	<table class="thinborder">
 		<tr>
 			<td align="right"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td>
@@ -81,7 +81,7 @@ function checkForm(f){
 <%}%>
 
 
-<table class="sortable">
+<table class="sortable thinborder">
 
 	<thead>
 		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
