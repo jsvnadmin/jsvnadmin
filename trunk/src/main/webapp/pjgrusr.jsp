@@ -52,7 +52,7 @@ function checkForm(f){
 	<table class="thinborder">
 	<tr>
 		<td>
-			<select multiple="multiple" id="select1" style="width:100px;height:160px;">
+			<select multiple="multiple" id="select1" style="height:160px;">
 			<%
 				java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
 				if(usrlist!=null){	
@@ -71,7 +71,7 @@ function checkForm(f){
 			
 		</td>
 		<td>
-			<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;"></select>
+			<select id="select2" name="usrs" multiple="multiple" style="height:160px;"></select>
 		</td>
 	</tr>	
 	</table>
