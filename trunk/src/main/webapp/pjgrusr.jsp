@@ -49,10 +49,10 @@ function checkForm(f){
 	<input type="hidden" name="pj" value="<%=request.getParameter("pj")%>">
 	<input type="hidden" name="gr" value="<%=request.getParameter("gr")%>">
 	
-	<table class="thinborder">
+	<table>
 	<tr>
 		<td>
-			<select multiple="multiple" id="select1" style="height:160px;">
+			<select multiple="multiple" id="select1" style="height: 150px;width: 180px;">
 			<%
 				java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
 				if(usrlist!=null){	
@@ -71,11 +71,15 @@ function checkForm(f){
 			
 		</td>
 		<td>
-			<select id="select2" name="usrs" multiple="multiple" style="height:160px;"></select>
+			<select id="select2" name="usrs" multiple="multiple" style="height: 150px;width: 180px;"></select>
 		</td>
-	</tr>	
+	</tr>
+	<tr>
+		<td colspan="3" align="center">
+			<input type="submit" value="<%=I18N.getLbl(request,"pjgrusr.op.submit","增加用户") %>">
+		</td>
+	</tr>
 	</table>
-	<input type="submit" value="<%=I18N.getLbl(request,"pjgrusr.op.submit","增加用户") %>">
 </form>
 
 <table class="sortable thinborder">

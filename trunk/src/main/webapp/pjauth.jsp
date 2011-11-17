@@ -130,8 +130,8 @@ String ctx = request.getContextPath();
 			<td valign="top">
 				<table>
 					<tr>
-						<td>
-							<select id="select3" multiple="multiple" style="height:160px;">
+						<td style="border:0px;">
+							<select id="select3" multiple="multiple" style="height: 150px;width: 180px;">
 								<%
 								java.util.List<org.svnadmin.entity.PjGr> pjgrlist = (java.util.List<org.svnadmin.entity.PjGr>)request.getAttribute("pjgrlist");
 								if(pjgrlist!=null){	
@@ -142,14 +142,14 @@ String ctx = request.getContextPath();
 								<%}}%>
 							</select>
 						</td>
-						<td>
+						<td style="border:0px;">
 							<input id="group_add" type="button" style="width:30px;" value=">"><br>
 							<input id="group_add_all" type="button" style="width:30px;" value=">>"><br><br>
 							<input id="group_del" type="button" style="width:30px;" value="<"><br>
 							<input id="group_del_all" type="button" style="width:30px;" value="<<"><br><br>
 						</td>
-						<td>
-							<select id="select4" name="grs" multiple="multiple" style="height:160px;">
+						<td style="border:0px;">
+							<select id="select4" name="grs" multiple="multiple" style="height: 150px;width: 180px;">
 							</select>
 						</td>
 					</tr>
@@ -160,8 +160,8 @@ String ctx = request.getContextPath();
 			<td valign="top">
 				<table>
 					<tr>
-						<td>
-							<select id="select1" multiple="multiple" style="width: 100px;height:160px;">
+						<td style="border:0px;">
+							<select id="select1" multiple="multiple" style="height: 150px;width: 180px;">
 									<%
 									java.util.List<org.svnadmin.entity.Usr> usrlist = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("usrList");
 									if(usrlist!=null){	
@@ -172,14 +172,14 @@ String ctx = request.getContextPath();
 									<%}}%>
 							</select>
 						</td>
-						<td>
+						<td style="border:0px;">
 							<input id="user_add" type="button" style="width:30px;" value=">"><br>
 							<input id="user_add_all" type="button" style="width:30px;" value=">>"><br><br>
 							<input id="user_del" type="button" style="width:30px;" value="<"><br>
 							<input id="user_del_all" type="button" style="width:30px;" value="<<"><br><br>
 						</td>
-						<td>
-							<select id="select2" name="usrs" multiple="multiple" style="width: 100px;height:160px;">
+						<td style="border:0px;">
+							<select id="select2" name="usrs" multiple="multiple" style="height: 150px;width: 180px;">
 							</select>
 						</td>
 					</tr>
