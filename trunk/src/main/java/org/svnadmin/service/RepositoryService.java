@@ -78,6 +78,33 @@ public class RepositoryService{
 		}
 		return this.getRepository(pj);
 	}
+	
+	/**
+	 * 从项目的url中获取svn的url
+	 * @param url 项目url
+	 * @return svn url
+	 */
+	public String parseURL(String url){
+		if(StringUtils.isBlank(url)){
+			return null;
+		}
+		String result = url.trim().toLowerCase();//去空格
+		result = StringUtils.replace(result, "\t", " ");
+		result = StringUtils.replace(result, "\r", " ");
+		result = StringUtils.replace(result, "\n", " ");
+		result = StringUtils.replace(result, "\b", " ");
+		result = StringUtils.replace(result, "<", " ");//eg. <br/>
+		result = StringUtils.replace(result, "(", " ");//eg. ()
+		
+		result = result.trim();
+		int blank = result.indexOf(" ");
+		if(blank != -1){
+			result = result.substring(0, blank);
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * 获取svn仓库
 	 * @param pj 项目
@@ -88,7 +115,7 @@ public class RepositoryService{
 		
 		Usr usr = UsrProvider.getCurrentUsr();
 		
-		String svnUrl = pj.getUrl();
+		String svnUrl = this.parseURL(pj.getUrl());
 		if(StringUtils.isBlank(svnUrl)){
 			throw new RuntimeException(I18N.getLbl("pj.error.url", "URL不可以为空"));
 		}
