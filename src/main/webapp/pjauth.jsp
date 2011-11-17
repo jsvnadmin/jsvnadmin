@@ -131,7 +131,7 @@ String ctx = request.getContextPath();
 				<table>
 					<tr>
 						<td>
-							<select id="select3" multiple="multiple" style="width: 100px;height:160px;">
+							<select id="select3" multiple="multiple" style="height:160px;">
 								<%
 								java.util.List<org.svnadmin.entity.PjGr> pjgrlist = (java.util.List<org.svnadmin.entity.PjGr>)request.getAttribute("pjgrlist");
 								if(pjgrlist!=null){	
@@ -149,7 +149,7 @@ String ctx = request.getContextPath();
 							<input id="group_del_all" type="button" style="width:30px;" value="<<"><br><br>
 						</td>
 						<td>
-							<select id="select4" name="grs" multiple="multiple" style="width: 100px;height:160px;">
+							<select id="select4" name="grs" multiple="multiple" style="height:160px;">
 							</select>
 						</td>
 					</tr>
