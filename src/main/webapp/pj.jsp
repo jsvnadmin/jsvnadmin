@@ -111,7 +111,11 @@ function checkForm(f){
 			<%if(hasAdminRight || pj.isManager()){%><%=pj.getPath() %><%}else{%>&nbsp;<%}%>
 		</td>
 		<td title="<%=pj.getPj() %>">
-			<a href="<%=ctx%>/rep?pj=<%=pj.getPj()%>"><%=pj.getUrl() %></a>
+			<%if(hasAdminRight || pj.isManager()){%>
+				<a href="<%=ctx%>/rep?pj=<%=pj.getPj()%>"><%=pj.getUrl() %></a>
+			<%}else{%>
+				<%=pj.getUrl() %>
+			<%}%>
 		</td>
 		<td title="<%=pj.getPj() %>"><%=pj.getType()%></td>
 		<td title="<%=pj.getPj() %>"><%=pj.getDes() %></td>
@@ -124,7 +128,7 @@ function checkForm(f){
 			<a href="<%=ctx%>/pjgr?pj=<%=pj.getPj()%>"><%=I18N.getLbl(request,"pj.op.setgr","设置用户组") %></a>
 		</td>
 		<td title="<%=pj.getPj() %>">
-		<a href="<%=ctx%>/pjauth?pj=<%=pj.getPj()%>"><%=I18N.getLbl(request,"pj.op.setauth","设置权限") %></a>
+		<a href="<%=ctx%>/rep?pj=<%=pj.getPj()%>"><%=I18N.getLbl(request,"pj.op.setauth","设置权限") %></a>
 		</td>
 		
 		

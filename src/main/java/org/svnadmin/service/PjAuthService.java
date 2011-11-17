@@ -57,17 +57,13 @@ public class PjAuthService {
 	/**
 	 * @param pj
 	 *            项目
-	 * @param path 相对路径
+	 * @param res 资源
 	 * @return 项目资源的权限列表
 	 */
-	public List<PjAuth> list(String pj,String path) {
-		if(StringUtils.isBlank(path)){
+	public List<PjAuth> list(String pj,String res) {
+		if(StringUtils.isBlank(res)){
 			return pjAuthDao.getList(pj);
 		}
-		if(!path.startsWith("/")){
-			path = "/"+path;
-		}
-		String res = "["+pj+":"+path+"]";
 		return pjAuthDao.getList(pj,res);
 	}
 

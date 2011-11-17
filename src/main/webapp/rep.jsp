@@ -9,7 +9,8 @@
 <script type="text/javascript">
 <!--
 AjaxTreeView.config.onclick=function(o,a){
-	var p=o.getAttribute("param");if(p==null)p="";
+	var p=o.getAttribute("param");
+	if(p==null)p="";
 	var url="<%=ctx%>/pjauth";
 	if(url!=""){
 	  if(p!=""){
@@ -26,6 +27,12 @@ AjaxTreeView.config.onclick=function(o,a){
 };
 $(document).ready(function (){
 	AjaxTreeView.open(document.getElementById("svnroot"));
+	//回车事件
+	$('#path').bind('keyup', function(event){
+	   if (event.keyCode=="13"){
+		   freshTree();
+	   }
+	});
 });
 function freshTree(){
 	var $p = $("#path");
@@ -66,7 +73,7 @@ function freshTree(){
 
 		</td>
 		<td valign="top">
-			<iframe height="100%" width="100%" style="border:0px;" frameBorder="0" name="pjauthWindow" src="<%=ctx%>/pjauth?pj=<%=request.getParameter("pj")%>&path=<%=request.getAttribute("path")%>"></iframe>
+			<iframe height="100%" width="100%" style="border:0px;" frameBorder="0" name="pjauthWindow" src="<%=ctx%>/pjauth?pj=<%=request.getParameter("pj")%>"></iframe>
 		</td>
 	</tr>
 </table>

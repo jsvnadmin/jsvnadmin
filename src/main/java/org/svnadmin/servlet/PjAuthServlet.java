@@ -70,14 +70,38 @@ public class PjAuthServlet extends PjBaseServlet {
 		String[] usrs = request.getParameterValues("usrs");
 
 		String rw = request.getParameter("rw");
+		PjAuth entity = new PjAuth();
+		entity.setPj(pj);
+		entity.setRes(res);
+		request.setAttribute("entity", entity);
 
 		pjAuthService.save(pj, res, rw, grs, usrs);
-
+		
 	}
 
 	@Override
 	protected void list(HttpServletRequest request, HttpServletResponse response) {
-		List<PjAuth> list = pjAuthService.list(request.getParameter("pj"),request.getParameter("path"));
+		String pj = request.getParameter("pj");
+		String res = request.getParameter("res");
+		if(StringUtils.isBlank(res)){
+			String path = request.getParameter("path");//从rep 树点击进来，传递的是path
+			if(StringUtils.isNotBlank(path)){
+				if(path.startsWith("/")){
+					res = "["+pj+":"+path+"]";
+				}else{
+					res = "["+pj+":/"+path+"]";
+				}
+			}
+		}
+		PjAuth entity = (PjAuth) request.getAttribute("entity");
+		if(entity == null){
+			entity = new PjAuth();
+			entity.setPj(pj);
+			request.setAttribute("entity", entity);
+		}
+		entity.setRes(res);
+		
+		List<PjAuth> list = pjAuthService.list(pj,res);
 		request.setAttribute("list", list);
 	}
 
@@ -92,11 +116,7 @@ public class PjAuthServlet extends PjBaseServlet {
 
 		request.setAttribute("pjreslist",
 				pjAuthService.getResList(request.getParameter("pj")));
-		if(StringUtils.isBlank(request.getParameter("path"))){
-			request.getRequestDispatcher("pjauth.jsp").forward(request, response);
-		}else{
-			request.getRequestDispatcher("pjauthrep.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("pjauth.jsp").forward(request, response);
 	}
 
 }
