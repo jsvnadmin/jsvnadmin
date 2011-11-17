@@ -12,6 +12,7 @@
 		<!--war包是否把classes打包 -->
 		<war.archiveClasses>true</war.archiveClasses>
 
+		<svnkit.version>1.3.5</svnkit.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.8.2</junit.version>
 		<commons-lang.version>2.6</commons-lang.version>
@@ -21,7 +22,7 @@
 		<commons-logging.version>1.1.1</commons-logging.version>
 		<log4j.version>1.2.16</log4j.version>
 		<servlet.version>2.5</servlet.version>
-
+		<servlet.jsp.version>2.1</servlet.jsp.version>
 		<!-- jdbc -->
 		<jdbc.mysql.version>5.1.14</jdbc.mysql.version>
 		<jdbc.oracle.version>10.2.0.3.0</jdbc.oracle.version>
@@ -29,18 +30,24 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.tmatesoft.svnkit</groupId>
-			<artifactId>svnkit</artifactId>
-			<version>1.3.5</version>
-		</dependency>
-		
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${servlet.jsp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.tmatesoft.svnkit</groupId>
+			<artifactId>svnkit</artifactId>
+			<version>${svnkit.version}</version>
+		</dependency>
+		
 		<!-- spring begin -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -181,49 +188,45 @@
 
 	<build>
 		<finalName>${war.name}</finalName>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>2.1.1</version>
-					<configuration>
-						<archiveClasses>${war.archiveClasses}</archiveClasses>
-						<webResources>
-							<resource>
-								<directory>${project.basedir}/src/main/webapp</directory>
-								<filtering>true</filtering>
-								<includes>
-									<include>header.jsp</include>
-								</includes>
-							</resource>
-						</webResources>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.3.2</version>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.5</version>
-					<configuration>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<archiveClasses>${war.archiveClasses}</archiveClasses>
+					<webResources>
+						<resource>
+							<directory>${project.basedir}/src/main/webapp</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>header.jsp</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -238,6 +241,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<charset>${project.build.sourceEncoding}</charset>
+					<docencoding>${project.build.sourceEncoding}</docencoding>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -255,6 +278,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			
 		</plugins>
 
 	</build>
