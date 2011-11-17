@@ -84,7 +84,7 @@ public class RepositoryService{
 	 * @param url 项目url
 	 * @return svn url
 	 */
-	public String parseURL(String url){
+	public static String parseURL(String url){
 		if(StringUtils.isBlank(url)){
 			return null;
 		}
@@ -115,7 +115,7 @@ public class RepositoryService{
 		
 		Usr usr = UsrProvider.getCurrentUsr();
 		
-		String svnUrl = this.parseURL(pj.getUrl());
+		String svnUrl = parseURL(pj.getUrl());
 		if(StringUtils.isBlank(svnUrl)){
 			throw new RuntimeException(I18N.getLbl("pj.error.url", "URL不可以为空"));
 		}
@@ -147,7 +147,7 @@ public class RepositoryService{
 		SVNRepository repository = null;
 		try{
 			repository = this.getRepository(pj);
-			return repository .getRepositoryRoot(true).toString();
+			return repository.getRepositoryRoot(true).toString();
 		}catch(SVNAuthenticationException e){
     		LOG.error(e.getMessage());
     		return null;

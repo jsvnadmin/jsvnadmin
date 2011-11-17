@@ -518,7 +518,8 @@ public class SvnService {
 		// 例如 http://192.168.1.100/svn/projar/trunk
 		if (StringUtils.isNotBlank(pj.getUrl())
 				&& pj.getUrl().indexOf("//") != -1) {
-			location = StringUtils.substringAfter(pj.getUrl(), "//");// 192.168.1.100/svn/projar/trunk
+			String svnUrl =RepositoryService.parseURL(pj.getUrl());
+			location = StringUtils.substringAfter(svnUrl, "//");// 192.168.1.100/svn/projar/trunk
 			location = StringUtils.substringAfter(location, "/");// svn/projar/trunk
 			location = StringUtils.substringBeforeLast(location, "/trunk");// svn/projar
 																			// see:
