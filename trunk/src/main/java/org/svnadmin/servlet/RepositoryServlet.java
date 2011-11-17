@@ -49,16 +49,17 @@ public class RepositoryServlet extends PjBaseServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 		Pj pj = pjService.get(request.getParameter("pj"));
 		String root = repositoryService.getRepositoryRoot(pj);
+		String svnUrl = RepositoryService.parseURL(pj.getUrl());
 		String path = "/";
 		if(root != null){
-			if(pj.getUrl().indexOf(root) != -1){
-				path = StringUtils.substringAfter(pj.getUrl(), root);
+			if(svnUrl.indexOf(root) != -1){
+				path = StringUtils.substringAfter(svnUrl, root);
 				if(!path.startsWith("/")){
 					path = "/"+path;
 				}
 			}
 		}else{
-			root = pj.getUrl();
+			root = svnUrl;
 		}
 		
 		request.setAttribute("root", root);
