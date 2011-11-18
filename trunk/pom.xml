@@ -188,22 +188,29 @@
 
 	<build>
 		<finalName>${war.name}</finalName>
-		<plugins>
+		<resources>
+	      <resource>
+	        <directory>src/main/resources</directory>
+	        <filtering>true</filtering>
+	        <includes>
+	          <include>version.properties</include>
+	        </includes>
+	      </resource>
+	      <resource>
+	        <directory>src/main/resources</directory>
+	        <filtering>false</filtering>
+	        <excludes>
+	          <exclude>version.properties</exclude>
+	        </excludes>
+	      </resource>
+	    </resources>
+   		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
 					<archiveClasses>${war.archiveClasses}</archiveClasses>
-					<webResources>
-						<resource>
-							<directory>${project.basedir}/src/main/webapp</directory>
-							<filtering>true</filtering>
-							<includes>
-								<include>header.jsp</include>
-							</includes>
-						</resource>
-					</webResources>
 				</configuration>
 			</plugin>
 
