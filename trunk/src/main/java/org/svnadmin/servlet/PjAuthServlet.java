@@ -39,9 +39,7 @@ public class PjAuthServlet extends PjBaseServlet {
 	@Override
 	protected void before(HttpServletRequest request,
 			HttpServletResponse response) {
-		if (StringUtils.isBlank(request.getParameter("pj"))) {
-			throw new RuntimeException(I18N.getLbl(request, "sys.error.pj.empty", "不可以直接访问，请从项目的菜单进来这个页面!"));
-		}
+		this.validateAccessPj(request);
 		this.validateManager(request, response);//检查权限
 	}
 

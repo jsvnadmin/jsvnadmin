@@ -12,12 +12,12 @@ String ctx = request.getContextPath();
 Usr _usr = BaseServlet.getUsrFromSession(request);
 %>
 
-<title><%=I18N.getLbl(request,"sys.title","SVN ADMIN")%></title>
+<title><%=I18N.getLbl(request,"main.title","SVN ADMIN")%></title>
 <head>
 
 <%if(_usr == null){%>
 <script>
-	alert("<%=I18N.getLbl(request,"sys.timeout","超时或未登录")%>");	
+	alert("<%=I18N.getLbl(request,"sys.error.timeout","超时或未登录")%>");	
 	top.location="login.jsp";
 </script>
 <%
@@ -36,7 +36,7 @@ return;
 <table width="100%">
 	<tr>
 		<td align="center" style="font-size:20;font-weight:bold;">
-			<%=I18N.getLbl(request,"sys.title","SVN ADMIN")%>
+			<%=I18N.getLbl(request,"main.title","SVN ADMIN")%>
 			<a style="text-decoration:none;" target="_blank" title="56099823@qq.com" href="http://code.google.com/p/jsvnadmin/"><sub style="font-size: 10px;font-weight:normal;">V ${project.version}</sub></a>
 		</td>
 	</tr>
