@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" errorPage="error.jsp"%>
 <%@page import="org.svnadmin.entity.Usr"%>
-<%@page import="org.svnadmin.util.I18N"%>
+<%@page import="org.svnadmin.util.*"%>
 <%@page import="org.svnadmin.servlet.BaseServlet"%>
 <%
 response.setHeader("Cache-Control", "no-cache, post-check=0, pre-check=0");
@@ -37,7 +37,7 @@ return;
 	<tr>
 		<td align="center" style="font-size:20;font-weight:bold;">
 			<%=I18N.getLbl(request,"main.title","SVN ADMIN")%>
-			<a style="text-decoration:none;" target="_blank" title="56099823@qq.com" href="http://code.google.com/p/jsvnadmin/"><sub style="font-size: 10px;font-weight:normal;">V ${project.version}</sub></a>
+			<a style="text-decoration:none;" target="_blank" title="56099823@qq.com" href="http://code.google.com/p/jsvnadmin/"><sub style="font-size: 10px;font-weight:normal;">V <%=SpringUtils.getVersion()%></sub></a>
 		</td>
 	</tr>
 	<tr>
