@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2000                    */
-/* Created on:     2011/11/2 8:57:32                            */
+/* Created on:     2011/11/18 16:12:46                          */
 /*==============================================================*/
 
 
@@ -58,62 +58,6 @@ if exists (select 1
    where r.fkeyid = object_id('pj_usr_auth') and o.name = 'FK_PJ_USR_A_REFERENCE_USR')
 alter table pj_usr_auth
    drop constraint FK_PJ_USR_A_REFERENCE_USR
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('i18n')
-            and   type = 'U')
-   drop table i18n
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('pj')
-            and   type = 'U')
-   drop table pj
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('pj_gr')
-            and   type = 'U')
-   drop table pj_gr
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('pj_gr_auth')
-            and   type = 'U')
-   drop table pj_gr_auth
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('pj_gr_usr')
-            and   type = 'U')
-   drop table pj_gr_usr
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('pj_usr')
-            and   type = 'U')
-   drop table pj_usr
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('pj_usr_auth')
-            and   type = 'U')
-   drop table pj_usr_auth
-go
-
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('usr')
-            and   type = 'U')
-   drop table usr
 go
 
 /*==============================================================*/
