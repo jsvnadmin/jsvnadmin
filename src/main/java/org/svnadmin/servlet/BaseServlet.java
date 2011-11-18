@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.svnadmin.Constants;
 import org.svnadmin.entity.Usr;
@@ -101,7 +102,7 @@ public class BaseServlet extends ServletSupport {
 	 */
 	protected void validate(HttpServletRequest request) {
 		if (!hasLogin(request)) {
-			throw new TimeoutException(I18N.getLbl(request,"sys.timeout","超时或未登录"));
+			throw new TimeoutException(I18N.getLbl(request,"sys.error.timeout","超时或未登录"));
 		}
 	}
 
@@ -380,5 +381,15 @@ public class BaseServlet extends ServletSupport {
 	 */
 	public static boolean hasLogin(HttpServletRequest request){
 		return request.getSession().getAttribute(Constants.SESSION_KEY_USER) != null;
+	}
+	
+	/**
+	 * 验证是否有效访问项目相关的页面。
+	 * @param request 请求
+	 */
+	protected void validateAccessPj(HttpServletRequest request){
+		if (StringUtils.isBlank(request.getParameter("pj"))) {
+			throw new RuntimeException(I18N.getLbl(request, "sys.error.pj.empty", "非法访问"));
+		}
 	}
 }
