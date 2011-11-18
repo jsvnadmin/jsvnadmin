@@ -1,24 +1,8 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/11/2 8:54:37                            */
+/* Created on:     2011/11/18 16:10:05                          */
 /*==============================================================*/
 
-
-drop table if exists i18n;
-
-drop table if exists pj;
-
-drop table if exists pj_gr;
-
-drop table if exists pj_gr_auth;
-
-drop table if exists pj_gr_usr;
-
-drop table if exists pj_usr;
-
-drop table if exists pj_usr_auth;
-
-drop table if exists usr;
 
 /*==============================================================*/
 /* Table: i18n                                                  */
