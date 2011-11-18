@@ -21,7 +21,7 @@
 			<directory>${project.basedir}/db</directory>
 			<outputDirectory>/db</outputDirectory>
 			<includes>
-				<include>*.sql</include>
+				<include>**/*.sql</include>
 			</includes>
 		</fileSet>
 		<fileSet>
