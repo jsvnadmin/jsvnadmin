@@ -15,6 +15,7 @@ import org.svnadmin.dao.PjGrDao;
 import org.svnadmin.dao.PjGrUsrDao;
 import org.svnadmin.dao.PjUsrDao;
 import org.svnadmin.entity.Pj;
+import org.svnadmin.entity.PjAuth;
 import org.svnadmin.entity.PjGr;
 import org.svnadmin.util.I18N;
 
@@ -150,8 +151,8 @@ public class PjService {
 		if (!respository.exists() || !respository.isDirectory()) {// 不存在仓库
 			RepositoryService.createLocalRepository(respository);
 		}
-		// 增加默认的组
 		if (insert) {
+			// 增加默认的组
 			this.pjDao.insert(pj);
 			for (String gr : Constants.GROUPS) {
 				PjGr pjGr = new PjGr();
@@ -160,6 +161,14 @@ public class PjService {
 				pjGr.setDes(gr);
 				pjGrDao.save(pjGr);
 			}
+			// 增加默认的权限 @see Issue 29
+			PjAuth pjAuth = new PjAuth();
+			pjAuth.setPj(pj.getPj());
+			pjAuth.setRes("["+pj.getPj()+":/]");
+			pjAuth.setRw("rw");
+			pjAuth.setGr(Constants.GROUP_MANAGER);
+			pjAuthDao.saveByGr(pjAuth);
+
 		} else {
 			this.pjDao.update(pj);
 		}
