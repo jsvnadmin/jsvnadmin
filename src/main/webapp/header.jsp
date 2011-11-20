@@ -26,7 +26,7 @@ return;
 <script src="<%=ctx%>/resources/jquery-1.7.min.js" type="text/javascript"></script>
 <script src="<%=ctx%>/resources/sorttable.js"></script>
 <script src="<%=ctx%>/resources/svnadmin.js"></script>
-<link rel="stylesheet" href="<%=ctx%>/resources/sorttable.css" />
+<link rel="stylesheet" href="<%=ctx%>/resources/svnadmin.css" />
 </head>
 <%-- 选择语言 --%>
 <div style="float:right">

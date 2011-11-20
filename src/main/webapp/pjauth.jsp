@@ -9,7 +9,7 @@ String ctx = request.getContextPath();
 		<script src="<%=ctx%>/resources/jquery-1.7.min.js" type="text/javascript"></script>
 		<script src="<%=ctx%>/resources/sorttable.js"></script>
 		<script src="<%=ctx%>/resources/svnadmin.js"></script>
-		<link rel="stylesheet" href="<%=ctx%>/resources/sorttable.css" />
+		<link rel="stylesheet" href="<%=ctx%>/resources/svnadmin.css" />
 		<script>
 		$(function(){
 		    //移到用户组右边
@@ -109,7 +109,7 @@ String ctx = request.getContextPath();
 	<input type="hidden" name="pj" value="<%=request.getParameter("pj")%>">
 	<table class="thinborder">
 		<tr>
-			<td align="right"><%=I18N.getLbl(request,"pjauth.res","资源") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pjauth.res","资源") %></td>
 			<td colspan="3">
 				<input type="text" name="res" value="<%=entity.getRes()==null?"":entity.getRes()%>" style="width:400px;"><span style="color:red;">*</span>
 				<select onchange="this.form.res.value=this.value">
@@ -126,7 +126,7 @@ String ctx = request.getContextPath();
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><%=I18N.getLbl(request,"pj_gr.gr","用户组") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj_gr.gr","用户组") %></td>
 			<td valign="top">
 				<table>
 					<tr>
@@ -156,7 +156,7 @@ String ctx = request.getContextPath();
 				</table>
 			</td>
 			
-			<td align="right"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td valign="top">
 				<table>
 					<tr>
@@ -187,7 +187,7 @@ String ctx = request.getContextPath();
 			</td>
 		</tr>
 		<tr>
-			<td align="right"><%=I18N.getLbl(request,"pjauth.rw","权限") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pjauth.rw","权限") %></td>
 			<td colspan="3">
 			<select name="rw">
 					<option value="" <%="".equals(entity.getRw())?"selected='selected'":""%> ><%=I18N.getLbl(request,"pjauth.rw.none","没有权限") %></option>

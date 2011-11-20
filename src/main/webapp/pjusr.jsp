@@ -40,9 +40,9 @@ function checkForm(f){
 	<input type="hidden" name="act" value="save">
 	<table class="thinborder">
 		<tr>
-			<td align="right"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td><input type="hidden" name="pj" value="<%=request.getParameter("pj")%>"><%=request.getParameter("pj")%></td>
-			<td align="right"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td>
 			 <%if(hasManagerRight){ %>
 				 <select name="usr">
@@ -66,7 +66,7 @@ function checkForm(f){
 			 
 			</td>
 			
-			<td align="right"><%=I18N.getLbl(request,"pjusr.psw.psw","项目新密码") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pjusr.psw.psw","项目新密码") %></td>
 			<td>
 				<input type="password" name="newPsw" value="" onkeyup="value=value.replace(/[^_\-A-Za-z0-9]/g,'')">
 				<input type="hidden" name="psw" value="<%=entity.getPsw()==null?"":entity.getPsw()%>">

@@ -43,8 +43,8 @@ public class RepositoryServlet extends PjBaseServlet {
 	}
 
 	@Override
-	protected void forword(HttpServletRequest request,
-			HttpServletResponse response) throws IOException, ServletException {
+	protected void unknow(HttpServletRequest request,
+			HttpServletResponse response) {
 		Pj pj = pjService.get(request.getParameter("pj"));
 		String root = repositoryService.getRepositoryRoot(pj);
 		String svnUrl = RepositoryService.parseURL(pj.getUrl());
@@ -62,7 +62,11 @@ public class RepositoryServlet extends PjBaseServlet {
 		
 		request.setAttribute("root", root);
 		request.setAttribute("path", path);
-
+	}
+	
+	@Override
+	protected void forword(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
 		request.getRequestDispatcher("rep.jsp").forward(request, response);
 	}
 

@@ -39,7 +39,7 @@ function checkForm(f){
 	<input type="hidden" name="act" value="save">
 	<table class="thinborder">
 		<tr>
-			<td align="right"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td>
 			<%if(hasAdminRight){ %>
 			<input type="text" name="pj" value="<%=entity.getPj()==null?"":entity.getPj()%>" onkeyup="value=value.replace(/[^_\-A-Za-z0-9]/g,'')"><span style="color:red;">*</span>
@@ -48,7 +48,7 @@ function checkForm(f){
 			<%=entity.getPj()==null?"":entity.getPj()%>
 			<%} %>
 			</td>
-			<td align="right"><%=I18N.getLbl(request,"pj.type","类型") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj.type","类型") %></td>
 			<td>
 				<select name="type">
 					<option value="<%=Constants.SVN%>" <%=Constants.SVN.equals(entity.getType())?"selected='selected'":""%> ><%=I18N.getLbl(request,"pj.type.svn","svn") %></option>
@@ -60,15 +60,15 @@ function checkForm(f){
 			
 		</tr>
 		<tr id="path_tr">
-			<td align="right"><%=I18N.getLbl(request,"pj.path","路径") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj.path","路径") %></td>
 			<td colspan="5"><input type="text" name="path" value="<%=entity.getPath()==null?"":entity.getPath()%>" style="width:400px;"><span style="color:red;">*</span></td>
 		</tr>
 		<tr id="url_tr">
-			<td><%=I18N.getLbl(request,"pj.url","URL") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj.url","URL") %></td>
 			<td colspan="5"><input type="text" name="url" value="<%=entity.getUrl()==null?"":entity.getUrl()%>" style="width:400px;"><span style="color:red;">*</span></td>
 		</tr>
 		<tr>
-			<td align="right"><%=I18N.getLbl(request,"pj.des","描述") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj.des","描述") %></td>
 			<td colspan="5"><input type="text" name="des" value="<%=entity.getDes()==null?"":entity.getDes()%>" style="width:100%;"></td>
 		</tr>
 		<tr>
