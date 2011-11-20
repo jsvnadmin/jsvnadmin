@@ -30,7 +30,7 @@ function checkForm(f){
 	<input type="hidden" name="act" value="save">
 	<table class="thinborder">
 		<tr>
-			<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"usr.usr","用户") %></td>
 			<td>
 				<%if(hasAdminRight){ %>
 					<input type="text" name="usr" value="<%=entity.getUsr()==null?"":entity.getUsr()%>" 
@@ -42,14 +42,14 @@ function checkForm(f){
 				<%} %>				
 			</td>
 			
-			<td><%=I18N.getLbl(request,"usr.psw","密码") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"usr.psw","密码") %></td>
 			<td>
 			<input type="password" name="newPsw" value="">
 			<input type="hidden" name="psw" value="<%=entity.getPsw()==null?"":entity.getPsw()%>">
 			</td>
 			
 			<%if(hasAdminRight){ %>
-			<td><%=I18N.getLbl(request,"usr.role","角色") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"usr.role","角色") %></td>
 			<td>
 				<select name="role">
 					<option value=""><%=I18N.getLbl(request,"usr.role.select","选择角色") %></option>

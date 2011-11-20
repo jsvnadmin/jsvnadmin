@@ -59,7 +59,7 @@ function selectLocale(sel){
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td class="lbl">
 				<%=I18N.getLbl(request,"i18n.lang","语言") %>
 			</td>
 			<td>
@@ -68,7 +68,7 @@ function selectLocale(sel){
 				<span style="color:red;">*</span>
 			</td>
 			
-			<td align="right"><%=I18N.getLbl(request,"i18n.lbl","标签") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"i18n.lbl","标签") %></td>
 			<td>
 				<input type="text" name="lbl" value="<%=entity.getLbl()==null?"":entity.getLbl()%>" >
 				<span style="color:red;">*</span>

@@ -38,7 +38,7 @@ function checkForm(f){
 				<input type="hidden" name="act" value="save">
 				<table class="thinborder">
 					<tr>
-						<td align="right"><%=I18N.getLbl(request, "i18n.id", "键值")%></td>
+						<td class="lbl"><%=I18N.getLbl(request, "i18n.id", "键值")%></td>
 						<td style="width:100%;">
 						   	<%=request.getParameter("id")==null?"":request.getParameter("id")%>
 						   	<input type="hidden" name="id" value="<%=request.getParameter("id")==null?"":request.getParameter("id")%>" >
@@ -49,7 +49,7 @@ function checkForm(f){
 							String lang = langs.get(i);
 					%>
 					<tr>
-						<td align="right">
+						<td class="lbl">
 							<%=I18N.getLbl(request, lang, lang)%>(<%=lang%>)
 							<input type="hidden" name="lang_<%=i%>" value="<%=lang%>" >
 						</td>

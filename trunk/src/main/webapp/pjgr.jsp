@@ -26,11 +26,11 @@ function checkForm(f){
 	<input type="hidden" name="act" value="save">
 	<table class="thinborder">
 		<tr>
-			<td align="right"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 			<td><input type="hidden" name="pj" value="<%=request.getParameter("pj")%>"><%=request.getParameter("pj")%></td>
-			<td align="right"><%=I18N.getLbl(request,"pj_gr.gr","组号") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj_gr.gr","组号") %></td>
 			<td><input type="text" name="gr" value="<%=entity.getGr()==null?"":entity.getGr()%>"  onkeyup="value=value.replace(/[^_\-A-Za-z0-9]/g,'')"><span style="color:red;">*</span></td>
-			<td align="right"><%=I18N.getLbl(request,"pj_gr.des","描述") %></td>
+			<td class="lbl"><%=I18N.getLbl(request,"pj_gr.des","描述") %></td>
 			<td><input type="text" name="des" value="<%=entity.getDes()==null?"":entity.getDes()%>"></td>
 			<td>
 				<input type="submit" value="<%=I18N.getLbl(request,"pjgr.btn.submit","提交") %>">

@@ -18,3 +18,8 @@ table.sortable thead td {text-align:center;background: #ECF20F;}
 table.sortable tr.odd{background: #ECFCCC;}
 table.sortable tr.even{background: #FFFFFF;}
 table.sortable tr.over{background: #ECF2AF;}
+
+td.lbl{
+	background-color: #ECFAAC;
+	text-align: right;
+}
