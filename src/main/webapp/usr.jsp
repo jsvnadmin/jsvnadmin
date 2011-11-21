@@ -34,7 +34,7 @@ function checkForm(f){
 			<td>
 				<%if(hasAdminRight){ %>
 					<input type="text" name="usr" value="<%=entity.getUsr()==null?"":entity.getUsr()%>" 
-					onkeyup="value=value.replace(/[^_\-A-Za-z0-9*]/g,'')">
+					onkeyup="value=value.replace(/[^._\-A-Za-z0-9*]/g,'')">
 					<span style="color:red;">*</span>
 				<%}else{ %>
 				   	<input type="hidden" name="usr" value="<%=entity.getUsr()==null?"":entity.getUsr()%>" >

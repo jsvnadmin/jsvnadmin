@@ -68,7 +68,7 @@ function checkForm(f){
 			
 			<td class="lbl"><%=I18N.getLbl(request,"pjusr.psw.psw","项目新密码") %></td>
 			<td>
-				<input type="password" name="newPsw" value="" onkeyup="value=value.replace(/[^_\-A-Za-z0-9]/g,'')">
+				<input type="password" name="newPsw" value="">
 				<input type="hidden" name="psw" value="<%=entity.getPsw()==null?"":entity.getPsw()%>">
 			<td>
 				<input type="submit" value="<%=I18N.getLbl(request,"pjusr.op.submit","提交") %>">
