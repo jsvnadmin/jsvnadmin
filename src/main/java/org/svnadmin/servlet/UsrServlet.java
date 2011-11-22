@@ -67,7 +67,6 @@ public class UsrServlet extends BaseServlet {
 		if (entity.getUsr().equals(getUsrFromSession(request).getUsr())) {// 当前用户
 			request.getSession().setAttribute(Constants.SESSION_KEY_USER, entity);
 		}
-		request.setAttribute("entity", entity);
 	}
 
 	@Override

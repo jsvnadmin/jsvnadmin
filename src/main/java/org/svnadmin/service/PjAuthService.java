@@ -109,12 +109,7 @@ public class PjAuthService {
 	 */
 	@Transactional
 	public void save(String pj,String res,String rw, String[] grs, String[] usrs) {
-		//如果资源没有[],自动加上[pj:/]
-		if(!res.startsWith("[") && !res.endsWith("]")){
-			Pj pjEntity = this.pjDao.get(pj);
-			String pjid = StringUtils.substringAfterLast(pjEntity.getPath(), "/");
-			res = "["+pjid+":"+res+"]";
-		}
+		res = this.formatRes(pj, res);//如果资源没有[],自动加上
 		//gr
 		if(grs!=null){
 			for (String gr : grs) {
@@ -145,5 +140,39 @@ public class PjAuthService {
 		}
 		//export
 		svnService.exportConfig(pj);
+	}
+	
+	/**
+	 * 格式化资源.如果资源没有[],自动加上[relateRoot:/]
+	 * @param pj 项目id
+	 * @param res 资源
+	 * @return 格式化后的资源
+	 * @since 3.0.3
+	 */
+	public String formatRes(String pj,String res){
+		//如果资源没有[],自动加上
+		if(!res.startsWith("[") && !res.endsWith("]")){
+			return this.formatRes(this.pjDao.get(pj), res);
+		}
+		return res;
+	}
+	/**
+	 * 格式化资源.如果资源没有[],自动加上[relateRoot:/]
+	 * @param pj 项目
+	 * @param res 资源
+	 * @return 格式化后的资源
+	 * @since 3.0.3
+	 */
+	public String formatRes(Pj pj,String res){
+		//如果资源没有[],自动加上
+		if(!res.startsWith("[") && !res.endsWith("]")){
+			String relateRoot = PjService.getRelateRootPath(pj);
+			if(res.startsWith("/")){
+				return "["+relateRoot+":"+res+"]";
+			}else{
+				return  "["+relateRoot+":"+res+"]";
+			}
+		}
+		return res;
 	}
 }

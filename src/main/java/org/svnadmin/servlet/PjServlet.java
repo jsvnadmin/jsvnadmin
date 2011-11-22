@@ -54,7 +54,6 @@ public class PjServlet extends PjBaseServlet {
 		entity.setType(request.getParameter("type"));
 		request.setAttribute("entity", entity);
 		pjService.save(entity);
-		request.setAttribute("entity", entity);
 
 	}
 

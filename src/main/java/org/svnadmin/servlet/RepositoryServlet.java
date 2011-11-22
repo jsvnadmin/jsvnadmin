@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.Pj;
 import org.svnadmin.service.PjService;
 import org.svnadmin.service.RepositoryService;
-import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**

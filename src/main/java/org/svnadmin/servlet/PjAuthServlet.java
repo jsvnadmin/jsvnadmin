@@ -11,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.PjAuth;
 import org.svnadmin.service.PjAuthService;
 import org.svnadmin.service.PjGrService;
-import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**
@@ -81,22 +80,22 @@ public class PjAuthServlet extends PjBaseServlet {
 	protected void list(HttpServletRequest request, HttpServletResponse response) {
 		String pj = request.getParameter("pj");
 		String res = request.getParameter("res");
-		if(StringUtils.isBlank(res)){
-			String path = request.getParameter("path");//从rep 树点击进来，传递的是path
-			if(StringUtils.isNotBlank(path)){
-				if(path.startsWith("/")){
-					res = "["+pj+":"+path+"]";
-				}else{
-					res = "["+pj+":/"+path+"]";
-				}
-			}
-		}
 		PjAuth entity = (PjAuth) request.getAttribute("entity");
 		if(entity == null){
 			entity = new PjAuth();
 			entity.setPj(pj);
 			request.setAttribute("entity", entity);
 		}
+		
+		if(StringUtils.isBlank(res)){
+			String path = request.getParameter("path");//从rep 树点击进来，传递的是path
+			if(StringUtils.isNotBlank(path)){
+				res = this.pjAuthService.formatRes(pj, path);
+			}
+		}else{
+			res = entity.getRes();
+		}
+		
 		entity.setRes(res);
 		
 		List<PjAuth> list = pjAuthService.list(pj,res);

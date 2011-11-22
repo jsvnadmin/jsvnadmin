@@ -12,7 +12,6 @@ import org.svnadmin.entity.PjUsr;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.service.PjUsrService;
 import org.svnadmin.util.EncryptUtil;
-import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**
@@ -69,8 +68,6 @@ public class PjUsrServlet extends PjServlet {
 		request.setAttribute("entity", entity);
 
 		pjUsrService.save(entity);
-
-		request.setAttribute("entity", entity);
 	}
 
 	@Override
