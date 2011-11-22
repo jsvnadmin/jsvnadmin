@@ -68,6 +68,11 @@ public class PjService {
 	 */
 	@Resource(name = SvnService.BEAN_NAME)
 	protected SvnService svnService;
+	/**
+	 * 权限服务层
+	 */
+	@Resource(name = PjAuthService.BEAN_NAME)
+	protected PjAuthService pjAuthService;
 
 	/**
 	 * @param pj
@@ -164,7 +169,7 @@ public class PjService {
 			// 增加默认的权限 @see Issue 29
 			PjAuth pjAuth = new PjAuth();
 			pjAuth.setPj(pj.getPj());
-			pjAuth.setRes("["+pj.getPj()+":/]");
+			pjAuth.setRes(this.pjAuthService.formatRes(pj, "/"));
 			pjAuth.setRw("rw");
 			pjAuth.setGr(Constants.GROUP_MANAGER);
 			pjAuthDao.saveByGr(pjAuth);
@@ -173,5 +178,33 @@ public class PjService {
 			this.pjDao.update(pj);
 		}
 		svnService.exportConfig(pj.getPj());
+	}
+	
+	/**
+	 * 获取项目的相对根路径.例如项目的path=e:/svn/projar，则返回projar。如果path为空，则返回项目ID
+	 * @param pj 项目id
+	 * @return 项目的相对根路径
+	 * @since 3.0.3
+	 */
+	public String getRelateRootPath(String pj){
+		Pj p = this.get(pj);
+		if(p == null || StringUtils.isBlank(p.getPath())){
+			return pj;
+		}
+		return getRelateRootPath(pj);
+	}
+	/**
+	 * 获取项目的相对根路径.例如项目的path=e:/svn/projar，则返回projar。如果path为空，则返回项目ID
+	 * @param pj 项目
+	 * @return 项目的相对根路径
+	 * @since 3.0.3
+	 */
+	public static String getRelateRootPath(Pj pj){
+		String path = pj.getPath();
+		if(StringUtils.isBlank(path)){
+			return pj.getPj();
+		}
+		StringUtils.replace(path, "\\", "/");
+		return StringUtils.substringBeforeLast(pj.getPath(), "/");
 	}
 }

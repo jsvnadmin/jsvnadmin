@@ -7,10 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.svnadmin.entity.PjGr;
 import org.svnadmin.service.PjGrService;
-import org.svnadmin.util.I18N;
 import org.svnadmin.util.SpringUtils;
 
 /**
@@ -64,8 +62,6 @@ public class PjGrServlet extends PjBaseServlet {
 		request.setAttribute("entity", entity);
 
 		pjGrService.save(entity);
-
-		request.setAttribute("entity", entity);
 	}
 
 	@Override
