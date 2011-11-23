@@ -209,6 +209,6 @@ public class PjService {
 			path = path.substring(0, path.length()-1);
 		}
 		
-		return StringUtils.substringBeforeLast(pj.getPath(), "/");
+		return StringUtils.substringAfterLast(path, "/");
 	}
 }
