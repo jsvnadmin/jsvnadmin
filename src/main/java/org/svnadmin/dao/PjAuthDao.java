@@ -190,9 +190,9 @@ public class PjAuthDao extends Dao {
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
 			pstmt.setString(index++, Constants.HTTP_MUTIL);
-			pstmt.setString(index++, rootPath + "%");
+			pstmt.setString(index++, rootPath + "%");//TODO 大小写敏感?
 			pstmt.setString(index++, Constants.HTTP_MUTIL);
-			pstmt.setString(index++, rootPath + "%");
+			pstmt.setString(index++, rootPath + "%");//TODO 大小写敏感?
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
