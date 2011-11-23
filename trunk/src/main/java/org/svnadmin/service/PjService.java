@@ -205,6 +205,11 @@ public class PjService {
 			return pj.getPj();
 		}
 		StringUtils.replace(path, "\\", "/");
+		
+		while(path.endsWith("/")){
+			path = path.substring(0, path.length()-1);
+		}
+		
 		return StringUtils.substringBeforeLast(pj.getPath(), "/");
 	}
 }
