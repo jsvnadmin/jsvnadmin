@@ -88,7 +88,7 @@ public class RepositoryService{
 		if(StringUtils.isBlank(url)){
 			return null;
 		}
-		String result = url.trim().toLowerCase();//去空格
+		String result = url.trim();//去空格
 		result = StringUtils.replace(result, "\t", " ");
 		result = StringUtils.replace(result, "\r", " ");
 		result = StringUtils.replace(result, "\n", " ");

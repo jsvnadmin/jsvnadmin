@@ -128,14 +128,13 @@ public class PjService {
 	 */
 	@Transactional
 	public void save(Pj pj) {
-		// 路径 把\替换为/，转为小写
+		// 路径 把\替换为/
 		if (StringUtils.isNotBlank(pj.getPath())) {
-			pj.setPath(StringUtils.replace(pj.getPath(), "\\", "/")
-					.toLowerCase());// 小写
+			pj.setPath(StringUtils.replace(pj.getPath(), "\\", "/"));
 		}
-		// url 把\替换为/，转为小写
+		// url 把\替换为/
 		if (StringUtils.isNotBlank(pj.getUrl())) {
-			pj.setUrl(StringUtils.replace(pj.getUrl(), "\\", "/").toLowerCase());// 小写
+			pj.setUrl(StringUtils.replace(pj.getUrl(), "\\", "/"));
 		}
 
 		// 是否可以增加项目

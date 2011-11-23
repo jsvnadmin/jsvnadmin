@@ -241,7 +241,7 @@ public class PjDao extends Dao {
 	 * @return 具有相同路径或访问地址的项目数量
 	 */
 	public int getCount(String path, String url) {
-		String sql = "select count(1) from pj where path=? or url=?";
+		String sql = "select count(1) from pj where path=? or url=?";//TODO 大小写敏感?
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
