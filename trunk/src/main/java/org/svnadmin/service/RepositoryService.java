@@ -183,8 +183,10 @@ public class RepositoryService{
 			SVNProperties properties = new SVNProperties();
 	    	return repository.getDir(path, SVNRevision.HEAD.getNumber(), properties, (Collection) null);
     	}catch(SVNAuthenticationException e){
+    		e.printStackTrace();
 			throw new RuntimeException(I18N.getLbl("svn.auth.error", "认证失败"));
     	}catch (SVNException e) {
+    		e.printStackTrace();
     		throw new RuntimeException(e.getMessage());
 		}finally{
 			if(repository!=null){

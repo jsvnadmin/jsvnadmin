@@ -83,7 +83,7 @@ public class RepTreeNodeService extends AbstractTreeNodeService {
 			Collections.sort(results);// 排序
 		} catch (Exception e) {
     		LOG.error(e.getMessage());
-//			e.printStackTrace();
+			e.printStackTrace();
 			
     		results.clear();
     		TreeNode errorNode = new TreeNode(e.getMessage());
