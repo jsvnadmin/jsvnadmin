@@ -380,7 +380,7 @@ public class BaseServlet extends ServletSupport {
 	 * @since 3.0.2
 	 */
 	public static boolean hasLogin(HttpServletRequest request){
-		return request.getSession().getAttribute(Constants.SESSION_KEY_USER) != null;
+		return getUsrFromSession(request) != null;
 	}
 	
 	/**
