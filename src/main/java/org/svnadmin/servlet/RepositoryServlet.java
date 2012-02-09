@@ -48,13 +48,13 @@ public class RepositoryServlet extends PjBaseServlet {
 			HttpServletResponse response) {
 		Pj pj = pjService.get(request.getParameter("pj"));
 		String root = repositoryService.getRepositoryRoot(pj);
-		try {
-			root = URLDecoder.decode(root,"UTF-8");//@see issue 34
-		} catch (UnsupportedEncodingException e) {
-		}
 		String svnUrl = RepositoryService.parseURL(pj.getUrl());
 		String path = "/";
 		if(root != null){
+			try {
+				root = URLDecoder.decode(root,"UTF-8");//@see issue 34
+			} catch (UnsupportedEncodingException e) {
+			}
 			if(svnUrl.indexOf(root) != -1){
 				path = StringUtils.substringAfter(svnUrl, root);
 				if(!path.startsWith("/")){
