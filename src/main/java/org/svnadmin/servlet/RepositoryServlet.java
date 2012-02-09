@@ -1,6 +1,8 @@
 package org.svnadmin.servlet;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +48,10 @@ public class RepositoryServlet extends PjBaseServlet {
 			HttpServletResponse response) {
 		Pj pj = pjService.get(request.getParameter("pj"));
 		String root = repositoryService.getRepositoryRoot(pj);
+		try {
+			root = URLDecoder.decode(root,"UTF-8");//@see issue 34
+		} catch (UnsupportedEncodingException e) {
+		}
 		String svnUrl = RepositoryService.parseURL(pj.getUrl());
 		String path = "/";
 		if(root != null){
