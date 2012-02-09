@@ -203,7 +203,7 @@ public class PjService {
 		if(StringUtils.isBlank(path)){
 			return pj.getPj();
 		}
-		StringUtils.replace(path, "\\", "/");
+		path = StringUtils.replace(path, "\\", "/");
 		
 		while(path.endsWith("/")){
 			path = path.substring(0, path.length()-1);
