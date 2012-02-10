@@ -1,0 +1,25 @@
+table.thinborder {
+	border-collapse:collapse;
+	border:solid #999;
+	border-width:1px 0 0 1px;
+}
+table.thinborder caption {font-size:14px;font-weight:bolder;}
+table.thinborder th,table.thinborder td {
+	border:solid #999;
+	border-width:0 1px 1px 0;
+	padding:2px;
+	word-break : keep-all;
+	white-space:nowrap;
+}
+
+table.sortablet foot td {text-align:center;background: #ECF20F;}
+table.sortable thead td {text-align:center;background: #ECF20F;}
+
+table.sortable tr.odd{background: #ECFCCC;}
+table.sortable tr.even{background: #FFFFFF;}
+table.sortable tr.over{background: #ECF2AF;}
+
+td.lbl{
+	background-color: #ECFAAC;
+	text-align: right;
+}
