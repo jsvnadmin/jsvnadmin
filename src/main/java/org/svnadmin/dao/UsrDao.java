@@ -129,7 +129,7 @@ public class UsrDao extends Dao {
 				+ " exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj=?) "
 				+ " or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj=?) "
 				+ " ) p "
-				+ " left join pj_usr pu on (p.usr=pu.usr) where p.usr <> '*' and pu.pj=?"
+				+ " left join pj_usr pu on (p.usr=pu.usr and pu.pj=?) where p.usr <> '*'"
 				+ " order by p.usr ";
 
 		List<Usr> list = new ArrayList<Usr>();
