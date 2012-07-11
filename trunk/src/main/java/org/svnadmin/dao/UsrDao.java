@@ -129,7 +129,7 @@ public class UsrDao extends Dao {
 				+ " exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj=?) "
 				+ " or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj=?) "
 				+ " ) p "
-				+ " left join pj_usr pu on (p.usr=pu.usr) where p.usr <> '*'"
+				+ " left join pj_usr pu on (p.usr=pu.usr) where p.usr <> '*' and pu.pj=?"
 				+ " order by p.usr ";
 
 		List<Usr> list = new ArrayList<Usr>();
@@ -140,6 +140,7 @@ public class UsrDao extends Dao {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
+			pstmt.setString(index++, pj);
 			pstmt.setString(index++, pj);
 			pstmt.setString(index++, pj);
 
