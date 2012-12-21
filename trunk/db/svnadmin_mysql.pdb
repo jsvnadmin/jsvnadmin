@@ -3651,8 +3651,8 @@ DAT 1300616437
 ORG {D6C56BDC-5B0A-4392-8441-DFEC2264B257}
 DAT 1300615815
 ATT MAND</a:History>
-<a:DataType>varchar(255)</a:DataType>
-<a:Length>255</a:Length>
+<a:DataType>varchar(200)</a:DataType>
+<a:Length>200</a:Length>
 <a:Column.Mandatory>1</a:Column.Mandatory>
 </o:Column>
 <o:Column Id="o40">
@@ -3663,8 +3663,8 @@ ATT MAND</a:History>
 <a:Creator>Harvey</a:Creator>
 <a:ModificationDate>1315546358</a:ModificationDate>
 <a:Modifier>Harvey</a:Modifier>
-<a:DataType>varchar(255)</a:DataType>
-<a:Length>255</a:Length>
+<a:DataType>varchar(200)</a:DataType>
+<a:Length>200</a:Length>
 <a:Column.Mandatory>1</a:Column.Mandatory>
 </o:Column>
 <o:Column Id="o41">
@@ -3691,8 +3691,8 @@ ATT MAND</a:History>
 DAT 1300616437
 ORG {29F98789-6FA9-45F0-A7CA-2BD1AD98E2D2}
 DAT 1300615815</a:History>
-<a:DataType>varchar(255)</a:DataType>
-<a:Length>255</a:Length>
+<a:DataType>varchar(200)</a:DataType>
+<a:Length>200</a:Length>
 </o:Column>
 </c:Columns>
 <c:Keys>
@@ -3802,8 +3802,8 @@ DAT 1300616437
 ORG {6B00C6C0-7FD3-4ECD-BC2E-32B20D8AD705}
 DAT 1300615815
 ATT PRIM</a:History>
-<a:DataType>varchar(255)</a:DataType>
-<a:Length>255</a:Length>
+<a:DataType>varchar(200)</a:DataType>
+<a:Length>200</a:Length>
 <a:Column.Mandatory>1</a:Column.Mandatory>
 </o:Column>
 <o:Column Id="o49">
@@ -4409,8 +4409,8 @@ REM COLNCOL {30DAF413-7F18-4E63-B575-FC30B9A9FC39}</a:History>
 <a:Creator>Harvey</a:Creator>
 <a:ModificationDate>1315894687</a:ModificationDate>
 <a:Modifier>Harvey</a:Modifier>
-<a:DataType>varchar(255)</a:DataType>
-<a:Length>255</a:Length>
+<a:DataType>varchar(200)</a:DataType>
+<a:Length>200</a:Length>
 <a:Column.Mandatory>1</a:Column.Mandatory>
 </o:Column>
 <o:Column Id="o86">
@@ -4523,8 +4523,8 @@ REM COLNCOL {30DAF413-7F18-4E63-B575-FC30B9A9FC39}</a:History>
 <a:Creator>Harvey</a:Creator>
 <a:ModificationDate>1320195268</a:ModificationDate>
 <a:Modifier>Harvey</a:Modifier>
-<a:DataType>varchar(255)</a:DataType>
-<a:Length>255</a:Length>
+<a:DataType>varchar(200)</a:DataType>
+<a:Length>200</a:Length>
 <a:Column.Mandatory>1</a:Column.Mandatory>
 </o:Column>
 <o:Column Id="o94">
@@ -4535,8 +4535,8 @@ REM COLNCOL {30DAF413-7F18-4E63-B575-FC30B9A9FC39}</a:History>
 <a:Creator>Harvey</a:Creator>
 <a:ModificationDate>1320195150</a:ModificationDate>
 <a:Modifier>Harvey</a:Modifier>
-<a:DataType>varchar(255)</a:DataType>
-<a:Length>255</a:Length>
+<a:DataType>varchar(200)</a:DataType>
+<a:Length>200</a:Length>
 <a:Column.Mandatory>1</a:Column.Mandatory>
 </o:Column>
 </c:Columns>

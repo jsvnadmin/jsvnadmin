@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/11/18 16:10:05                          */
+/* Created on:     2012/12/21 12:42:18                          */
 /*==============================================================*/
 
 
@@ -10,8 +10,8 @@
 create table i18n
 (
    lang                 varchar(20) not null,
-   id                   varchar(255) not null,
-   lbl                  varchar(255) not null,
+   id                   varchar(200) not null,
+   lbl                  varchar(200) not null,
    primary key (lang, id)
 );
 
@@ -21,10 +21,10 @@ create table i18n
 create table pj
 (
    pj                   varchar(50) not null,
-   path                 varchar(255) not null,
-   url                  varchar(255) not null,
+   path                 varchar(200) not null,
+   url                  varchar(200) not null,
    type                 varchar(10) not null,
-   des                  varchar(255),
+   des                  varchar(200),
    primary key (pj)
 );
 
@@ -46,7 +46,7 @@ create table pj_gr_auth
 (
    pj                   varchar(50) not null,
    gr                   varchar(50) not null,
-   res                  varchar(255) not null,
+   res                  varchar(200) not null,
    rw                   varchar(10) not null,
    primary key (pj, res, gr)
 );
@@ -80,7 +80,7 @@ create table pj_usr_auth
 (
    pj                   varchar(50) not null,
    usr                  varchar(50) not null,
-   res                  varchar(255) not null,
+   res                  varchar(200) not null,
    rw                   varchar(10) not null,
    primary key (pj, res, usr)
 );
