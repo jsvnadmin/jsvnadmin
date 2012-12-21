@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2000                    */
-/* Created on:     2011/11/18 16:12:46                          */
+/* Created on:     2012/12/21 12:47:30                          */
 /*==============================================================*/
 
 
@@ -65,8 +65,8 @@ go
 /*==============================================================*/
 create table i18n (
    lang                 varchar(20)          not null,
-   id                   varchar(255)         not null,
-   lbl                  varchar(255)         not null,
+   id                   varchar(200)         not null,
+   lbl                  varchar(200)         not null,
    constraint PK_I18N primary key nonclustered (lang, id)
 )
 go
@@ -76,10 +76,10 @@ go
 /*==============================================================*/
 create table pj (
    pj                   varchar(50)          not null,
-   path                 varchar(255)         not null,
-   url                  varchar(255)         not null,
+   path                 varchar(200)         not null,
+   url                  varchar(200)         not null,
    type                 varchar(10)          not null,
-   des                  varchar(255)         null,
+   des                  varchar(200)         null,
    constraint PK_PJ primary key nonclustered (pj)
 )
 go
@@ -101,7 +101,7 @@ go
 create table pj_gr_auth (
    pj                   varchar(50)          not null,
    gr                   varchar(50)          not null,
-   res                  varchar(255)         not null,
+   res                  varchar(200)         not null,
    rw                   varchar(10)          not null,
    constraint PK_PJ_GR_AUTH primary key nonclustered (pj, res, gr)
 )
@@ -135,7 +135,7 @@ go
 create table pj_usr_auth (
    pj                   varchar(50)          not null,
    usr                  varchar(50)          not null,
-   res                  varchar(255)         not null,
+   res                  varchar(200)         not null,
    rw                   varchar(10)          not null,
    constraint PK_PJ_USR_AUTH primary key nonclustered (pj, res, usr)
 )
