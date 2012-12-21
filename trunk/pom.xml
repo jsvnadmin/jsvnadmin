@@ -12,7 +12,7 @@
 		<!--war包是否把classes打包 -->
 		<war.archiveClasses>true</war.archiveClasses>
 
-		<svnkit.version>1.3.5</svnkit.version>
+		<svnkit.version>1.7.6</svnkit.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.8.2</junit.version>
 		<commons-lang.version>2.6</commons-lang.version>
