@@ -3,31 +3,6 @@
 /* Created on:     2013/1/16 14:32:28                           */
 /*==============================================================*/
 
-
-alter table pj_gr
-   drop constraint FK_PJ_GR_RELATIONS_PJ;
-
-alter table pj_gr_auth
-   drop constraint FK_PJ_GR_AU_REFERENCE_PJ_GR;
-
-alter table pj_gr_usr
-   drop constraint FK_PJ_GR_US_REFERENCE_PJ_GR;
-
-alter table pj_gr_usr
-   drop constraint FK_PJ_GR_US_REFERENCE_USR;
-
-alter table pj_usr
-   drop constraint FK_PJ_USR_REFERENCE_PJ;
-
-alter table pj_usr
-   drop constraint FK_PJ_USR_REFERENCE_USR;
-
-alter table pj_usr_auth
-   drop constraint FK_PJ_USR_A_REFERENCE_PJ;
-
-alter table pj_usr_auth
-   drop constraint FK_PJ_USR_A_REFERENCE_USR;
-
 /*==============================================================*/
 /* Table: i18n                                                  */
 /*==============================================================*/
