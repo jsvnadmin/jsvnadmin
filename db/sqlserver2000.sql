@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2000                    */
-/* Created on:     2012/12/21 12:47:30                          */
+/* Created on:     2013/1/16 14:32:28                           */
 /*==============================================================*/
 
 
@@ -102,7 +102,7 @@ create table pj_gr_auth (
    pj                   varchar(50)          not null,
    gr                   varchar(50)          not null,
    res                  varchar(200)         not null,
-   rw                   varchar(10)          not null,
+   rw                   varchar(10)          null,
    constraint PK_PJ_GR_AUTH primary key nonclustered (pj, res, gr)
 )
 go
@@ -136,7 +136,7 @@ create table pj_usr_auth (
    pj                   varchar(50)          not null,
    usr                  varchar(50)          not null,
    res                  varchar(200)         not null,
-   rw                   varchar(10)          not null,
+   rw                   varchar(10)          null,
    constraint PK_PJ_USR_AUTH primary key nonclustered (pj, res, usr)
 )
 go
