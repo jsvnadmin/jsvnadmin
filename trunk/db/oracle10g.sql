@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10g                           */
-/* Created on:     2012/12/21 12:46:59                          */
+/* Created on:     2013/1/16 14:32:28                           */
 /*==============================================================*/
 
 
@@ -75,7 +75,7 @@ create table pj_gr_auth  (
    pj                   VARCHAR2(50)                    not null,
    gr                   VARCHAR2(50)                    not null,
    res                  VARCHAR2(200)                   not null,
-   rw                   VARCHAR2(10)                    not null,
+   rw                   VARCHAR2(10),
    constraint PK_PJ_GR_AUTH primary key (pj, res, gr)
 );
 
@@ -112,7 +112,7 @@ create table pj_usr_auth  (
    pj                   VARCHAR2(50)                    not null,
    usr                  VARCHAR2(50)                    not null,
    res                  VARCHAR2(200)                   not null,
-   rw                   VARCHAR2(10)                    not null,
+   rw                   VARCHAR2(10),
    constraint PK_PJ_USR_AUTH primary key (pj, res, usr)
 );
 

@@ -3823,7 +3823,6 @@ ATT MLEN
 ATT MAND</a:History>
 <a:DataType>varchar(10)</a:DataType>
 <a:Length>10</a:Length>
-<a:Column.Mandatory>1</a:Column.Mandatory>
 </o:Column>
 </c:Columns>
 <c:Keys>
@@ -4423,7 +4422,6 @@ REM COLNCOL {30DAF413-7F18-4E63-B575-FC30B9A9FC39}</a:History>
 <a:Modifier>Harvey</a:Modifier>
 <a:DataType>varchar(10)</a:DataType>
 <a:Length>10</a:Length>
-<a:Column.Mandatory>1</a:Column.Mandatory>
 </o:Column>
 </c:Columns>
 <c:Keys>

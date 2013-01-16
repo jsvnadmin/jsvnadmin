@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2012/12/21 12:42:18                          */
+/* Created on:     2013/1/16 14:32:28                           */
 /*==============================================================*/
 
 
@@ -47,7 +47,7 @@ create table pj_gr_auth
    pj                   varchar(50) not null,
    gr                   varchar(50) not null,
    res                  varchar(200) not null,
-   rw                   varchar(10) not null,
+   rw                   varchar(10),
    primary key (pj, res, gr)
 );
 
@@ -81,7 +81,7 @@ create table pj_usr_auth
    pj                   varchar(50) not null,
    usr                  varchar(50) not null,
    res                  varchar(200) not null,
-   rw                   varchar(10) not null,
+   rw                   varchar(10),
    primary key (pj, res, usr)
 );
 
