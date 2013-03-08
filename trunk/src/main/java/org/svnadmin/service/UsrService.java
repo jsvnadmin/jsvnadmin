@@ -17,6 +17,7 @@ import org.svnadmin.dao.PjGrUsrDao;
 import org.svnadmin.dao.PjUsrDao;
 import org.svnadmin.dao.UsrDao;
 import org.svnadmin.entity.Pj;
+import org.svnadmin.entity.PjAuth;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.util.EncryptUtil;
 import org.svnadmin.util.I18N;
@@ -249,5 +250,13 @@ public class UsrService {
 			return true;
 		}
 		return false;
+	}
+	/**
+	 * 报表:获取用户所有的权限
+	 * @param usr 用户
+	 * @return 用户所有的权限
+	 */
+	public List<PjAuth> getAuths(String usr){
+		return this.pjAuthDao.getByUsr(usr);
 	}
 }

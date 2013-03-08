@@ -74,6 +74,7 @@ function checkForm(f){
 		<td><%=I18N.getLbl(request,"usr.psw","密码") %></td>
 		<td><%=I18N.getLbl(request,"usr.role","角色") %></td>
 		<td><%=I18N.getLbl(request,"usr.op.delete","删除") %></td>
+		<td><%=I18N.getLbl(request,"usr.op.listauth","查看权限") %></td>
 	</thead>
 	<%
 	java.util.List<org.svnadmin.entity.Usr> list = (java.util.List<org.svnadmin.entity.Usr>)request.getAttribute("list");
@@ -94,9 +95,58 @@ function checkForm(f){
 		<td><%=usr.getPsw() %></td>
 		<td><%=usr.getRole()==null?"":usr.getRole() %></td>
 		<td><a href="javascript:if(confirm('<%=I18N.getLbl(request,"usr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/usr?usr=<%=usr.getUsr()%>')}"><%=I18N.getLbl(request,"usr.op.delete","删除") %></a></td>
+		<td><a href="<%=ctx%>/usr?act=searchAuth&usr=<%=usr.getUsr()%>"><%=I18N.getLbl(request,"usr.op.listauth","查看权限") %></a></td>
 	</tr>
 		<%	
 	}}
 	%>
 </table>
 <%} %>
+
+<%
+java.util.List<org.svnadmin.entity.PjAuth> auths = (java.util.List<org.svnadmin.entity.PjAuth>)request.getAttribute("auths");
+
+if(auths!=null){
+%>
+<br>
+<%=I18N.getLbl(request,"usr.op.listauth","查看权限") %><br>
+<table class="sortable thinborder">
+
+	<thead>
+		
+		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
+		<td><%=I18N.getLbl(request,"pj.pj","项目") %></td>
+		<td><%=I18N.getLbl(request,"pj.des","描述") %></td>
+		<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+		<td><%=I18N.getLbl(request,"pjauth.res","资源") %></td>
+		<td><%=I18N.getLbl(request,"pjauth.rw","权限") %></td>
+	</thead>
+	<%
+		int no = 1;	  
+		for(int i = 0;i<auths.size();i++){
+		  org.svnadmin.entity.PjAuth auth = auths.get(i);
+		%>
+		<tr>
+		<td><%=(no++) %></td>
+		<td><%=auth.getPj()%></td>
+		<td><%=auth.getDes()%></td>
+		<td><%=auth.getUsr()%></td>
+		<td><%=auth.getRes()%></td>
+		<td>
+			<% if("r".equals(auth.getRw())){ %>
+				<%=I18N.getLbl(request,"pjauth.rw.r","可读") %>
+			<%}else if("rw".equals(auth.getRw())){%>
+				<%=I18N.getLbl(request,"pjauth.rw.rw","可读可写") %>
+			<%}else{%>
+				<%=I18N.getLbl(request,"pjauth.rw.none","没有权限") %>
+			<%}%>
+		</td>
+	</tr>
+		<%	
+	}
+	%>
+</table>
+
+<%	
+}
+%>

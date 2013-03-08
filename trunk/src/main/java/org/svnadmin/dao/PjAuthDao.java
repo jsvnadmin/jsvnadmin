@@ -97,6 +97,63 @@ public class PjAuthDao extends Dao {
 		}
 		return null;
 	}
+	/**
+	 * @param usr
+	 *            用户
+	 * @return 用户的权限
+	 */
+	public List<PjAuth> getByUsr(String usr) {
+		String sql = "select b.pj,p.des,b.usr,b.res,b.rw from usr a";
+		sql+=" join pj_usr_auth b on (a.usr = b.usr)";
+		sql+=" join pj p on (b.pj=p.pj)";
+		sql+=" where a.usr=?";
+
+		sql+=" union all";
+
+		sql+=" select c.pj,p.des,a.usr,c.res,c.rw from usr a";
+		sql+=" join pj_gr_usr b on (a.usr = b.usr)";
+		sql+=" join pj_gr_auth c on (b.pj = c.pj and b.gr = c.gr)";
+		sql+=" join pj p on (b.pj=p.pj)";
+		sql+=" where a.usr=?";
+
+		sql+=" order by pj,res";
+		
+		List<PjAuth> list = new ArrayList<PjAuth>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			int index = 1;
+			pstmt.setString(index++, usr);
+			pstmt.setString(index++, usr);
+			
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				
+				PjAuth result = new PjAuth();
+				result.setPj(rs.getString("pj"));
+				result.setDes(rs.getString("des"));
+				result.setUsr(rs.getString("usr"));
+				result.setRes(rs.getString("res"));
+				String rw = rs.getString("rw");
+				if (StringUtils.isBlank(rw)) {
+					rw = "";
+				}
+				result.setRw(rw);
+				
+				list.add(result);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(rs, pstmt, conn);
+		}
+	}
 
 	/**
 	 * @param pj

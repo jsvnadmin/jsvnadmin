@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.svnadmin.Constants;
+import org.svnadmin.entity.PjAuth;
 import org.svnadmin.entity.Usr;
 import org.svnadmin.exceptions.TimeoutException;
 import org.svnadmin.util.EncryptUtil;
@@ -85,8 +86,19 @@ public class UsrServlet extends BaseServlet {
 		boolean hasAdminRight = hasAdminRight(request);
 		request.setAttribute("hasAdminRight", hasAdminRight);
 
+		Usr sessionUsr = getUsrFromSession(request);
 		if (!hasAdminRight) {
-			request.setAttribute("entity", getUsrFromSession(request));
+			request.setAttribute("entity", sessionUsr);
+		}
+		//查看用户权限
+		String usr = request.getParameter("usr");
+		if(StringUtils.isBlank(usr)){
+			usr = sessionUsr.getUsr();
+		}
+		boolean hasUsr = StringUtils.isNotBlank(usr);
+		if (hasUsr) {
+			List<PjAuth> auths = this.usrService.getAuths(usr);
+			request.setAttribute("auths", auths);
 		}
 
 		request.getRequestDispatcher("usr.jsp").forward(request, response);
