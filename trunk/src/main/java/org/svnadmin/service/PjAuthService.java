@@ -151,10 +151,10 @@ public class PjAuthService {
 	 */
 	public String formatRes(String pj,String res){
 		//如果资源没有[],自动加上
-		if(!res.startsWith("[") && !res.endsWith("]")){
+//		if(!res.startsWith("[") && !res.endsWith("]")){
 			return this.formatRes(this.pjDao.get(pj), res);
-		}
-		return res;
+//		}
+//		return res;
 	}
 	/**
 	 * 格式化资源.如果资源没有[],自动加上[relateRoot:/]
@@ -164,13 +164,19 @@ public class PjAuthService {
 	 * @since 3.0.3
 	 */
 	public String formatRes(Pj pj,String res){
+		//去除[xxx:]，重新加上[relateRoot:/]，防止跨项目授权
+		res = StringUtils.replaceEach(res, new String[]{"[","]"}, new String[]{"",""});
+		if (res.indexOf(":")!=-1) {
+			res = StringUtils.substringAfter(res, ":");
+		}
+		
 		//如果资源没有[],自动加上
+		String relateRoot = PjService.getRelateRootPath(pj);
 		if(!res.startsWith("[") && !res.endsWith("]")){
-			String relateRoot = PjService.getRelateRootPath(pj);
 			if(res.startsWith("/")){
 				return "["+relateRoot+":"+res+"]";
 			}else{
-				return  "["+relateRoot+":"+res+"]";
+				return  "["+relateRoot+":/"+res+"]";
 			}
 		}
 		return res;
