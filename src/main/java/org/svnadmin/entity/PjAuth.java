@@ -33,6 +33,10 @@ public class PjAuth implements Serializable{
 	 * r : 可读; w : 可写
 	 */
 	private String rw;
+	/**
+	 * 描述
+	 */
+	private String des;
 
 	/**
 	 * @return 资源
@@ -108,5 +112,18 @@ public class PjAuth implements Serializable{
 	public void setUsr(String usr) {
 		this.usr = usr;
 	}
+	/**
+	 * @return 描述
+	 */
+	public String getDes() {
+		return des;
+	}
+	/**
+	 * @param des 描述
+	 */
+	public void setDes(String des) {
+		this.des = des;
+	}
 
+	
 }
