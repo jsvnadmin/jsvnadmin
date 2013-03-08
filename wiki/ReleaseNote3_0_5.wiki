@@ -1,0 +1,4 @@
+#labels Featured
+= Release Note 3.0.5 =
+  * Issue 43: 用户管理增加查看所有权限
+  * Issue 44: 修复跨项目授权
