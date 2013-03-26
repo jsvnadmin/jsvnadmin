@@ -29,6 +29,7 @@ import org.tree.service.AbstractTreeNodeService;
 @Service(RepTreeNodeService.BEAN_NAME)
 public class RepTreeNodeService extends AbstractTreeNodeService {
 	
+	private static final String AND = "$AND$";
 	/**
 	 * Bean名称
 	 */
@@ -52,6 +53,7 @@ public class RepTreeNodeService extends AbstractTreeNodeService {
 		
 		String pj = (String) parameters.get("pj");
 		String path = (String) parameters.get("path");
+		path = StringUtils.replace(path, AND, "&");
 		if(StringUtils.isBlank(pj)){
 			LOG.warn("pj id is blank ");
 			return null;
@@ -74,9 +76,9 @@ public class RepTreeNodeService extends AbstractTreeNodeService {
 	    		 treeNode.setLeaf(SVNNodeKind.FILE.equals(svnDirEntry.getKind()));//叶子?
 	    		 treeNode.addParamete("pj", pj);
 	    		 if(path.endsWith("/")){
-	    			 treeNode.addParamete("path", path+svnDirEntry.getName());
+	    			 treeNode.addParamete("path", path+StringUtils.replace(svnDirEntry.getName(), "&", AND));
 	    		 }else{
-	    			 treeNode.addParamete("path", path+"/"+svnDirEntry.getName());
+	    			 treeNode.addParamete("path", path+"/"+StringUtils.replace(svnDirEntry.getName(), "&", AND));
 	    		 }
 	    		 results.add(treeNode);
 			}
