@@ -116,7 +116,7 @@ public class PjAuthDao extends Dao {
 		sql+=" join pj p on (b.pj=p.pj)";
 		sql+=" where a.usr=?";
 
-		sql+=" order by pj,res";
+		sql+=" order by 1,4";//TODO 为了兼容sqlserver
 		
 		List<PjAuth> list = new ArrayList<PjAuth>();
 		
