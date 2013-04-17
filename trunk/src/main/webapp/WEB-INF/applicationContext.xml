@@ -35,12 +35,23 @@
 		<property name="username" value="${${db}.jdbc.username}" />
 		<property name="password" value="${${db}.jdbc.password}" />
 
-		<property name="initialSize" value="5" />
-		<property name="maxActive" value="100" />
-		<property name="maxIdle" value="30" />
-		<property name="maxWait" value="1000" />
 		<property name="poolPreparedStatements" value="false" />
 		<property name="defaultAutoCommit" value="false" />
+		
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="3" />
+		<property name="maxWait" value="50000" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="180" />
+		
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="timeBetweenEvictionRunsMillis" value="30000" />
+		<property name="numTestsPerEvictionRun" value="100" />
+		<property name="validationQuery" value="select 1 from dual" />
 	</bean>
 
 	<bean id="transactionManager"
