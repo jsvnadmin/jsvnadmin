@@ -51,7 +51,7 @@
 		<property name="testWhileIdle" value="true" />
 		<property name="timeBetweenEvictionRunsMillis" value="30000" />
 		<property name="numTestsPerEvictionRun" value="100" />
-		<property name="validationQuery" value="select 1 from dual" />
+		<property name="validationQuery" value="${${db}.jdbc.validationQuery}" />
 	</bean>
 
 	<bean id="transactionManager"
