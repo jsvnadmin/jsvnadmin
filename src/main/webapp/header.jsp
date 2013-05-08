@@ -47,7 +47,7 @@ return;
 			 <%if(BaseServlet.hasAdminRight(request)){ %>
 			 <a href="<%=ctx%>/i18n"><%=I18N.getLbl(request,"main.link.i18n","语言")%></a> 
 			 <%} %>
-			 <%=_usr.getUsr()%>
+			 <%=_usr.getName()==null?_usr.getUsr():_usr.getName()%>
 			 <a href="<%=ctx%>/login?act=logout"><%=I18N.getLbl(request,"main.link.logout","退出")%></a>
 		</td>
 	</tr>

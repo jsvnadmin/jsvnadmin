@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
-public class PjGrUsr implements Serializable{
+public class PjGrUsr implements Serializable {
 	/**
 	 * 
 	 */
@@ -21,6 +21,10 @@ public class PjGrUsr implements Serializable{
 	 * 用户
 	 */
 	private String usr;
+	/**
+	 * 用户姓名
+	 */
+	private String usrName;
 	/**
 	 * 组
 	 */
@@ -46,6 +50,21 @@ public class PjGrUsr implements Serializable{
 	 */
 	public String getUsr() {
 		return usr;
+	}
+
+	/**
+	 * @return 用户姓名
+	 */
+	public String getUsrName() {
+		return usrName;
+	}
+
+	/**
+	 * @param usrName
+	 *            用户姓名
+	 */
+	public void setUsrName(String usrName) {
+		this.usrName = usrName;
 	}
 
 	/**

@@ -92,6 +92,7 @@ create table usr
 (
    usr                  varchar(50) not null,
    psw                  varchar(50) not null,
+   name                 varchar(50),
    role                 varchar(10),
    primary key (usr)
 );

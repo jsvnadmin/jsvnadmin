@@ -147,6 +147,7 @@ go
 create table usr (
    usr                  varchar(50)          not null,
    psw                  varchar(50)          not null,
+   name                 varchar(50)          null,
    role                 varchar(10)          null,
    constraint PK_USR primary key nonclustered (usr)
 )

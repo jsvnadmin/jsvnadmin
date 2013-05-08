@@ -42,6 +42,11 @@ function checkForm(f){
 				<%} %>				
 			</td>
 			
+			<td class="lbl"><%=I18N.getLbl(request,"usr.name","姓名") %></td>
+			<td>
+				<input type="text" name="name" value="<%=entity.getName()==null?"":entity.getName()%>">
+			</td>
+			
 			<td class="lbl"><%=I18N.getLbl(request,"usr.psw","密码") %></td>
 			<td>
 			<input type="password" name="newPsw" value="">
@@ -71,6 +76,7 @@ function checkForm(f){
 	<thead>
 		<td><%=I18N.getLbl(request,"sys.lbl.no","NO.") %></td>
 		<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+		<td><%=I18N.getLbl(request,"usr.name","姓名") %></td>
 		<td><%=I18N.getLbl(request,"usr.psw","密码") %></td>
 		<td><%=I18N.getLbl(request,"usr.role","角色") %></td>
 		<td><%=I18N.getLbl(request,"usr.op.delete","删除") %></td>
@@ -92,6 +98,7 @@ function checkForm(f){
 		<td>
 			<a href="<%=ctx%>/usr?act=get&usr=<%=usr.getUsr()%>"><%=usr.getUsr() %></a>
 		</td>
+		<td><%=usr.getName()==null?"":usr.getName() %></td>
 		<td><%=usr.getPsw() %></td>
 		<td><%=usr.getRole()==null?"":usr.getRole() %></td>
 		<td><a href="javascript:if(confirm('<%=I18N.getLbl(request,"usr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/usr?usr=<%=usr.getUsr()%>')}"><%=I18N.getLbl(request,"usr.op.delete","删除") %></a></td>

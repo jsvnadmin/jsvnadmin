@@ -59,7 +59,7 @@ function checkForm(f){
 				for(int i = 0;i<usrlist.size();i++){
 					org.svnadmin.entity.Usr usr = usrlist.get(i);
 				%>
-				<option value="<%=usr.getUsr()%>"><%=usr.getUsr()%></option>
+				<option value="<%=usr.getUsr()%>"><%=usr.getName()==null?usr.getUsr():usr.getName()+"("+usr.getUsr()+")"%></option>
 				<%}}%>
 				</select>
 		</td>
@@ -88,6 +88,7 @@ function checkForm(f){
 		<td><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 		<td><%=I18N.getLbl(request,"pj_gr.gr","项目组") %></td>
 		<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+		<td><%=I18N.getLbl(request,"usr.name","姓名") %></td>
 		<td><%=I18N.getLbl(request,"pjgrusr.op.delete","删除") %></td>
 	</thead>
 	<%
@@ -102,6 +103,7 @@ function checkForm(f){
 		<td><%=pjGrUsr.getPj() %></td>
 		<td><%=pjGrUsr.getGr() %></td>
 		<td><%=pjGrUsr.getUsr() %></td>
+		<td><%=pjGrUsr.getUsrName()==null?"":pjGrUsr.getUsrName() %></td>
 		<td><a href="javascript:if(confirm('<%=I18N.getLbl(request,"pjgrusr.op.delete.confirm","确认删除?") %>')){del('<%=ctx%>/pjgrusr?&pj=<%=pjGrUsr.getPj()%>&gr=<%=pjGrUsr.getGr()%>&usr=<%=pjGrUsr.getUsr()%>')}"><%=I18N.getLbl(request,"pjgrusr.op.delete","删除") %></a></td>
 	</tr>
 		<%	

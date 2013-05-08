@@ -99,6 +99,7 @@ create table pj_usr_auth  (
 create table usr  (
    usr                  VARCHAR2(50)                    not null,
    psw                  VARCHAR2(50)                    not null,
+   name                 VARCHAR2(50),
    role                 VARCHAR2(10),
    constraint PK_USR primary key (usr)
 );
