@@ -36,7 +36,7 @@ public class PjAuthDao extends Dao {
 	 * @return 项目组资源的权限
 	 */
 	public PjAuth getByGr(String pj, String gr, String res) {
-		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj = ? and gr=? and res=? ";
+		String sql = "select pj,res,rw,gr,' ' usr,' ' usrname from pj_gr_auth where pj = ? and gr=? and res=? ";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -72,7 +72,7 @@ public class PjAuthDao extends Dao {
 	 * @return 项目用户资源的权限
 	 */
 	public PjAuth getByUsr(String pj, String usr, String res) {
-		String sql = "select pj,res,rw,usr,' ' gr from pj_usr_auth where pj = ? and usr=? and res=? ";
+		String sql = "select a.pj,a.res,a.rw,b.usr,b.name as usrname,' ' gr from pj_usr_auth a left join usr b on (a.usr=b.usr) where a.pj = ? and a.usr=? and a.res=? ";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -162,9 +162,9 @@ public class PjAuthDao extends Dao {
 	 * @return 项目资源的权限列表
 	 */
 	public List<PjAuth> getList(String pj,String res) {
-		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj=? and res = ? "
+		String sql = "select pj,res,rw,gr,' ' usr,' ' usrname from pj_gr_auth where pj=? and res = ? "
 				+ " UNION "
-				+ " select pj,res,rw,' ' gr,usr from pj_usr_auth where pj=? and res = ? "
+				+ " select a.pj,a.res,a.rw,' ' gr,a.usr,b.name as usrname from pj_usr_auth a left join usr b on (a.usr=b.usr) where a.pj=? and a.res = ? "
 				+ " order by res,gr,usr";
 		List<PjAuth> list = new ArrayList<PjAuth>();
 
@@ -198,9 +198,9 @@ public class PjAuthDao extends Dao {
 	 * @return 项目资源的权限列表
 	 */
 	public List<PjAuth> getList(String pj) {
-		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj=? "
+		String sql = "select pj,res,rw,gr,' ' usr,' ' usrname from pj_gr_auth where pj=? "
 				+ " UNION "
-				+ " select pj,res,rw,' ' gr,usr from pj_usr_auth where pj=? "
+				+ " select a.pj,a.res,a.rw,' ' gr,a.usr,b.name as usrname from pj_usr_auth a left join usr b on (a.usr = b.usr) where a.pj=? "
 				+ " order by res,gr,usr";
 		List<PjAuth> list = new ArrayList<PjAuth>();
 
@@ -233,9 +233,9 @@ public class PjAuthDao extends Dao {
 	 * @return 具有相同svn root的项目资源的权限列表
 	 */
 	public List<PjAuth> getListByRootPath(String rootPath) {
-		String sql = "select pj,res,rw,gr,' ' usr from pj_gr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
+		String sql = "select pj,res,rw,gr,' ' usr,' ' usrname from pj_gr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
 				+ " UNION "
-				+ " select pj,res,rw,' ' gr,usr from pj_usr_auth where pj in (select distinct pj from pj where type=? and path like ?) "
+				+ " select a.pj,a.res,a.rw,' ' gr,a.usr,b.name usrname from pj_usr_auth a left join usr b on (a.usr=b.usr) where a.pj in (select distinct pj from pj where type=? and path like ?) "
 				+ " order by res,gr,usr";
 		List<PjAuth> list = new ArrayList<PjAuth>();
 
@@ -276,6 +276,7 @@ public class PjAuthDao extends Dao {
 		result.setPj(rs.getString("pj"));
 		result.setGr(rs.getString("gr"));
 		result.setUsr(rs.getString("usr"));
+		result.setUsrName(rs.getString("usrname"));
 		result.setRes(rs.getString("res"));
 		String rw = rs.getString("rw");
 		if (StringUtils.isBlank(rw)) {

@@ -168,7 +168,7 @@ String ctx = request.getContextPath();
 									for(int i = 0;i<usrlist.size();i++){
 										org.svnadmin.entity.Usr usr = usrlist.get(i);
 									%>
-									<option value="<%=usr.getUsr()%>"><%=usr.getUsr()%></option>
+									<option value="<%=usr.getUsr()%>"><%=usr.getName()==null?usr.getUsr():usr.getName()+"("+usr.getUsr()+")"%></option>
 									<%}}%>
 							</select>
 						</td>
@@ -225,7 +225,7 @@ String ctx = request.getContextPath();
 		<td><%=(i+1) %></td>
 		<td><%=pjAuth.getPj() %></td>
 		<td><%=pjAuth.getRes() %></td>
-		<td><%=pjAuth.getGr()==null?"":pjAuth.getGr() %><%=pjAuth.getUsr()==null?"":pjAuth.getUsr() %></td>
+		<td><%=pjAuth.getGr()==null?"":pjAuth.getGr() %><%=pjAuth.getUsr()==null?"":( (pjAuth.getUsrName()==null || pjAuth.getUsrName().trim().length()==0) ?pjAuth.getUsr():pjAuth.getUsrName()+"("+pjAuth.getUsr()+")") %></td>
 		<td>
 			<% if("r".equals(pjAuth.getRw())){ %>
 				<%=I18N.getLbl(request,"pjauth.rw.r","可读") %>

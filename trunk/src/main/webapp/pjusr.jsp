@@ -52,7 +52,7 @@ function checkForm(f){
 				 for(int i=0;i<usrList.size();i++){
 					 Usr usr = usrList.get(i);
 				 %>
-				 <option value="<%=usr.getUsr()%>" <%=(usr.getUsr().equals(entity.getUsr()))?"selected='selected'":"" %>><%=usr.getUsr()%></option>
+				 <option value="<%=usr.getUsr()%>" <%=(usr.getUsr().equals(entity.getUsr()))?"selected='selected'":"" %>><%=usr.getName()==null?usr.getUsr():usr.getName()+"("+usr.getUsr()+")"%></option>
 				 <%
 				 }
 				 %>	
@@ -84,6 +84,7 @@ function checkForm(f){
 		<td>NO.</td>
 		<td><%=I18N.getLbl(request,"pj.pj","项目") %></td>
 		<td><%=I18N.getLbl(request,"usr.usr","用户") %></td>
+		<td><%=I18N.getLbl(request,"usr.name","姓名") %></td>
 		<td><%=I18N.getLbl(request,"pjusr.psw.psw","项目新密码") %></td>
 		<td><%=I18N.getLbl(request,"pjusr.op.delete","删除") %></td>
 	<%
@@ -101,6 +102,9 @@ function checkForm(f){
 		
 		<td>
 			<a href="<%=ctx%>/pjusr?act=get&pj=<%=pjUsr.getPj()%>&usr=<%=pjUsr.getUsr()%>"><%=pjUsr.getUsr() %></a>
+		</td>
+		<td>
+			<a href="<%=ctx%>/pjusr?act=get&pj=<%=pjUsr.getPj()%>&usr=<%=pjUsr.getUsr()%>"><%=pjUsr.getName()==null?"":pjUsr.getName() %></a>
 		</td>
 		<td><%=pjUsr.getPsw() %></td>
 		<td>

@@ -33,7 +33,7 @@ public class UsrDao extends Dao {
 	 * @return 用户
 	 */
 	public Usr get(String usr) {
-		String sql = "select usr,psw,role from usr where usr=?";
+		String sql = "select usr,name,psw,role from usr where usr=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -60,7 +60,7 @@ public class UsrDao extends Dao {
 	 * @return 所有用户列表
 	 */
 	public List<Usr> getList() {
-		String sql = "select usr,psw,role from usr order by usr";
+		String sql = "select usr,name,psw,role from usr order by usr";
 		List<Usr> list = new ArrayList<Usr>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -92,7 +92,7 @@ public class UsrDao extends Dao {
 	 * @return 项目组未选的用户(不包括*)
 	 */
 	public List<Usr> listUnSelected(String pj, String gr) {
-		String sql = "select usr,psw,role from usr a where a.usr <> '*' "
+		String sql = "select usr,name,psw,role from usr a where a.usr <> '*' "
 				+ " and not exists (select usr from pj_gr_usr b where a.usr = b.usr and b.pj=? and b.gr=?) order by a.usr";
 		List<Usr> list = new ArrayList<Usr>();
 		Connection conn = null;
@@ -123,8 +123,8 @@ public class UsrDao extends Dao {
 	 * @return 所有项目用户列表(不包括*)
 	 */
 	public List<Usr> getList(String pj) {
-		String sql = "select p.usr,p.role,CASE WHEN pu.psw IS NOT NULL THEN pu.psw ELSE p.psw END psw from ("
-				+ " select a.usr,a.role,a.psw from usr a "
+		String sql = "select p.usr,p.name,p.role,CASE WHEN pu.psw IS NOT NULL THEN pu.psw ELSE p.psw END psw from ("
+				+ " select a.usr,a.role,a.psw,a.name from usr a "
 				+ " where "
 				+ " exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj=?) "
 				+ " or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj=?) "
@@ -163,8 +163,8 @@ public class UsrDao extends Dao {
 	 * @return 所有相同svn root的项目的用户列表(不包括*)
 	 */
 	public List<Usr> getListByRootPath(String rootPath) {
-		String sql = "select p.usr,p.role,CASE WHEN pu.psw IS NOT NULL THEN pu.psw ELSE p.psw END psw from ("
-				+ " select a.usr,a.role,a.psw from usr a "
+		String sql = "select p.usr,p.name,p.role,CASE WHEN pu.psw IS NOT NULL THEN pu.psw ELSE p.psw END psw from ("
+				+ " select a.usr,a.role,a.psw,a.name from usr a "
 				+ " where "
 				+ " exists (select d.usr from pj_gr_usr d where d.usr=a.usr and d.pj in (select distinct pj from pj where type=? and path like ?)) "
 				+ " or exists(select c.usr from pj_usr_auth c where a.usr=c.usr and c.pj in (select distinct pj from pj where type=? and path like ?)) "
@@ -210,6 +210,7 @@ public class UsrDao extends Dao {
 	Usr readUsr(ResultSet rs) throws SQLException {
 		Usr result = new Usr();
 		result.setUsr(rs.getString("usr"));
+		result.setName(rs.getString("name"));
 		result.setPsw(rs.getString("psw"));
 		result.setRole(rs.getString("role"));
 		return result;
@@ -248,7 +249,7 @@ public class UsrDao extends Dao {
 	 * @return 更新数量
 	 */
 	public int update(Usr usr) {
-		String sql = "update usr set psw=?,role=? where usr=?";
+		String sql = "update usr set psw=?,name=?,role=? where usr=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -256,6 +257,7 @@ public class UsrDao extends Dao {
 			pstmt = conn.prepareStatement(sql);
 			int index = 1;
 			pstmt.setString(index++, usr.getPsw());
+			pstmt.setString(index++, usr.getName());
 			pstmt.setString(index++, usr.getRole());
 			pstmt.setString(index++, usr.getUsr());
 
@@ -276,7 +278,7 @@ public class UsrDao extends Dao {
 	 * @return 更新数量
 	 */
 	public int insert(Usr usr) {
-		String sql = "insert into usr (usr,psw,role) values (?,?,?)";
+		String sql = "insert into usr (usr,psw,name,role) values (?,?,?,?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -285,6 +287,7 @@ public class UsrDao extends Dao {
 			int index = 1;
 			pstmt.setString(index++, usr.getUsr());
 			pstmt.setString(index++, usr.getPsw());
+			pstmt.setString(index++, usr.getName());
 			pstmt.setString(index++, usr.getRole());
 
 			return pstmt.executeUpdate();

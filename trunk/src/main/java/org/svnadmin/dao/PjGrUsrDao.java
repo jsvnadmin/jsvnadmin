@@ -34,7 +34,7 @@ public class PjGrUsrDao extends Dao {
 	 * @return 组用户
 	 */
 	public PjGrUsr get(String pj, String gr, String usr) {
-		String sql = "select pj,usr,gr from pj_gr_usr where pj = ? and gr=? and usr=?";
+		String sql = "select a.pj,a.usr,a.gr,b.name as usrname from pj_gr_usr a left join usr b on (a.usr=b.usr) where a.pj = ? and a.gr=? and a.usr=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -67,7 +67,7 @@ public class PjGrUsrDao extends Dao {
 	 * @return 组用户列表
 	 */
 	public List<PjGrUsr> getList(String pj, String gr) {
-		String sql = "select pj,usr,gr from pj_gr_usr where pj=? and gr=? order by usr";
+		String sql = "select a.pj,a.usr,a.gr,b.name as usrname from pj_gr_usr a left join usr b on (a.usr = b.usr) where a.pj=? and a.gr=? order by a.usr";
 		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -102,7 +102,7 @@ public class PjGrUsrDao extends Dao {
 	public List<PjGrUsr> getList(String pj) {
 		// String sql =
 		// "select pj,usr,gr from pj_gr_usr where pj=? order by gr,usr";
-		String sql = "select a.pj,a.gr,b.usr from pj_gr a left join pj_gr_usr b on (a.pj=b.pj and a.gr=b.gr) where a.pj=? order by a.gr,b.usr";
+		String sql = "select a.pj,a.gr,b.usr,c.name as usrname from pj_gr a left join pj_gr_usr b on (a.pj=b.pj and a.gr=b.gr) left join usr c on (b.usr = c.usr) where a.pj=? order by a.gr,b.usr";
 		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -136,7 +136,7 @@ public class PjGrUsrDao extends Dao {
 	public List<PjGrUsr> getListByRootPath(String rootPath) {
 		// String sql =
 		// "select pj,usr,gr from pj_gr_usr where pj in (select distinct pj from pj where type=? and path like ?) order by pj,gr,usr";
-		String sql = "select a.pj,a.gr,b.usr from pj_gr a left join pj_gr_usr b on (a.pj=b.pj and a.gr=b.gr) "
+		String sql = "select a.pj,a.gr,b.usr,c.name as usrname from pj_gr a left join pj_gr_usr b on (a.pj=b.pj and a.gr=b.gr) left join usr c on (b.usr=c.usr) "
 				+ " where a.pj in (select distinct pj from pj where type=? and path like ?) order by a.pj,a.gr,b.usr";
 		List<PjGrUsr> list = new ArrayList<PjGrUsr>();
 
@@ -175,6 +175,7 @@ public class PjGrUsrDao extends Dao {
 		result.setPj(rs.getString("pj"));
 		result.setUsr(rs.getString("usr"));
 		result.setGr(rs.getString("gr"));
+		result.setUsrName(rs.getString("usrname"));
 		return result;
 	}
 

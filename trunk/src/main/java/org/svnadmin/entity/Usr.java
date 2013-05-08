@@ -8,8 +8,8 @@ import java.io.Serializable;
  * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
-public class Usr implements Serializable{
-	
+public class Usr implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -18,6 +18,10 @@ public class Usr implements Serializable{
 	 * 用户ID
 	 */
 	private String usr;
+	/**
+	 * 用户姓名
+	 */
+	private String name;
 	/**
 	 * 密码(加密)
 	 */
@@ -40,6 +44,21 @@ public class Usr implements Serializable{
 	 */
 	public void setUsr(String usr) {
 		this.usr = usr;
+	}
+
+	/**
+	 * @return 用户姓名
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            用户姓名
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**

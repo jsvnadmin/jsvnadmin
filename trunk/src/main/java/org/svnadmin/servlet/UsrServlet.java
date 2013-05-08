@@ -55,6 +55,7 @@ public class UsrServlet extends BaseServlet {
 
 		Usr entity = new Usr();
 		entity.setUsr(request.getParameter("usr"));
+		entity.setName(request.getParameter("name"));
 		if (StringUtils.isNotBlank(request.getParameter("newPsw"))) {
 			entity.setPsw(EncryptUtil.encrypt(request.getParameter("newPsw")));
 		} else {

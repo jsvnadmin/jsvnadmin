@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author <a href="mailto:yuanhuiwu@gmail.com">Huiwu Yuan</a>
  * 
  */
-public class PjAuth implements Serializable{
+public class PjAuth implements Serializable {
 	/**
 	 * 
 	 */
@@ -29,6 +29,10 @@ public class PjAuth implements Serializable{
 	 * 用户
 	 */
 	private String usr;
+	/**
+	 * 用户姓名
+	 */
+	private String usrName;
 	/**
 	 * r : 可读; w : 可写
 	 */
@@ -112,18 +116,37 @@ public class PjAuth implements Serializable{
 	public void setUsr(String usr) {
 		this.usr = usr;
 	}
+
+	/**
+	 * 
+	 * @return 用户姓名
+	 */
+	public String getUsrName() {
+		return usrName;
+	}
+
+	/**
+	 * 
+	 * @param usrName
+	 *            用户姓名
+	 */
+	public void setUsrName(String usrName) {
+		this.usrName = usrName;
+	}
+
 	/**
 	 * @return 描述
 	 */
 	public String getDes() {
 		return des;
 	}
+
 	/**
-	 * @param des 描述
+	 * @param des
+	 *            描述
 	 */
 	public void setDes(String des) {
 		this.des = des;
 	}
 
-	
 }

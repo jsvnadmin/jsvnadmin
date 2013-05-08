@@ -32,7 +32,7 @@ public class PjUsrDao extends Dao {
 	 * @return 项目用户
 	 */
 	public PjUsr get(String pj, String usr) {
-		String sql = "select pj,usr,psw from pj_usr where pj = ? and usr=?";
+		String sql = "select a.pj,a.usr,a.psw,b.name as usrname from pj_usr a left join usr b on (a.usr = b.usr) where a.pj = ? and a.usr=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -62,7 +62,7 @@ public class PjUsrDao extends Dao {
 	 * @return 项目的用户列表
 	 */
 	public List<PjUsr> getList(String pj) {
-		String sql = "select pj,usr,psw from pj_usr where pj = ?";
+		String sql = "select a.pj,a.usr,a.psw,b.name usrname from pj_usr a left join usr b on (a.usr = b.usr) where a.pj = ?";
 		List<PjUsr> list = new ArrayList<PjUsr>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -97,6 +97,7 @@ public class PjUsrDao extends Dao {
 		PjUsr result = new PjUsr();
 		result.setPj(rs.getString("pj"));
 		result.setUsr(rs.getString("usr"));
+		result.setName(rs.getString("usrname"));
 		result.setPsw(rs.getString("psw"));
 		return result;
 	}
