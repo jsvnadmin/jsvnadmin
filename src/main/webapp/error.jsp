@@ -7,7 +7,7 @@
 </head>
 <body>
 <div>
-发生错误，请联系 QQ 56099823 或 <a target="_blank" href="http://code.google.com/p/jsvnadmin/">报告一个Issue</a>，以下是错误信息:<br><br>
+发生错误，请联系 QQ 56099823 或 <a target="_blank" href="https://github.com/jsvnadmin/jsvnadmin">报告一个Issue</a>，以下是错误信息:<br><br>
 <%
 StringWriter sWriter = new StringWriter();
 PrintWriter pWriter = new PrintWriter(sWriter);
