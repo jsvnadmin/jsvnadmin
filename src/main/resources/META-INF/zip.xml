@@ -13,15 +13,17 @@
 			<outputDirectory>/</outputDirectory>
 			<includes>
 				<include>${project.build.finalName}.war</include>
-				<include>${project.build.finalName}-sources.jar</include>
-				<include>${project.build.finalName}-javadoc.jar</include>
+				<!--<include>${project.build.finalName}-sources.jar</include>-->
+				<!--<include>${project.build.finalName}-javadoc.jar</include>-->
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>${project.basedir}/db</directory>
 			<outputDirectory>/db</outputDirectory>
 			<includes>
-				<include>**/*.sql</include>
+				<include>mysql5.sql</include>
+				<include>oracle10g.sql</include>
+				<include>sqlserver2000.sql</include>
 			</includes>
 		</fileSet>
 		<fileSet>
