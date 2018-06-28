@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.svnadmin</groupId>
 	<artifactId>svnadmin</artifactId>
-	<version>3.0.6</version>
+	<version>3.0.7</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -12,7 +12,7 @@
 		<!--war包是否把classes打包 -->
 		<war.archiveClasses>true</war.archiveClasses>
 
-		<svnkit.version>1.7.6</svnkit.version>
+		<svnkit.version>1.9.3</svnkit.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.8.2</junit.version>
 		<commons-lang.version>2.6</commons-lang.version>
