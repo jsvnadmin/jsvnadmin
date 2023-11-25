@@ -13,8 +13,9 @@
 			<outputDirectory>/</outputDirectory>
 			<includes>
 				<include>${project.build.finalName}.war</include>
-				<!--<include>${project.build.finalName}-sources.jar</include>-->
-				<!--<include>${project.build.finalName}-javadoc.jar</include>-->
+				<include>${project.build.finalName}-tomcat-${project.version}.jar</include>
+				<include>${project.build.finalName}-sources.jar</include>
+				<include>${project.build.finalName}-javadoc.jar</include>
 			</includes>
 		</fileSet>
 		<fileSet>
@@ -30,7 +31,7 @@
 			<directory>${project.basedir}/doc</directory>
 			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>*.pdf</include>
+				<include>SvnAdmin_Manual_zh_CN.pdf</include>
 			</includes>
 		</fileSet>
 	</fileSets>

@@ -31,43 +31,82 @@ try{
 		document.getElementById("usr").focus();
 	}
 	</script>
+	<style>
+		body{
+			background-image: url('<%=ctx%>/resources/bg.png');
+			background-repeat: no-repeat;
+			
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.container {
+			text-align: center;
+			margin:auto;
+			opacity: 0.8;
+		}
+		.login-box {
+			width: 400px;
+			height: 300px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			margin-top: 50px;
+			padding: 20px;
+		}
+		
+		input{
+		    outline-style: none ;
+		    border: 1px solid #ccc; 
+		    border-radius: 3px;
+		    padding: 13px 14px;
+		    width: 200px;
+		    font-size: 14px;
+		    font-weight: 700;
+		    font-family: "Microsoft soft";
+		}
+		input:focus {
+		    border-color: #66afe9;
+		    outline: 0;
+		    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+		    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+		}
+		.login-btn {
+			padding-left: 50px;
+		}
+	</style>
 </head>
 <body>
 <%-- 选择语言 --%>
-<div style="float:right">
+<div style="position:absolute ;top: 20px;right: 50px;">
 	<%@include file="chagelang.jsp"%>
 </div>
-<%-- error --%>
-<%
-String errorMsg = (String)request.getAttribute(org.svnadmin.Constants.ERROR);
-if(errorMsg != null){
-%>
-<div style="color:red;"><%=I18N.getLbl(request,"sys.error","错误") %> <%=errorMsg%></div>
-<%}%>
-<%-- set administrator tip --%>
-<%
-int usrCount = usrService.getCount();
-if(usrCount == 0){
-%>
-<div style="color:blue"><%=I18N.getLbl(request,"login.info.setadmin","欢迎使用SVN ADMIN,第一次使用请设置管理员帐号和密码.") %></div>
-<%}%>
 
 <%-- login form --%>
-	<form name="login" action="<%=ctx%>/login" method="post">
-		<table>
-		
-			<tr>
-				<td align="right"><%=I18N.getLbl(request,"usr.usr","帐号") %></td>
-				<td><input type="text" id="usr" name="usr" value="<%=request.getParameter("usr")==null?"":request.getParameter("usr")%>"></td>
-			</tr>
-			<tr>
-				<td align="right"><%=I18N.getLbl(request,"usr.psw","密码") %></td>
-				<td><input type="password" id="psw" name="psw" value="<%=request.getParameter("psw")==null?"":request.getParameter("psw")%>"></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="<%=I18N.getLbl(request,"login.btn.login","登录") %>"></td>
-			</tr>
-		</table>
-	</form>
+<div class="container">
+	<div class="login-box">
+		<h3><%=I18N.getLbl(request, "login.title", "SVN ADMIN 登录")%></h3>
+		<form name="login" action="<%=ctx%>/login" method="post">
+			<p><%=I18N.getLbl(request,"usr.usr","帐号") %>：<input type="text" placeholder="请输入账号" id="usr" name="usr" value="<%=request.getParameter("usr")==null?"":request.getParameter("usr")%>"></p>
+			<p><%=I18N.getLbl(request,"usr.psw","密码") %>：<input type="password" placeholder="请输入密码" id="psw" name="psw" value="<%=request.getParameter("psw")==null?"":request.getParameter("psw")%>"></p>
+			<p class="login-btn"><input type="submit" value="<%=I18N.getLbl(request,"login.btn.login","登录") %>"></p>
+		</form>
+		<%-- error --%>
+		<%
+		String errorMsg = (String)request.getAttribute(org.svnadmin.Constants.ERROR);
+		if(errorMsg != null){
+		%>
+		<div style="color:red;"><%=I18N.getLbl(request,"sys.error","错误") %> <%=errorMsg%></div>
+		<%}%>
+		<%-- set administrator tip --%>
+		<%
+		int usrCount = usrService.getCount();
+		if(usrCount == 0){
+		%>
+		<div style="color:blue"><%=I18N.getLbl(request,"login.info.setadmin","欢迎使用SVN ADMIN,第一次使用请设置管理员帐号和密码.") %></div>
+		<%}%>
+	</div>
+	
+</div>
 </body>
 </html>

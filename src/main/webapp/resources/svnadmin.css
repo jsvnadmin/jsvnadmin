@@ -1,7 +1,26 @@
+body {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
 table.thinborder {
 	border-collapse:collapse;
 	border:solid #999;
 	border-width:1px 0 0 1px;
+	width: 100%;
+}
+table.thinborder input,table.thinborder select {
+	outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 5px 5px;
+    width: 200px;
+    height: 35px;
+    font-size: 16px;
+    font-family: "Microsoft soft";
+}
+table.thinborder th, table.thinborder tr{
+	height: 38px;
 }
 table.thinborder caption {font-size:14px;font-weight:bolder;}
 table.thinborder th,table.thinborder td {
@@ -10,6 +29,7 @@ table.thinborder th,table.thinborder td {
 	padding:2px;
 	word-break : keep-all;
 	white-space:nowrap;
+	padding: 10px;
 }
 
 table.sortablet foot td {text-align:center;background: #ECF20F;}

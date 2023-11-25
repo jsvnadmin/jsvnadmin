@@ -17,7 +17,10 @@ import org.svnadmin.dao.PjUsrDao;
 import org.svnadmin.entity.Pj;
 import org.svnadmin.entity.PjAuth;
 import org.svnadmin.entity.PjGr;
+import org.svnadmin.entity.PjGrUsr;
+import org.svnadmin.entity.Usr;
 import org.svnadmin.util.I18N;
+import org.svnadmin.util.UsrProvider;
 
 /**
  * 项目服务层
@@ -62,7 +65,7 @@ public class PjService {
 	 */
 	@Resource(name = PjAuthDao.BEAN_NAME)
 	protected PjAuthDao pjAuthDao;
-
+	
 	/**
 	 * SVN服务层
 	 */
@@ -172,6 +175,14 @@ public class PjService {
 			pjAuth.setRw("rw");
 			pjAuth.setGr(Constants.GROUP_MANAGER);
 			pjAuthDao.saveByGr(pjAuth);
+			
+			Usr usr = UsrProvider.getCurrentUsr();
+			// 把当前用户加到组MANAGER
+			PjGrUsr pjGrUsr = new PjGrUsr();
+			pjGrUsr.setPj(pj.getPj());
+			pjGrUsr.setGr(Constants.GROUP_MANAGER);
+			pjGrUsr.setUsr(usr.getUsr());
+			pjGrUsrDao.save(pjGrUsr);
 
 		} else {
 			this.pjDao.update(pj);

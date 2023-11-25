@@ -37,7 +37,7 @@ return;
 	<tr>
 		<td align="center" style="font-size:20;font-weight:bold;">
 			<%=I18N.getLbl(request,"main.title","SVN ADMIN")%>
-			<a style="text-decoration:none;" target="_blank" title="56099823@qq.com" href="http://code.google.com/p/jsvnadmin/"><sub style="font-size: 10px;font-weight:normal;">V <%=SpringUtils.getVersion()%></sub></a>
+			<a style="text-decoration:none;" target="_blank" title="56099823@qq.com" href="https://github.com/jsvnadmin/jsvnadmin"><sub style="font-size: 10px;font-weight:normal;">V <%=SpringUtils.getVersion()%></sub></a>
 		</td>
 	</tr>
 	<tr>
@@ -46,6 +46,7 @@ return;
 			 <a href="<%=ctx%>/pj"><%=I18N.getLbl(request,"main.link.pj","项目")%></a> 
 			 <%if(BaseServlet.hasAdminRight(request)){ %>
 			 <a href="<%=ctx%>/i18n"><%=I18N.getLbl(request,"main.link.i18n","语言")%></a> 
+			 <a href="<%=ctx%>/h2" target="_blank">数据库</a> 
 			 <%} %>
 			 <%=_usr.getName()==null?_usr.getUsr():_usr.getName()%>
 			 <a href="<%=ctx%>/login?act=logout"><%=I18N.getLbl(request,"main.link.logout","退出")%></a>

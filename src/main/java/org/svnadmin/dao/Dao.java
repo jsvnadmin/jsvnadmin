@@ -58,6 +58,21 @@ public class Dao {
 			this.close(null, null, conn);
 		}
 	}
+	protected boolean execute(String sql) {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			conn = this.getConnection();
+			stmt = conn.createStatement();
+
+			return stmt.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			this.close(null, stmt, conn);
+		}
+	}
 	/**
 	 * 关闭资源
 	 * 
