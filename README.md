@@ -45,3 +45,5 @@ Apache+SVN配置成功后可以有两种方式：
 
 - 多库方式：SVNParentPath 指定一个父目录，所有仓库在这个父目录下，使用一个密码文件和一个权限配置文件。优点是增加删除仓库不需要改apache的httpd.conf，不需要重启Apache。缺点是项目多会很混乱。
 - 单库方式：SVNPath 每个仓库单独配置各自的密码和权限文件。优点是各自分开，互相不影响，维护方便。缺点是增加或删除仓库需要修改apache的httpd.conf后重启。
+
+[中文使用手册](./doc/SvnAdmin_Manual_zh_CN.pdf)
