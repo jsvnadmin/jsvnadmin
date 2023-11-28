@@ -35,6 +35,7 @@ $(function(){
 });
 
 function checkForm(f){
+	$("#select2 option").prop("selected", true);
 	if(f.elements["usrs"].value==""){
 		alert("<%=I18N.getLbl(request,"pjgrusr.error.usr","用户不可以为空") %>");
 		f.elements["usrs"].focus();

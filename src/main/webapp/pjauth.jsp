@@ -71,6 +71,8 @@ String ctx = request.getContextPath();
 		});
 		
 		function checkForm(f){
+			$("#select2 option").prop("selected", true);
+			$("#select4 option").prop("selected", true);
 			if(f.elements["pj"].value==""){
 				alert("<%=I18N.getLbl(request,"pjauth.error.pj","项目不可以为空") %>");
 				f.elements["pj"].focus();
