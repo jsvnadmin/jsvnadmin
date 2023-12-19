@@ -35,6 +35,10 @@ try{
 		body{
 			background-image: url('<%=ctx%>/resources/bg.png');
 			background-repeat: no-repeat;
+			-webkit-background-size: cover; /* Safari/Chrome */
+			-moz-background-size: cover; /* Firefox */
+			-o-background-size: cover; /* Opera */
+			background-size: cover; /* IE10+ and other browsers */
 			
 			display: flex;
 			align-items: center;
